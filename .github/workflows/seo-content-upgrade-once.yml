@@ -1,0 +1,122 @@
+name: Upgrade primary SEO pages once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/seo-content-upgrade-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Improve primary pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = {
+            'cuanto-gasto-gasolina-al-mes.html': '''
+          <!-- seo-content-upgrade-2026-09 -->
+          <section class="section"><div class="container"><span class="eyebrow">Referencia rápida</span><h2>Ejemplos de gasto mensual según los kilómetros</h2><p class="sub">La tabla usa un consumo de 6,2 L/100 km y 1,65 €/L solo para mostrar cómo cambia el resultado al aumentar los kilómetros.</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Km al mes</th><th>Litros aprox.</th><th>Gasto al mes</th><th>Gasto al año</th></tr></thead><tbody><tr><td>500 km</td><td>31,0 L</td><td>51,15 €</td><td>613,80 €</td></tr><tr><td>1.000 km</td><td>62,0 L</td><td>102,30 €</td><td>1.227,60 €</td></tr><tr><td>1.250 km</td><td>77,5 L</td><td>127,88 €</td><td>1.534,50 €</td></tr><tr><td>1.500 km</td><td>93,0 L</td><td>153,45 €</td><td>1.841,40 €</td></tr><tr><td>2.000 km</td><td>124,0 L</td><td>204,60 €</td><td>2.455,20 €</td></tr></tbody></table></div><p class="example-note">Ejemplos orientativos: cambia consumo, precio y kilometraje en la calculadora para obtener tu cifra.</p></div></section>
+          <section class="section"><div class="container content"><article class="info"><h2>Qué datos conviene introducir</h2><p><strong>Kilómetros:</strong> usa tu recorrido de un mes normal. Si solo conoces la cifra anual, puedes estimarla con la <a href="calculadora-kilometros-anuales-coche.html">calculadora de kilómetros al año</a> y dividir entre 12.</p><p><strong>Consumo:</strong> una media de varios depósitos suele representar mejor tu uso que una única lectura puntual.</p><p><strong>Precio:</strong> usa el que sueles pagar, no necesariamente el precio de una estación concreta un día concreto.</p></article><article class="info"><h2>Cómo interpretar el resultado</h2><p>El gasto mensual permite comparar cambios de uso de forma muy rápida. Por ejemplo, reducir 250 km al mes con los valores del ejemplo supone unos 25,58 € menos de combustible al mes.</p><p>Si quieres saber cuánto cuesta realmente mover y poseer el coche, no te quedes solo con la gasolina: calcula también el <a href="coste-por-kilometro-coche.html">coste real por kilómetro</a> o el <a href="cuanto-cuesta-mantener-un-coche-al-ano.html">coste anual de mantenerlo</a>.</p></article></div></section>
+          ''',
+            'cuanto-cuesta-un-viaje-en-coche.html': '''
+          <!-- seo-content-upgrade-2026-09 -->
+          <section class="section"><div class="container"><span class="eyebrow">Referencia rápida</span><h2>Ejemplos de coste de combustible por distancia</h2><p class="sub">Ejemplos con 6,5 L/100 km y 1,60 €/L, sin peajes ni aparcamiento.</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Distancia total</th><th>Litros</th><th>Combustible</th><th>Entre 2 personas</th></tr></thead><tbody><tr><td>300 km</td><td>19,5 L</td><td>31,20 €</td><td>15,60 €</td></tr><tr><td>600 km</td><td>39,0 L</td><td>62,40 €</td><td>31,20 €</td></tr><tr><td>1.000 km</td><td>65,0 L</td><td>104,00 €</td><td>52,00 €</td></tr></tbody></table></div><p class="example-note">Añade después peajes, parking u otros gastos reales del trayecto.</p></div></section>
+          <section class="section"><div class="container content"><article class="info"><h2>La clave: introducir la distancia total correcta</h2><p>Si el navegador indica 320 km hasta el destino y vas a volver por una distancia parecida, el cálculo completo debería usar aproximadamente 640 km. Introducir solo la ida es uno de los errores que más reduce artificialmente el presupuesto.</p><p>Si estás dudando entre dos caminos, usa la <a href="comparar-dos-rutas-en-coche.html">comparadora de dos rutas</a> para enfrentar distancia y peajes.</p></article><article class="info"><h2>Combustible no es lo mismo que coste real del viaje</h2><p>Esta calculadora está pensada para presupuesto inmediato: combustible, peajes y otros gastos. No reparte automáticamente seguro, mantenimiento, neumáticos o depreciación.</p><p>Para valorar el desgaste económico completo puedes calcular primero tu <a href="coste-por-kilometro-coche.html">coste real por km</a> y multiplicarlo por la distancia del trayecto.</p></article></div></section>
+          ''',
+            'coste-por-kilometro-coche.html': '''
+          <!-- seo-content-upgrade-2026-09 -->
+          <section class="section"><div class="container"><span class="eyebrow">Referencia rápida</span><h2>Cómo cambia el coste por km al recorrer más kilómetros</h2><p class="sub">Ejemplo con 6,2 L/100 km, 1,65 €/L y 3.850 € anuales de seguro, mantenimiento, impuestos y depreciación.</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Km/año</th><th>Combustible</th><th>Coste anual total</th><th>Coste por km</th></tr></thead><tbody><tr><td>10.000 km</td><td>1.023,00 €</td><td>4.873,00 €</td><td>0,487 €/km</td></tr><tr><td>15.000 km</td><td>1.534,50 €</td><td>5.384,50 €</td><td>0,359 €/km</td></tr><tr><td>20.000 km</td><td>2.046,00 €</td><td>5.896,00 €</td><td>0,295 €/km</td></tr></tbody></table></div><p class="example-note">El coste total sube al conducir más, pero parte de los costes fijos se reparte entre más kilómetros.</p></div></section>
+          <section class="section"><div class="container content"><article class="info"><h2>Cómo estimar la depreciación anual</h2><p>Una forma sencilla es restar al precio de compra el valor de reventa que esperas al final del periodo y dividir la pérdida entre los años.</p><div class="formula">Depreciación anual ≈ (precio de compra − valor de reventa) ÷ años</div><p>Si necesitas trabajar ese dato con más detalle, usa la <a href="calculadora-depreciacion-coche.html">calculadora de depreciación</a>.</p></article><article class="info"><h2>Qué cifra usar para tomar decisiones</h2><p>Para comparar dos coches, usa el mismo criterio en ambos: mismos kilómetros, mismo periodo y categorías de gasto equivalentes. Comparar solo combustible suele favorecer artificialmente al coche con menor consumo aunque su depreciación o seguro sean mayores.</p><p>También puedes combinar esta página con <a href="mantener-coche-o-cambiarlo.html">mantener el coche o cambiarlo</a> para estudiar un cambio de vehículo.</p></article></div></section>
+          ''',
+            'renting-o-comprar-coche.html': '''
+          <!-- seo-content-upgrade-2026-09 -->
+          <section class="section"><div class="container"><span class="eyebrow">Comparación justa</span><h2>Qué debes igualar antes de comparar renting y compra</h2><div class="table-wrap"><table class="data-table"><thead><tr><th>Factor</th><th>Renting</th><th>Compra</th></tr></thead><tbody><tr><td>Periodo</td><td>Meses del contrato</td><td>Mismos meses de propiedad</td></tr><tr><td>Entrada</td><td>Inclúyela si existe</td><td>Incluye el desembolso real</td></tr><tr><td>Seguro y mantenimiento</td><td>Comprueba qué incluye la cuota</td><td>Añádelos por separado</td></tr><tr><td>Valor al final</td><td>Normalmente no conservas el coche</td><td>Resta el valor de reventa</td></tr><tr><td>Financiación</td><td>Revisa comisiones y extras</td><td>Añade intereses y comisiones</td></tr><tr><td>Kilometraje</td><td>Revisa límites y penalizaciones</td><td>Influye en desgaste y reventa</td></tr></tbody></table></div></div></section>
+          <section class="section"><div class="container content"><article class="info"><h2>Cuándo puede encajar mejor el renting</h2><p>Puede tener sentido si valoras una cuota previsible, cambiar de coche con frecuencia y reducir la gestión de determinados gastos, siempre que el contrato encaje con tu kilometraje y uso.</p><p>La comparación debe hacerse con la cuota y las condiciones reales de la oferta, no solo con el precio publicitado.</p></article><article class="info"><h2>Cuándo puede encajar mejor comprar</h2><p>La compra puede ganar atractivo si vas a conservar el coche durante más tiempo, puedes obtener buen valor de reventa o prefieres no tener límites contractuales de uso.</p><p>Si la compra es financiada, calcula antes el <a href="calculadora-financiacion-coche.html">coste total de la financiación</a> y estima la <a href="calculadora-depreciacion-coche.html">depreciación</a>.</p></article></div></section>
+          <section class="section"><div class="container"><span class="eyebrow">Ejemplo comparado</span><h2>La reventa puede cambiar completamente el resultado</h2><article class="info"><p>Comprar un coche por 22.000 € y venderlo cuatro años después por 12.000 € no implica un coste de compra de 22.000 €: la pérdida de valor es 10.000 €. A esa cifra hay que sumar seguro, mantenimiento, impuestos y financiación. En renting, en cambio, deben sumarse todas las cuotas, entradas y extras del contrato.</p><div class="formula">Compra neta = 22.000 − 12.000 + gastos asociados</div><p class="example-note">No es asesoramiento financiero: es una forma de ordenar costes comparables.</p></article></div></section>
+          ''',
+            'cuanto-cuesta-mantener-un-coche-al-ano.html': '''
+          <!-- seo-content-upgrade-2026-09 -->
+          <section class="section"><div class="container"><span class="eyebrow">Ejemplo desglosado</span><h2>Ejemplo de presupuesto anual de un coche</h2><p class="sub">Cifras ilustrativas para entender qué categorías conviene sumar.</p><div class="table-wrap"><table class="data-table"><thead><tr><th>Concepto</th><th>Ejemplo anual</th><th>Cómo estimarlo</th></tr></thead><tbody><tr><td>Seguro</td><td>600 €</td><td>Prima anual real</td></tr><tr><td>Mantenimiento</td><td>500 €</td><td>Media de revisiones y reparaciones</td></tr><tr><td>Neumáticos</td><td>200 €</td><td>Coste repartido entre su duración</td></tr><tr><td>Impuestos + ITV</td><td>150 €</td><td>Importes anualizados</td></tr><tr><td>Aparcamiento</td><td>600 €</td><td>Garaje y parking habitual</td></tr><tr><td>Combustible</td><td>1.534,50 €</td><td>15.000 km · 6,2 L/100 · 1,65 €/L</td></tr><tr><th>Total</th><th>3.584,50 €</th><th>298,71 €/mes</th></tr></tbody></table></div><p class="example-note">No representa una media oficial: es un escenario de ejemplo para ayudarte a construir tu propio presupuesto.</p></div></section>
+          <section class="section"><div class="container content"><article class="info"><h2>Costes fijos frente a costes de uso</h2><p>Seguro, parte de los impuestos y algunos gastos de propiedad existen aunque conduzcas poco. Combustible, neumáticos y parte del mantenimiento dependen mucho más del kilometraje.</p><p>Separarlos ayuda a entender por qué reducir kilómetros no elimina todo el coste de tener coche.</p></article><article class="info"><h2>Cómo tratar gastos irregulares</h2><p>No hace falta esperar a que llegue una factura grande para incluirla en el cálculo. Puedes anualizar neumáticos, ITV, revisiones mayores o reparaciones previsibles y crear una provisión razonable en “otros gastos”.</p><p>Para separar categorías concretas tienes también la <a href="calculadora-coste-neumaticos-coche.html">calculadora de neumáticos</a> y la <a href="calculadora-coste-aparcamiento-coche.html">calculadora de aparcamiento</a>.</p></article></div></section>
+          ''',
+          }
+
+          meta_replacements = {
+            'cuanto-gasto-gasolina-al-mes.html': (
+              'Calcula cuánto gastas en gasolina o diésel al mes y al año según tus kilómetros, consumo y precio del combustible.',
+              'Calcula tu gasto de gasolina o diésel al mes y al año. Incluye fórmula, ejemplos por kilometraje y coste por 100 km.'
+            ),
+            'cuanto-cuesta-un-viaje-en-coche.html': (
+              'Calcula cuánto cuesta un viaje en coche con combustible, peajes, otros gastos y coste por persona. Introduce distancia, consumo y precio por litro.',
+              'Calcula el coste de un viaje en coche: combustible, peajes, parking y coste por persona. Incluye fórmula, ejemplos y comparación de rutas.'
+            ),
+            'coste-por-kilometro-coche.html': (
+              'Calcula el coste real por kilómetro de tu coche incluyendo combustible, seguro, mantenimiento, impuestos y depreciación.',
+              'Calcula el coste real por km de tu coche con combustible, seguro, mantenimiento, impuestos y depreciación. Incluye ejemplos por kilometraje.'
+            ),
+            'renting-o-comprar-coche.html': (
+              'Compara renting y compra de coche durante el mismo periodo: cuotas, reventa, seguro, mantenimiento, impuestos y financiación.',
+              'Compara renting y compra con el mismo plazo: cuotas, entrada, reventa, seguro, mantenimiento, impuestos y financiación.'
+            ),
+            'cuanto-cuesta-mantener-un-coche-al-ano.html': (
+              'Calcula cuánto cuesta mantener un coche al año sumando seguro, revisiones, neumáticos, impuestos, ITV, aparcamiento y combustible.',
+              'Calcula cuánto cuesta mantener un coche al año: seguro, revisiones, neumáticos, impuestos, ITV, parking y combustible, con ejemplos.'
+            ),
+          }
+
+          for filename, extra in pages.items():
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+              old_desc, new_desc = meta_replacements[filename]
+              text = text.replace(old_desc, new_desc)
+              if '<!-- seo-content-upgrade-2026-09 -->' not in text:
+                  anchor = '<section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span>'
+                  if anchor not in text:
+                      raise SystemExit(f'Anchor not found in {filename}')
+                  text = text.replace(anchor, extra.strip() + '\n' + anchor, 1)
+              if 'class="updated"' not in text:
+                  text = text.replace('<main id="contenido">', '<main id="contenido"><div class="container"><p class="updated">Actualizado: septiembre de 2026 · Cálculos y ejemplos orientativos.</p></div>', 1)
+              path.write_text(text, encoding='utf-8')
+
+          css = Path('assets/calculators.css')
+          css_text = css.read_text(encoding='utf-8')
+          marker = '/* seo-content-upgrade-2026-09 */'
+          if marker not in css_text:
+              css_text += '''\n\n/* seo-content-upgrade-2026-09 */
+          .updated{margin:18px 0 0;color:#667387;font-size:.84rem}
+          .table-wrap{overflow-x:auto;margin-top:18px;border:1px solid #dce4ef;border-radius:18px;background:#fff;box-shadow:0 14px 35px rgba(19,34,61,.06)}
+          .data-table{width:100%;border-collapse:collapse;min-width:620px}
+          .data-table th,.data-table td{padding:13px 15px;text-align:left;border-bottom:1px solid #e8edf4;vertical-align:top}
+          .data-table th{background:#f4f7fc;color:#24334d;font-size:.9rem}
+          .data-table td{color:#4f5f73}
+          .data-table tbody tr:last-child td,.data-table tbody tr:last-child th{border-bottom:0}
+          .data-table tbody tr:hover{background:#f9fbff}
+          @media(max-width:700px){.updated{margin-top:12px}.table-wrap{margin-left:-2px;margin-right:-2px}.data-table th,.data-table td{padding:11px 12px}}
+          '''
+              css.write_text(css_text, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          sm = sitemap.read_text(encoding='utf-8')
+          targets = ['cuanto-gasto-gasolina-al-mes.html','cuanto-cuesta-un-viaje-en-coche.html','coste-por-kilometro-coche.html','renting-o-comprar-coche.html','cuanto-cuesta-mantener-un-coche-al-ano.html']
+          for target in targets:
+              old = f'{target}</loc><lastmod>2026-09-09</lastmod>'
+              new = f'{target}</loc><lastmod>2026-09-10</lastmod>'
+              sm = sm.replace(old,new)
+          sitemap.write_text(sm,encoding='utf-8')
+          PY
+
+          rm -f .github/workflows/seo-content-upgrade-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cuanto-gasto-gasolina-al-mes.html cuanto-cuesta-un-viaje-en-coche.html coste-por-kilometro-coche.html renting-o-comprar-coche.html cuanto-cuesta-mantener-un-coche-al-ano.html assets/calculators.css sitemap.xml .github/workflows/seo-content-upgrade-once.yml
+          git commit -m "SEO: reforzar las cinco páginas principales"
+          git push
