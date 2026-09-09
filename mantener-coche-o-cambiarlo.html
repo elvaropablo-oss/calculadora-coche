@@ -1,76 +1,43 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mantener coche o cambiarlo: comparador de costes | CosteCoche</title><meta name="description" content="Compara el coste anual de mantener tu coche actual frente a cambiarlo por otro con menor consumo y mantenimiento."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/mantener-coche-o-cambiarlo.html">
-<style>
-:root{
-  --bg:#f5f7fb;--card:#fff;--text:#162033;--muted:#667387;--line:#dce4ef;
-  --primary:#2a6df2;--primary-dark:#1f57c6;--primary-soft:#eaf1ff;
-  --shadow:0 18px 45px rgba(19,34,61,.08);--max:1180px
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:var(--text);line-height:1.55;
-  background:radial-gradient(circle at top left,#dfe9ff 0,transparent 35%),
-             radial-gradient(circle at top right,#eef3ff 0,transparent 28%),
-             linear-gradient(180deg,#f8fbff,#f3f6fb)
-}
-a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
-.container{width:min(var(--max),calc(100% - 32px));margin:auto}
-.top{position:sticky;top:0;z-index:30;background:rgba(245,247,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.topin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850}.brand:hover{text-decoration:none}
-.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0f56da,#4d91ff);color:#fff;box-shadow:0 12px 24px rgba(42,109,242,.24)}
-nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:var(--text);padding:9px 11px;border-radius:999px;font-size:.87rem}
-nav a:hover,nav a.on{background:#fff;box-shadow:var(--shadow);text-decoration:none}
-.crumb{padding-top:22px;color:var(--muted);font-size:.9rem}
-.hero{padding:38px 0 34px}.hero-grid,.calc,.content{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
-.badge,.pill{display:inline-flex;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:.88rem;box-shadow:var(--shadow)}
-h1,h2,h3{line-height:1.12;letter-spacing:-.025em}
-h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:16px 0 14px}
-h2{font-size:clamp(1.55rem,3vw,2.3rem);margin:6px 0 10px}
-.lead{font-size:1.08rem;color:var(--muted);max-width:760px}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{color:var(--muted);font-weight:600}
-.hero-card{background:linear-gradient(145deg,#0f1f4f,#183d96 55%,#2a6df2);color:#fff;border-radius:26px;padding:24px;box-shadow:0 28px 70px rgba(17,36,82,.22)}
-.hero-card small{opacity:.8}.hero-value{font-size:2.2rem;font-weight:850;margin:8px 0}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.mini div{padding:13px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}.mini strong{display:block;font-size:1.18rem}
-.section{padding:20px 0 36px}.eyebrow{color:var(--primary-dark);font-weight:850;font-size:.88rem}.sub{color:var(--muted);margin:0 0 20px}
-.card,.info{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}
-label{font-weight:750;font-size:.92rem}input,select{width:100%;border:1px solid #d6dfeb;border-radius:14px;background:#f9fbff;padding:14px;font:inherit;outline:none;color:var(--text)}
-input:focus,select:focus{border-color:#a8c3ff;background:#fff;box-shadow:0 0 0 4px rgba(42,109,242,.08)}.help{font-size:.8rem;color:var(--muted)}
-.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(180deg,#3579ff,#2a6df2);color:#fff}.secondary{background:#f5f8fd;color:var(--text);border:1px solid var(--line)}
-.result{background:#101d35;color:#fff;border-radius:24px;padding:22px;box-shadow:0 22px 55px rgba(17,29,53,.16)}.result p{color:#c7d2e5}
-.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ri{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.ri.main{grid-column:1/-1;background:linear-gradient(145deg,#1e58cd,#2f73f7)}.rl{font-size:.82rem;color:#cbd7e9}.rv{font-size:1.42rem;font-weight:850}.ri.main .rv{font-size:1.9rem}
-.info p,.info li{color:#4f5f73}.formula{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:12px;padding:13px 15px;margin:14px 0;font-weight:800;color:#1c4f9b}
-.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);color:var(--text)}.related small{display:block;color:var(--muted);margin-top:5px}
-.faq{display:grid;gap:12px}.faq details{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:0 18px;box-shadow:var(--shadow)}summary{cursor:pointer;font-weight:800;padding:16px 0}.faq p{color:var(--muted);margin:0 0 16px}
-footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;padding:26px}.foot a{color:#d7def0}.foot p{color:#b7c4df}
-.cookie{position:fixed;left:18px;right:18px;bottom:18px;max-width:760px;margin:auto;background:#0f1830;color:#fff;border-radius:20px;padding:18px;z-index:50;box-shadow:0 24px 60px rgba(0,0,0,.28)}.cookie[hidden]{display:none}.cookie p{margin:0 0 12px;color:#d5def1}
-@media(max-width:980px){.hero-grid,.calc,.content{grid-template-columns:1fr}.related{grid-template-columns:1fr 1fr}}
-@media(max-width:680px){nav{display:none}.fields,.rg,.mini,.related{grid-template-columns:1fr}.ri.main{grid-column:auto}}
-</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Incluye el precio de compra del coche nuevo?", "acceptedAnswer": {"@type": "Answer", "text": "Indirectamente solo mediante la depreciación anual. No es una comparación de flujo de caja."}}, {"@type": "Question", "name": "¿Incluye financiación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes añadirla por separado usando la calculadora de financiación."}}, {"@type": "Question", "name": "¿Qué mantenimiento pongo para el coche actual?", "acceptedAnswer": {"@type": "Answer", "text": "Una media anual razonable basada en revisiones y reparaciones recientes."}}, {"@type": "Question", "name": "¿Puede ayudarme a decidir si cambiar de coche?", "acceptedAnswer": {"@type": "Answer", "text": "Sí como apoyo numérico, pero la decisión también depende de fiabilidad, seguridad, liquidez y necesidades personales."}}]}</script></head><body>
-<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav><a href="index.html">Inicio</a><a href="cuanto-cuesta-tener-un-coche-al-mes.html">Coste mensual</a><a href="cuanto-cuesta-cargar-coche-electrico-en-casa.html">Carga EV</a><a href="calculadora-autonomia-deposito-coche.html">Autonomía</a><a href="calculadora-kilometros-anuales-coche.html">Km/año</a><a class="on" href="mantener-coche-o-cambiarlo.html">Mantener/cambiar</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Mantener o cambiar</div><main>
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Mantener coche o cambiarlo: comparador de costes | CosteCoche</title><meta content="Compara el coste anual de mantener tu coche actual frente a cambiarlo por otro con menor consumo y mantenimiento." name="description"/><meta content="index,follow,max-image-preview:large" name="robots"/><link href="https://elvaropablo-oss.github.io/calculadora-coche/mantener-coche-o-cambiarlo.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="Mantener coche o cambiarlo: comparador de costes | CosteCoche" property="og:title"/>
+<meta content="Compara el coste anual de mantener tu coche actual frente a cambiarlo por otro con menor consumo y mantenimiento." property="og:description"/>
+<meta content="https://elvaropablo-oss.github.io/calculadora-coche/mantener-coche-o-cambiarlo.html" property="og:url"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="#2a6df2" name="theme-color"/>
+<link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/><link href="assets/calculators.css" rel="stylesheet"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Incluye el precio de compra del coche nuevo?", "acceptedAnswer": {"@type": "Answer", "text": "Indirectamente solo mediante la depreciación anual. No es una comparación de flujo de caja."}}, {"@type": "Question", "name": "¿Incluye financiación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes añadirla por separado usando la calculadora de financiación."}}, {"@type": "Question", "name": "¿Qué mantenimiento pongo para el coche actual?", "acceptedAnswer": {"@type": "Answer", "text": "Una media anual razonable basada en revisiones y reparaciones recientes."}}, {"@type": "Question", "name": "¿Puede ayudarme a decidir si cambiar de coche?", "acceptedAnswer": {"@type": "Answer", "text": "Sí como apoyo numérico, pero la decisión también depende de fiabilidad, seguridad, liquidez y necesidades personales."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://elvaropablo-oss.github.io/calculadora-coche/"},{"@type":"ListItem","position":2,"name":"¿Compensa mantener tu coche o cambiarlo?","item":"https://elvaropablo-oss.github.io/calculadora-coche/mantener-coche-o-cambiarlo.html"}]}</script>
+
+</head><body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="cuanto-gasto-gasolina-al-mes.html">Gasolina al mes</a><a href="cuanto-cuesta-un-viaje-en-coche.html">Viaje</a><a href="coste-por-kilometro-coche.html">Coste/km</a><a href="comparar-coches.html">Comparar coches</a><a href="renting-o-comprar-coche.html">Renting vs compra</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Mantener o cambiar</div><main id="contenido">
 <section class="hero"><div class="container hero-grid"><div><span class="badge">Mantener o cambiar</span><h1>¿Compensa mantener tu coche o cambiarlo?</h1><p class="lead">Compara combustible, mantenimiento y depreciación para entender qué escenario tiene menor coste anual estimado.</p><div class="pills"><span class="pill">Cálculo instantáneo</span><span class="pill">Sin registro</span><span class="pill">Datos en tu navegador</span></div></div><div class="hero-card"><small>Coste del coche actual frente a uno nuevo</small><div class="hero-value">Mantener o cambiar</div><div>Compara el coste anual estimado de seguir con tu coche o sustituirlo.</div><div class="mini"><div><small>Actual</small><strong>Costes/año</strong></div><div><small>Nuevo</small><strong>Costes/año</strong></div></div></div></div></section>
 <section class="section"><div class="container"><span class="eyebrow">Calculadora</span><h2>¿Compensa mantener tu coche o cambiarlo?</h2><p class="sub">Una comparación simplificada entre costes anuales del coche actual y un coche nuevo.</p><div class="calc"><div class="card"><div class="fields">
-<div class="field"><label for="km">Kilómetros/año</label><input id="km" type="number" min="0" step="100" placeholder="Ej: 15000"></div>
-<div class="field"><label for="fuelPrice">Combustible (€/L)</label><input id="fuelPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65"></div>
-<div class="field"><label for="oldCons">Actual: consumo (L/100 km)</label><input id="oldCons" type="number" min="0" step=".1" placeholder="Ej: 7.5"></div>
-<div class="field"><label for="oldMaint">Actual: mantenimiento/año (€)</label><input id="oldMaint" type="number" min="0" step="10" placeholder="Ej: 1200"></div>
-<div class="field"><label for="newCons">Nuevo: consumo (L/100 km)</label><input id="newCons" type="number" min="0" step=".1" placeholder="Ej: 5.3"></div>
-<div class="field"><label for="newMaint">Nuevo: mantenimiento/año (€)</label><input id="newMaint" type="number" min="0" step="10" placeholder="Ej: 450"></div>
-<div class="field"><label for="newDep">Nuevo: depreciación/año (€)</label><input id="newDep" type="number" min="0" step="100" placeholder="Ej: 3500"></div>
-<div class="field"><label for="oldDep">Actual: depreciación/año (€)</label><input id="oldDep" type="number" min="0" step="100" placeholder="Ej: 800"></div></div>
-<div class="actions"><button class="btn primary" onclick="calcKeep()">Comparar</button><button class="btn secondary" onclick="clearKeep()">Limpiar</button></div></div>
-<aside class="result"><h2>Resultado</h2><p>Comparación simplificada de coste anual.</p><div class="rg">
+<div class="field"><label for="km">Kilómetros/año</label><input id="km" min="0" placeholder="Ej: 15000" step="100" type="number"/></div>
+<div class="field"><label for="fuelPrice">Combustible (€/L)</label><input id="fuelPrice" min="0" placeholder="Ej: 1.65" step=".01" type="number"/></div>
+<div class="field"><label for="oldCons">Actual: consumo (L/100 km)</label><input id="oldCons" min="0" placeholder="Ej: 7.5" step=".1" type="number"/></div>
+<div class="field"><label for="oldMaint">Actual: mantenimiento/año (€)</label><input id="oldMaint" min="0" placeholder="Ej: 1200" step="10" type="number"/></div>
+<div class="field"><label for="newCons">Nuevo: consumo (L/100 km)</label><input id="newCons" min="0" placeholder="Ej: 5.3" step=".1" type="number"/></div>
+<div class="field"><label for="newMaint">Nuevo: mantenimiento/año (€)</label><input id="newMaint" min="0" placeholder="Ej: 450" step="10" type="number"/></div>
+<div class="field"><label for="newDep">Nuevo: depreciación/año (€)</label><input id="newDep" min="0" placeholder="Ej: 3500" step="100" type="number"/></div>
+<div class="field"><label for="oldDep">Actual: depreciación/año (€)</label><input id="oldDep" min="0" placeholder="Ej: 800" step="100" type="number"/></div></div>
+<div class="actions"><button class="btn primary" onclick="calcKeep()" type="button">Comparar</button><button class="btn secondary" onclick="clearKeep()" type="button">Limpiar</button></div></div>
+<aside aria-live="polite" class="result"><h2>Resultado</h2><p>Comparación simplificada de coste anual.</p><div class="rg">
 <div class="ri main"><div class="rl">Opción de menor coste estimado</div><div class="rv" id="winner">—</div></div>
 <div class="ri"><div class="rl">Mantener actual</div><div class="rv" id="oldTotal">—</div></div>
 <div class="ri"><div class="rl">Cambiar por nuevo</div><div class="rv" id="newTotal">—</div></div>
 <div class="ri"><div class="rl">Diferencia anual</div><div class="rv" id="diff">—</div></div></div></aside></div></div></section>
 <section class="section"><div class="container content"><article class="info"><h2>Por qué un coche nuevo no siempre ahorra dinero</h2><p>Un coche nuevo puede gastar menos combustible y requerir menos reparaciones, pero suele sufrir una depreciación mayor.</p><div class="formula">Coste anual aproximado = combustible + mantenimiento + depreciación</div><p>La comparación no incluye financiación, seguro, impuestos ni riesgo de averías extraordinarias.</p></article><article class="info"><h2>Cómo interpretar el resultado</h2><ul><li>Si el coche actual tiene averías imprevisibles, usa una media prudente.</li><li>Estima la depreciación del coche nuevo con cuidado.</li><li>No tomes la cifra como una recomendación automática de compra.</li><li>Repite el cálculo con escenarios optimista y pesimista.</li></ul></article></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Ejemplo práctico</span><h2>Ejemplo: el coche nuevo consume menos, pero se deprecia más</h2><article class="info"><p>Con 15.000 km/año y combustible a 1,60 €/L, un coche actual de 7,5 L/100 km gastaría 1.800 € en combustible. Sumando 1.200 € de mantenimiento y 800 € de depreciación serían 3.800 €/año. Un coche nuevo de 5,5 L/100 km, 500 € de mantenimiento y 3.000 € de depreciación sumaría 4.820 €/año.</p><div class="formula">Coche actual: 3.800 €/año · Coche nuevo: 4.820 €/año</div><p class="example-note">Ejemplo ilustrativo. Sustituye estos valores por los de tu coche y tu uso real.</p></article></div></section>
 <section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span><h2>Más calculadoras</h2><div class="related"><a href="calculadora-ahorro-coche-eficiente.html"><strong>Ahorro por consumo</strong><small>Aísla el ahorro de combustible.</small></a><a href="calculadora-depreciacion-coche.html"><strong>Depreciación</strong><small>Estima pérdida de valor.</small></a><a href="calculadora-financiacion-coche.html"><strong>Financiación</strong><small>Añade cuota e intereses.</small></a></div></div></section>
 <section class="section"><div class="container"><span class="eyebrow">Preguntas frecuentes</span><h2>Dudas habituales</h2><div class="faq"><details><summary>¿Incluye el precio de compra del coche nuevo?</summary><p>Indirectamente solo mediante la depreciación anual. No es una comparación de flujo de caja.</p></details><details><summary>¿Incluye financiación?</summary><p>No. Puedes añadirla por separado usando la calculadora de financiación.</p></details><details><summary>¿Qué mantenimiento pongo para el coche actual?</summary><p>Una media anual razonable basada en revisiones y reparaciones recientes.</p></details><details><summary>¿Puede ayudarme a decidir si cambiar de coche?</summary><p>Sí como apoyo numérico, pero la decisión también depende de fiabilidad, seguridad, liquidez y necesidades personales.</p></details></div></div></section></main>
-<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras para entender mejor cuánto cuesta conducir.</p><a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="aviso-legal.html">Aviso legal</a><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
-<div class="cookie" id="cookie" hidden><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept">Aceptar analítica</button><button class="btn secondary" id="reject">Rechazar</button></div></div><script>function calcKeep(){const km=v("km"),p=v("fuelPrice"),oc=v("oldCons"),om=v("oldMaint"),nc=v("newCons"),nm=v("newMaint"),nd=v("newDep"),od=v("oldDep");if(!(km>=0)||!(p>0)||![oc,om,nc,nm,nd,od].every(x=>x>=0)){alert("Introduce valores válidos.");return}const old=km*oc/100*p+om+od,newt=km*nc/100*p+nm+nd;t("winner",old<newt?"Mantener el actual":newt<old?"Cambiar de coche":"Empate");t("oldTotal",E(old));t("newTotal",E(newt));t("diff",E(Math.abs(old-newt)))}function clearKeep(){["km","fuelPrice","oldCons","oldMaint","newCons","newMaint","newDep","oldDep"].forEach(x=>document.getElementById(x).value="");["winner","oldTotal","newTotal","diff"].forEach(x=>t(x,"—"))}
-const GA="G-EZJ4866V6M",KEY="costecoche_analytics_choice_v1";
+<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras gratuitas para entender mejor cuánto cuesta conducir. Los resultados son orientativos y dependen de los datos que introduces.</p><div class="foot-links"><a href="sobre-costecoche.html">Sobre CosteCoche</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><a href="aviso-legal.html">Aviso legal</a><a data-privacy-settings="" href="#">Preferencias de analítica</a></div><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
+<div aria-label="Preferencias de analítica" aria-live="polite" class="cookie" hidden="" id="cookie" role="dialog"><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept" type="button">Aceptar analítica</button><button class="btn secondary" id="reject" type="button">Rechazar</button></div></div><script>function calcKeep(){const km=v("km"),p=v("fuelPrice"),oc=v("oldCons"),om=v("oldMaint"),nc=v("newCons"),nm=v("newMaint"),nd=v("newDep"),od=v("oldDep");if(!(km>=0)||!(p>0)||![oc,om,nc,nm,nd,od].every(x=>x>=0)){alert("Introduce valores válidos.");return}const old=km*oc/100*p+om+od,newt=km*nc/100*p+nm+nd;t("winner",old<newt?"Mantener el actual":newt<old?"Cambiar de coche":"Empate");t("oldTotal",E(old));t("newTotal",E(newt));t("diff",E(Math.abs(old-newt)))}function clearKeep(){["km","fuelPrice","oldCons","oldMaint","newCons","newMaint","newDep","oldDep"].forEach(x=>document.getElementById(x).value="");["winner","oldTotal","newTotal","diff"].forEach(x=>t(x,"—"))}
+const GA="G-EZJ4866V6M",KEY="costecoche_privacy_v2";
 const E=(v,d=2)=>v.toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:d,maximumFractionDigits:d});
 const N=(v,d=1)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
 function v(id){return parseFloat(document.getElementById(id).value)}function t(id,x){document.getElementById(id).textContent=x}
@@ -79,4 +46,6 @@ const cb=document.getElementById("cookie"),choice=localStorage.getItem(KEY);if(c
 document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");loadGA();cb.hidden=true};
 document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");cb.hidden=true};
 document.getElementById("year").textContent=new Date().getFullYear();
-</script></body></html>
+</script>
+<script id="cc-privacy-enhancement">(()=>{const KEY="costecoche_privacy_v2",GA="G-EZJ4866V6M",banner=document.getElementById("cookie");const disabled="ga-disable-"+GA;window[disabled]=localStorage.getItem(KEY)!=="accepted";document.getElementById("accept")?.addEventListener("click",()=>{window[disabled]=false});document.getElementById("reject")?.addEventListener("click",()=>{window[disabled]=true});document.querySelectorAll("[data-privacy-settings]").forEach(el=>el.addEventListener("click",e=>{e.preventDefault();localStorage.removeItem(KEY);window[disabled]=true;if(banner)banner.hidden=false}))})();</script>
+</body></html>
