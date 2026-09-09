@@ -1,200 +1,1843 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Calculadora de coche: combustible, viajes y coste total | CosteCoche</title>
-  <meta name="description" content="Calcula cuánto cuesta usar un coche: combustible al mes y al año, coste de viajes, comparación entre coches, coste total y renting frente a compra.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CosteCoche | Calculadoras de combustible, viaje y coste total</title>
+  <meta name="description" content="Calcula de forma clara cuánto cuesta usar un coche: combustible al mes y al año, coste de un viaje, comparación entre coches, coste total de propiedad y renting frente a compra.">
+  <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
-  <meta property="og:title" content="Calculadora de coche: combustible, viajes y coste total | CosteCoche">
-  <meta property="og:description" content="Calcula cuánto cuesta usar un coche: combustible al mes y al año, coste de viajes, comparación entre coches, coste total y renting frente a compra.">
-  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/">
-  <meta name="theme-color" content="#1769e0">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
 
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebSite",
-  "name":"CosteCoche",
-  "url":"https://elvaropablo-oss.github.io/calculadora-coche/",
-  "inLanguage":"es",
-  "description":"Calculadoras gratuitas de combustible, viajes, comparación de coches y coste total de propiedad."
-}
-</script>
+  <style>
+    :root{
+      --bg: #f5f7fb;
+      --bg-2: #eef2f8;
+      --card: rgba(255,255,255,0.85);
+      --card-solid: #ffffff;
+      --text: #162033;
+      --muted: #667387;
+      --line: #dce4ef;
+      --primary: #2a6df2;
+      --primary-dark: #1f57c6;
+      --primary-soft: #eaf1ff;
+      --success: #14a36d;
+      --warning: #f59e0b;
+      --shadow: 0 18px 45px rgba(19, 34, 61, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --max: 1180px;
+    }
 
+    *{ box-sizing:border-box; }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, #dfe9ff 0%, transparent 35%),
+        radial-gradient(circle at top right, #eef3ff 0%, transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #f3f6fb 100%);
+      line-height:1.55;
+    }
+
+    a{
+      color:var(--primary);
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter: blur(12px);
+      background: rgba(245,247,251,0.78);
+      border-bottom:1px solid rgba(220,228,239,0.8);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      min-height:76px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--text);
+      font-weight:800;
+      font-size:1.08rem;
+    }
+
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, #0f56da 0%, #4d91ff 100%);
+      color:#fff;
+      box-shadow:0 12px 24px rgba(42,109,242,0.24);
+      font-size:1.1rem;
+      font-weight:900;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--text);
+      font-size:0.95rem;
+      padding:10px 14px;
+      border-radius:999px;
+      transition:0.18s ease;
+    }
+
+    .nav-links a:hover{
+      background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .hero{
+      padding:56px 0 38px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(220,228,239,0.95);
+      color:var(--primary-dark);
+      font-weight:700;
+      font-size:0.9rem;
+      box-shadow: var(--shadow);
+    }
+
+    h1{
+      margin:18px 0 14px;
+      font-size: clamp(2.5rem, 5vw, 4.45rem);
+      line-height:1.02;
+      letter-spacing:-0.03em;
+    }
+
+    .hero p{
+      font-size:1.08rem;
+      color:var(--muted);
+      max-width:720px;
+      margin:0 0 22px;
+    }
+
+    .hero-points{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .hero-pill{
+      padding:10px 14px;
+      background:rgba(255,255,255,0.82);
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:0.92rem;
+      color:var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card{
+      background:linear-gradient(145deg, #0f1f4f 0%, #183d96 55%, #2a6df2 100%);
+      border-radius:var(--radius-xl);
+      padding:24px;
+      color:#fff;
+      box-shadow:0 28px 70px rgba(17, 36, 82, 0.22);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      right:-70px;
+      top:-70px;
+      background:rgba(255,255,255,0.08);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      left:-40px;
+      bottom:-50px;
+      background:rgba(255,255,255,0.06);
+    }
+
+    .hero-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .mini-stat-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .mini-stat{
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.13);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .mini-stat-label{
+      color:rgba(255,255,255,0.82);
+      font-size:0.85rem;
+      margin-bottom:4px;
+    }
+
+    .mini-stat-value{
+      font-size:1.5rem;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+
+    .section{
+      padding:18px 0 34px;
+    }
+
+    .section-head{
+      margin-bottom:18px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      color:var(--primary-dark);
+      font-weight:800;
+      letter-spacing:0.02em;
+      font-size:0.88rem;
+      margin-bottom:8px;
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      line-height:1.08;
+      letter-spacing:-0.03em;
+    }
+
+    .section-subtitle{
+      margin:0;
+      color:var(--muted);
+      max-width:860px;
+      font-size:1rem;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:16px;
+      margin-top:22px;
+    }
+
+    .feature-card{
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(220,228,239,0.95);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .feature-icon{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:var(--primary-soft);
+      color:var(--primary);
+      font-size:1.2rem;
+      margin-bottom:14px;
+    }
+
+    .feature-card h3{
+      margin:0 0 6px;
+      font-size:1rem;
+    }
+
+    .feature-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.94rem;
+    }
+
+    .accordion-wrap{
+      margin-top:24px;
+      display:grid;
+      gap:16px;
+    }
+
+    details.tool{
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(220,228,239,0.95);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    details.tool[open]{
+      background:rgba(255,255,255,0.95);
+    }
+
+    summary.tool-summary{
+      list-style:none;
+      cursor:pointer;
+      padding:22px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    summary.tool-summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .tool-left{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      min-width:0;
+    }
+
+    .tool-icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      background:linear-gradient(180deg, #f3f7ff 0%, #e5efff 100%);
+      border:1px solid #d7e3ff;
+      color:var(--primary);
+      font-size:1.4rem;
+    }
+
+    .tool-text{
+      min-width:0;
+    }
+
+    .tool-title{
+      margin:0 0 6px;
+      font-size:1.16rem;
+      font-weight:800;
+      letter-spacing:-0.02em;
+    }
+
+    .tool-desc{
+      margin:0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .summary-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .summary-tag{
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--primary-soft);
+      color:var(--primary-dark);
+      font-size:0.85rem;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .chevron{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:#f6f8fc;
+      border:1px solid var(--line);
+      transition:0.18s ease;
+      font-size:1.1rem;
+      color:var(--muted);
+    }
+
+    details[open] .chevron{
+      transform:rotate(180deg);
+      color:var(--primary);
+      background:var(--primary-soft);
+    }
+
+    .tool-content{
+      padding:0 24px 24px;
+      border-top:1px solid #edf1f7;
+    }
+
+    .tool-intro{
+      padding-top:18px;
+      color:var(--muted);
+      margin-bottom:18px;
+      font-size:0.97rem;
+    }
+
+    .tool-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .form-card,
+    .result-card{
+      background:var(--card-solid);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:20px;
+    }
+
+    .form-card h3,
+    .result-card h3{
+      margin:0 0 6px;
+      font-size:1.05rem;
+    }
+
+    .card-help{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:0.93rem;
+    }
+
+    .fields{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-weight:700;
+      font-size:0.92rem;
+    }
+
+    .field input{
+      width:100%;
+      border:1px solid #d6dfeb;
+      border-radius:14px;
+      background:#f9fbff;
+      padding:14px 14px;
+      font-size:1rem;
+      color:var(--text);
+      outline:none;
+      transition:0.18s ease;
+    }
+
+    .field input:focus{
+      border-color:#a8c3ff;
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(42,109,242,0.08);
+    }
+
+    .field small{
+      color:var(--muted);
+      font-size:0.8rem;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      border:0;
+      border-radius:14px;
+      padding:13px 18px;
+      font-size:0.96rem;
+      font-weight:800;
+      cursor:pointer;
+      transition:0.18s ease;
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, #3579ff 0%, #2a6df2 100%);
+      color:#fff;
+      box-shadow:0 12px 25px rgba(42,109,242,0.18);
+    }
+
+    .btn-primary:hover{
+      background:linear-gradient(180deg, #2e70f4 0%, #245fcc 100%);
+      transform:translateY(-1px);
+    }
+
+    .btn-secondary{
+      background:#f5f8fd;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .btn-secondary:hover{
+      background:#fff;
+    }
+
+    .result-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .result-item{
+      border-radius:18px;
+      background:#f6f9ff;
+      border:1px solid #dce6fb;
+      padding:15px;
+    }
+
+    .result-item.primary{
+      grid-column:1 / -1;
+      background:linear-gradient(145deg, #1e58cd 0%, #2f73f7 100%);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 15px 32px rgba(42,109,242,0.18);
+    }
+
+    .result-item .label{
+      font-size:0.84rem;
+      color:inherit;
+      opacity:0.8;
+      margin-bottom:5px;
+    }
+
+    .result-item .value{
+      font-size:1.42rem;
+      font-weight:800;
+      letter-spacing:-0.03em;
+      line-height:1.12;
+    }
+
+    .result-note{
+      margin-top:16px;
+      padding:13px 14px;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px dashed var(--line);
+      color:var(--muted);
+      font-size:0.88rem;
+    }
+
+    .how-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:22px;
+    }
+
+    .info-box{
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(220,228,239,0.95);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .info-box h3{
+      margin:0 0 8px;
+      font-size:1.08rem;
+    }
+
+    .info-box p,
+    .info-box li{
+      color:var(--muted);
+    }
+
+    .info-box ul{
+      padding-left:18px;
+      margin:8px 0 0;
+    }
+
+    .faq{
+      display:grid;
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .faq details{
+      background:rgba(255,255,255,0.82);
+      border:1px solid rgba(220,228,239,0.95);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:0 20px;
+    }
+
+    .faq summary{
+      list-style:none;
+      cursor:pointer;
+      font-weight:800;
+      padding:18px 0;
+      position:relative;
+    }
+
+    .faq summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .faq p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+
+    footer{
+      padding:40px 0 24px;
+      margin-top:20px;
+    }
+
+    .footer-card{
+      background:#0f1830;
+      color:#d7def0;
+      border-radius:28px;
+      padding:28px;
+      box-shadow:0 28px 70px rgba(8, 17, 35, 0.18);
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr 0.8fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .footer-card h3{
+      margin:0 0 10px;
+      color:#fff;
+      font-size:1.05rem;
+    }
+
+    .footer-card p{
+      color:#b7c4df;
+      margin:0;
+      font-size:0.94rem;
+    }
+
+    .footer-links{
+      display:grid;
+      gap:9px;
+    }
+
+    .footer-links a{
+      color:#d7def0;
+      font-size:0.93rem;
+    }
+
+    .footer-links a:hover{
+      color:#fff;
+    }
+
+    .footer-bottom{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      color:#94a7cb;
+      font-size:0.84rem;
+    }
+
+    .cookie-banner{
+      position:fixed;
+      left:18px;
+      right:18px;
+      bottom:18px;
+      max-width:760px;
+      margin:0 auto;
+      z-index:60;
+      background:rgba(15,24,48,0.98);
+      color:#fff;
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 24px 60px rgba(0,0,0,0.28);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .cookie-banner[hidden]{
+      display:none;
+    }
+
+    .cookie-banner p{
+      margin:0 0 14px;
+      color:#d5def1;
+      font-size:0.93rem;
+    }
+
+    .cookie-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .cookie-actions .btn-secondary{
+      background:#1d2947;
+      color:#fff;
+      border-color:#32456d;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid,
+      .tool-grid,
+      .how-grid{
+        grid-template-columns:1fr;
+      }
+
+      .feature-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px){
+      .nav-links{
+        display:none;
+      }
+
+      .hero{
+        padding-top:38px;
+      }
+
+      .feature-grid,
+      .fields,
+      .result-grid,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+
+      .summary-right{
+        display:none;
+      }
+
+      summary.tool-summary{
+        padding:18px 18px;
+      }
+
+      .tool-content{
+        padding:0 18px 18px;
+      }
+
+      .form-card,
+      .result-card,
+      .info-box{
+        padding:18px;
+      }
+
+      .mini-stat-grid{
+        grid-template-columns:1fr;
+      }
+
+      .topbar-inner{
+        min-height:68px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"CosteCoche",
+    "applicationCategory":"FinanceApplication",
+    "operatingSystem":"Web",
+    "url":"https://elvaropablo-oss.github.io/calculadora-coche/",
+    "description":"Herramienta web para calcular el coste de usar un coche: combustible, viajes, comparación entre coches, coste total y renting frente a compra."
+  }
+  </script>
 </head>
-<a class="skip-link" href="#contenido">Saltar al contenido</a>
-<header class="site-header">
-  <nav class="nav" aria-label="Navegación principal">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">€</span>
-      <span>CosteCoche</span>
-    </a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menú</button>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html" aria-current="page">Inicio</a><a href="combustible.html">Combustible</a><a href="viaje.html">Viaje</a><a href="comparar-coches.html">Comparar coches</a><a href="coste-total.html">Coste total</a><a href="renting-o-comprar.html">Renting vs compra</a>
-    </div>
-  </nav>
-</header>
+<body>
 
-<main id="contenido">
-  <section class="hero">
-    <div>
-      <span class="eyebrow">Calculadoras gratuitas · Sin registro</span>
-      <h1>Descubre cuánto te cuesta conducir de verdad</h1>
-      <p class="lead">Convierte kilómetros, consumo y precio del combustible en cifras útiles: coste mensual, anual, por viaje y por kilómetro. Después compara coches y calcula el coste total de propiedad.</p>
-      <div class="hero-points">
-        <span class="pill">Cálculo instantáneo</span>
-        <span class="pill">Funciona en móvil</span>
-        <span class="pill">Los valores del cálculo no se envían</span>
-      </div>
-    </div>
-    <div class="hero-visual" aria-label="Ejemplo de resultado">
-      <div class="hero-caption">Ejemplo con 15.000 km/año, 6,2 L/100 km y 1,65 €/L</div>
-      <div class="mini-card">
-        <div class="hero-caption">Gasto estimado al año</div>
-        <div class="hero-number">1.534,50 €</div>
-      </div>
-      <div class="mini-card">
-        <div class="hero-caption">Equivale aproximadamente a</div>
-        <div class="hero-number">127,88 €/mes</div>
-      </div>
-    </div>
-  </section>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#inicio" class="brand">
+        <span class="brand-logo">€</span>
+        <span>CosteCoche</span>
+      </a>
 
-  <section class="section" aria-labelledby="calc-title">
-    <div class="section-head">
-      <span class="kicker">Calculadora principal</span>
-      <h2 id="calc-title">Coste de combustible al mes y al año</h2>
-      <p>Introduce tres datos. Actualizamos el resultado mientras escribes para que puedas probar escenarios rápidamente.</p>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#calculadoras">Calculadoras</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#faq">FAQ</a>
+        <a href="#legal">Información</a>
+      </nav>
     </div>
-    <div class="calculator-shell">
-      <form class="card" id="fuelForm">
-        <div class="form-grid">
-          <div class="field">
-            <label for="fuelKm">Kilómetros al año</label>
-            <input id="fuelKm" inputmode="decimal" value="15000" min="0" type="number" step="100" required>
-            <span class="help">Ejemplo: 15.000 km</span>
-          </div>
-          <div class="field">
-            <label for="fuelConsumption">Consumo medio (L/100 km)</label>
-            <input id="fuelConsumption" inputmode="decimal" value="6.2" min="0" type="number" step="0.1" required>
-            <span class="help">Usa el consumo real si lo conoces</span>
-          </div>
-          <div class="field full">
-            <label for="fuelPrice">Precio del combustible (€/L)</label>
-            <input id="fuelPrice" inputmode="decimal" value="1.65" min="0" type="number" step="0.01" required>
-            <span class="help">Puedes poner gasolina, diésel o cualquier precio por litro</span>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="hero-badge">Herramienta gratuita · Clara · Rápida</span>
+          <h1>Calcula cuánto te cuesta de verdad usar tu coche</h1>
+          <p>
+            Todo en una sola página, con cada función dentro de su propio desplegable:
+            combustible, viajes, comparación entre coches, coste total de propiedad y renting frente a compra.
+          </p>
+
+          <div class="hero-points">
+            <span class="hero-pill">Diseño más intuitivo</span>
+            <span class="hero-pill">Resultados instantáneos</span>
+            <span class="hero-pill">Preparada para crecer</span>
           </div>
         </div>
-        <div class="form-actions">
-          <button class="btn btn-primary" type="submit">Calcular</button>
-          <a class="btn btn-secondary" href="combustible.html">Ver calculadora detallada</a>
+
+        <div class="hero-card">
+          <div style="font-size:0.95rem; opacity:0.88;">Ejemplo rápido</div>
+          <h2 style="margin:8px 0 0; font-size:1.45rem; line-height:1.15;">15.000 km/año · 6,2 L/100 km · 1,65 €/L</h2>
+
+          <div class="mini-stat-grid">
+            <div class="mini-stat">
+              <div class="mini-stat-label">Coste anual estimado</div>
+              <div class="mini-stat-value">1.534,50 €</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Coste mensual estimado</div>
+              <div class="mini-stat-value">127,88 €</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Litros al año</div>
+              <div class="mini-stat-value">930 L</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Cada 100 km</div>
+              <div class="mini-stat-value">10,23 €</div>
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
+    </section>
 
-      <aside class="results" aria-live="polite">
-        <h2>Tu estimación</h2>
-        <div class="result-grid">
-          <div class="result-item result-primary"><span>Coste anual</span><strong id="fuelAnnual">—</strong></div>
-          <div class="result-item"><span>Coste mensual</span><strong id="fuelMonthly">—</strong></div>
-          <div class="result-item"><span>Litros al año</span><strong id="fuelLiters">—</strong></div>
-          <div class="result-item"><span>Coste cada 100 km</span><strong id="fuelPer100">—</strong></div>
-          <div class="result-item"><span>Coste por km</span><strong id="fuelPerKm">—</strong></div>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Qué puedes hacer</span>
+          <h2 class="section-title">Una herramienta más bonita y más fácil de usar</h2>
+          <p class="section-subtitle">
+            En lugar de enseñarte demasiadas cosas a la vez, cada función está dentro de su propio apartado desplegable.
+            Abres solo lo que necesitas, rellenas los datos y ves el resultado de forma clara.
+          </p>
         </div>
-        <p class="result-note">Estimación basada únicamente en combustible. Seguro, mantenimiento, impuestos, financiación y depreciación se calculan aparte.</p>
-      </aside>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="section-head">
-      <span class="kicker">Más herramientas</span>
-      <h2>Elige qué quieres calcular</h2>
-      <p>Separar cada decisión en una herramienta específica hace que la estimación sea más clara y evita mezclar conceptos.</p>
-    </div>
-    <div class="tool-grid">
-      <a class="tool-card" href="combustible.html"><div class="icon">⛽</div><h3>Combustible</h3><p>Gasto mensual, anual, por 100 km y por kilómetro.</p></a>
-      <a class="tool-card" href="viaje.html"><div class="icon">🛣️</div><h3>Coste de un viaje</h3><p>Combustible, peajes, litros y coste por persona.</p></a>
-      <a class="tool-card" href="comparar-coches.html"><div class="icon">↔️</div><h3>Comparar dos coches</h3><p>Descubre cuánto ahorra al año el coche más eficiente.</p></a>
-      <a class="tool-card" href="coste-total.html"><div class="icon">📊</div><h3>Coste total</h3><p>Depreciación, combustible, seguro, mantenimiento e impuestos.</p></a>
-      <a class="tool-card" href="renting-o-comprar.html"><div class="icon">🔑</div><h3>Renting o comprar</h3><p>Compara el coste estimado de ambas opciones en el mismo periodo.</p></a>
-      <a class="tool-card" href="sobre-costecoche.html"><div class="icon">✓</div><h3>Cómo calculamos</h3><p>Metodología, límites de las estimaciones y principios del sitio.</p></a>
-    </div>
-  </section>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⛽</div>
+            <h3>Combustible</h3>
+            <p>Gasto mensual, anual, litros, coste por 100 km y coste por kilómetro.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛣️</div>
+            <h3>Viaje</h3>
+            <p>Coste total de una ruta incluyendo combustible, peajes y reparto por persona.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🚗</div>
+            <h3>Comparar coches</h3>
+            <p>Descubre cuál gasta menos y cuánto ahorrarías cada año.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Coste real</h3>
+            <p>Mira el coste total de tener coche y compáralo con renting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section class="section">
-    <div class="content-grid">
-      <article class="prose">
-        <h2>Cómo se calcula el gasto de combustible</h2>
-        <p>La idea es sencilla: primero calculamos cuántos litros necesitas para recorrer tus kilómetros anuales y después multiplicamos esos litros por el precio del combustible.</p>
-        <div class="formula">Litros/año = kilómetros/año × consumo ÷ 100</div>
-        <div class="formula">Coste/año = litros/año × precio por litro</div>
-        <p>Por ejemplo, un coche que recorre 15.000 km al año y consume 6,2 L/100 km utiliza aproximadamente 930 litros. A 1,65 €/L, el gasto estimado sería 1.534,50 € al año.</p>
-      </article>
-      <article class="prose">
-        <h2>Por qué mirar solo el combustible puede engañar</h2>
-        <p>Dos coches con consumos diferentes pueden acabar teniendo un coste total parecido si también cambian el precio de compra, el valor de reventa, el seguro o el mantenimiento. Por eso CosteCoche separa el gasto de uso del coste total de propiedad.</p>
-        <p>Para una compra importante, prueba primero la comparación de consumos y después la calculadora de coste total. Así puedes distinguir el ahorro operativo del coste de adquirir y mantener el vehículo.</p>
-      </article>
-    </div>
-  </section>
+    <section class="section" id="calculadoras">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Calculadoras</span>
+          <h2 class="section-title">Abre el apartado que necesites</h2>
+          <p class="section-subtitle">
+            Cada bloque es independiente. Así la experiencia es mucho más limpia y no te pierdes entre datos.
+          </p>
+        </div>
 
-  <section class="section section-tight">
-    <div class="section-head">
-      <h2>Preguntas frecuentes</h2>
-    </div>
-    <div class="faq">
-      <details><summary>¿Qué consumo debo introducir?</summary><p>Si puedes, usa tu consumo real medio de varios depósitos. El dato homologado sirve como referencia, pero tu resultado real puede variar por velocidad, tráfico, temperatura, neumáticos, carga y estilo de conducción.</p></details>
-      <details><summary>¿El cálculo incluye mantenimiento y seguro?</summary><p>No en la calculadora básica. Para incluir depreciación, seguro, mantenimiento e impuestos utiliza la calculadora de coste total.</p></details>
-      <details><summary>¿Puedo usar decimales?</summary><p>Sí. Los campos aceptan decimales y los resultados se muestran con formato de euros.</p></details>
-      <details><summary>¿Guardáis los datos que escribo?</summary><p>No enviamos los valores de las calculadoras a un servidor propio. Los cálculos se realizan en tu navegador. La medición de audiencia con Google Analytics solo se carga si la aceptas.</p></details>
-    </div>
-  </section>
-</main>
+        <div class="accordion-wrap">
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h3>CosteCoche</h3>
-      <p>Calculadoras gratuitas para entender el coste real de conducir. Los cálculos se realizan en tu navegador y son orientativos.</p>
-    </div>
-    <div>
-      <h3>Calculadoras</h3>
-      <div class="footer-links">
-        <a href="combustible.html">Coste de combustible</a>
-        <a href="viaje.html">Coste de un viaje</a>
-        <a href="comparar-coches.html">Comparar dos coches</a>
-        <a href="coste-total.html">Coste total de propiedad</a>
-        <a href="renting-o-comprar.html">Renting vs compra</a>
+          <!-- 1 COMBUSTIBLE -->
+          <details class="tool" open>
+            <summary class="tool-summary">
+              <div class="tool-left">
+                <div class="tool-icon">⛽</div>
+                <div class="tool-text">
+                  <div class="tool-title">1. Coste de combustible</div>
+                  <p class="tool-desc">Calcula cuánto gastas al año, al mes y por cada 100 km.</p>
+                </div>
+              </div>
+
+              <div class="summary-right">
+                <span class="summary-tag">Más usada</span>
+                <div class="chevron">⌄</div>
+              </div>
+            </summary>
+
+            <div class="tool-content">
+              <div class="tool-intro">
+                Introduce tus kilómetros anuales, el consumo medio del coche y el precio del combustible.
+              </div>
+
+              <div class="tool-grid">
+                <div class="form-card">
+                  <h3>Datos</h3>
+                  <p class="card-help">Puedes usar decimales. Mejor introducir el consumo real que el homologado.</p>
+
+                  <div class="fields">
+                    <div class="field">
+                      <label for="kmAnual">Kilómetros al año</label>
+                      <input id="kmAnual" type="number" min="0" step="100" placeholder="Ej: 15000">
+                      <small>Ejemplo: 15.000 km</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="consumoAnual">Consumo (L/100 km)</label>
+                      <input id="consumoAnual" type="number" min="0" step="0.1" placeholder="Ej: 6.2">
+                      <small>Ejemplo: 6,2 L/100 km</small>
+                    </div>
+
+                    <div class="field full">
+                      <label for="precioAnual">Precio del combustible (€/L)</label>
+                      <input id="precioAnual" type="number" min="0" step="0.01" placeholder="Ej: 1.65">
+                      <small>Ejemplo: 1,65 €/L</small>
+                    </div>
+                  </div>
+
+                  <div class="actions">
+                    <button class="btn btn-primary" onclick="calcularCombustible()">Calcular combustible</button>
+                    <button class="btn btn-secondary" onclick="limpiarCombustible()">Limpiar</button>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <h3>Resultado</h3>
+                  <p class="card-help">Estimación basada solo en combustible.</p>
+
+                  <div class="result-grid">
+                    <div class="result-item primary">
+                      <div class="label">Coste anual</div>
+                      <div class="value" id="rCosteAnual">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste mensual</div>
+                      <div class="value" id="rCosteMensual">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Litros al año</div>
+                      <div class="value" id="rLitrosAnual">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste por 100 km</div>
+                      <div class="value" id="rCoste100">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste por km</div>
+                      <div class="value" id="rCosteKm">—</div>
+                    </div>
+                  </div>
+
+                  <div class="result-note">
+                    No incluye seguro, mantenimiento, impuestos, financiación ni depreciación.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- 2 VIAJE -->
+          <details class="tool">
+            <summary class="tool-summary">
+              <div class="tool-left">
+                <div class="tool-icon">🛣️</div>
+                <div class="tool-text">
+                  <div class="tool-title">2. Coste de un viaje</div>
+                  <p class="tool-desc">Calcula combustible, peajes, litros necesarios y coste por persona.</p>
+                </div>
+              </div>
+
+              <div class="summary-right">
+                <span class="summary-tag">Ruta puntual</span>
+                <div class="chevron">⌄</div>
+              </div>
+            </summary>
+
+            <div class="tool-content">
+              <div class="tool-intro">
+                Útil para escapadas, vacaciones o cualquier trayecto en el que quieras repartir gastos.
+              </div>
+
+              <div class="tool-grid">
+                <div class="form-card">
+                  <h3>Datos del viaje</h3>
+                  <p class="card-help">Incluye ida y vuelta si quieres el coste total del trayecto completo.</p>
+
+                  <div class="fields">
+                    <div class="field">
+                      <label for="distanciaViaje">Distancia total (km)</label>
+                      <input id="distanciaViaje" type="number" min="0" step="1" placeholder="Ej: 650">
+                      <small>Ejemplo: 650 km</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="consumoViaje">Consumo (L/100 km)</label>
+                      <input id="consumoViaje" type="number" min="0" step="0.1" placeholder="Ej: 6.2">
+                      <small>Ejemplo: 6,2</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="precioViaje">Precio del combustible (€/L)</label>
+                      <input id="precioViaje" type="number" min="0" step="0.01" placeholder="Ej: 1.65">
+                      <small>Ejemplo: 1,65</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="peajesViaje">Peajes (€)</label>
+                      <input id="peajesViaje" type="number" min="0" step="0.01" placeholder="Ej: 22">
+                      <small>Si no hay, pon 0</small>
+                    </div>
+
+                    <div class="field full">
+                      <label for="personasViaje">Número de personas</label>
+                      <input id="personasViaje" type="number" min="1" step="1" placeholder="Ej: 2">
+                      <small>Para repartir el coste</small>
+                    </div>
+                  </div>
+
+                  <div class="actions">
+                    <button class="btn btn-primary" onclick="calcularViaje()">Calcular viaje</button>
+                    <button class="btn btn-secondary" onclick="limpiarViaje()">Limpiar</button>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <h3>Resultado</h3>
+                  <p class="card-help">Combustible + peajes + reparto por persona.</p>
+
+                  <div class="result-grid">
+                    <div class="result-item primary">
+                      <div class="label">Coste total del viaje</div>
+                      <div class="value" id="rViajeTotal">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Solo combustible</div>
+                      <div class="value" id="rViajeCombustible">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste por persona</div>
+                      <div class="value" id="rViajePersona">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Litros necesarios</div>
+                      <div class="value" id="rViajeLitros">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste por 100 km</div>
+                      <div class="value" id="rViaje100">—</div>
+                    </div>
+                  </div>
+
+                  <div class="result-note">
+                    El reparto por persona divide el coste total entre los viajeros indicados.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- 3 COMPARAR -->
+          <details class="tool">
+            <summary class="tool-summary">
+              <div class="tool-left">
+                <div class="tool-icon">🚗</div>
+                <div class="tool-text">
+                  <div class="tool-title">3. Comparar dos coches</div>
+                  <p class="tool-desc">Descubre cuál consume menos y cuánto ahorrarías al año.</p>
+                </div>
+              </div>
+
+              <div class="summary-right">
+                <span class="summary-tag">Muy útil para comprar</span>
+                <div class="chevron">⌄</div>
+              </div>
+            </summary>
+
+            <div class="tool-content">
+              <div class="tool-intro">
+                Esta comparación está enfocada al gasto de combustible, no al coste total completo del vehículo.
+              </div>
+
+              <div class="tool-grid">
+                <div class="form-card">
+                  <h3>Datos para comparar</h3>
+                  <p class="card-help">Si un coche cuesta más de entrada, puedes calcular cuántos años tardaría en compensarse por menor consumo.</p>
+
+                  <div class="fields">
+                    <div class="field">
+                      <label for="compareKm">Kilómetros al año</label>
+                      <input id="compareKm" type="number" min="0" step="100" placeholder="Ej: 15000">
+                    </div>
+
+                    <div class="field">
+                      <label for="comparePrecio">Precio del combustible (€/L)</label>
+                      <input id="comparePrecio" type="number" min="0" step="0.01" placeholder="Ej: 1.65">
+                    </div>
+
+                    <div class="field">
+                      <label for="compareA">Consumo coche A (L/100 km)</label>
+                      <input id="compareA" type="number" min="0" step="0.1" placeholder="Ej: 5.5">
+                    </div>
+
+                    <div class="field">
+                      <label for="compareB">Consumo coche B (L/100 km)</label>
+                      <input id="compareB" type="number" min="0" step="0.1" placeholder="Ej: 7.0">
+                    </div>
+
+                    <div class="field full">
+                      <label for="compareSobreprecio">Diferencia de precio a compensar (€)</label>
+                      <input id="compareSobreprecio" type="number" min="0" step="100" placeholder="Ej: 3000">
+                      <small>Si no quieres calcular amortización, puedes dejarlo en 0.</small>
+                    </div>
+                  </div>
+
+                  <div class="actions">
+                    <button class="btn btn-primary" onclick="calcularComparativa()">Comparar</button>
+                    <button class="btn btn-secondary" onclick="limpiarComparativa()">Limpiar</button>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <h3>Resultado</h3>
+                  <p class="card-help">Comparación del gasto anual en combustible.</p>
+
+                  <div class="result-grid">
+                    <div class="result-item">
+                      <div class="label">Coste anual coche A</div>
+                      <div class="value" id="rCompareA">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste anual coche B</div>
+                      <div class="value" id="rCompareB">—</div>
+                    </div>
+
+                    <div class="result-item primary">
+                      <div class="label">Ahorro anual del más eficiente</div>
+                      <div class="value" id="rCompareAhorro">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coche más barato de usar</div>
+                      <div class="value" id="rCompareGanador">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Años para compensar el sobreprecio</div>
+                      <div class="value" id="rCompareAmort">—</div>
+                    </div>
+                  </div>
+
+                  <div class="result-note">
+                    Si el ahorro anual es 0 o el sobreprecio es 0, la amortización no aplica.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- 4 COSTE TOTAL -->
+          <details class="tool">
+            <summary class="tool-summary">
+              <div class="tool-left">
+                <div class="tool-icon">📊</div>
+                <div class="tool-text">
+                  <div class="tool-title">4. Coste total de tener coche</div>
+                  <p class="tool-desc">Suma depreciación, combustible, seguro, mantenimiento e impuestos.</p>
+                </div>
+              </div>
+
+              <div class="summary-right">
+                <span class="summary-tag">Visión completa</span>
+                <div class="chevron">⌄</div>
+              </div>
+            </summary>
+
+            <div class="tool-content">
+              <div class="tool-intro">
+                Aquí ya no miramos solo el combustible, sino una estimación más real del coste total de propiedad.
+              </div>
+
+              <div class="tool-grid">
+                <div class="form-card">
+                  <h3>Datos del coste total</h3>
+                  <p class="card-help">La depreciación se calcula como precio de compra menos valor de reventa estimado.</p>
+
+                  <div class="fields">
+                    <div class="field">
+                      <label for="tcoCompra">Precio de compra (€)</label>
+                      <input id="tcoCompra" type="number" min="0" step="100" placeholder="Ej: 28000">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoReventa">Valor de reventa (€)</label>
+                      <input id="tcoReventa" type="number" min="0" step="100" placeholder="Ej: 13000">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoAnios">Años que lo tendrás</label>
+                      <input id="tcoAnios" type="number" min="1" step="1" placeholder="Ej: 5">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoKm">Kilómetros al año</label>
+                      <input id="tcoKm" type="number" min="0" step="100" placeholder="Ej: 15000">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoConsumo">Consumo (L/100 km)</label>
+                      <input id="tcoConsumo" type="number" min="0" step="0.1" placeholder="Ej: 6.2">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoPrecio">Combustible (€/L)</label>
+                      <input id="tcoPrecio" type="number" min="0" step="0.01" placeholder="Ej: 1.65">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoSeguro">Seguro anual (€)</label>
+                      <input id="tcoSeguro" type="number" min="0" step="10" placeholder="Ej: 650">
+                    </div>
+
+                    <div class="field">
+                      <label for="tcoMantenimiento">Mantenimiento anual (€)</label>
+                      <input id="tcoMantenimiento" type="number" min="0" step="10" placeholder="Ej: 500">
+                    </div>
+
+                    <div class="field full">
+                      <label for="tcoImpuestos">Impuestos / ITV anuales (€)</label>
+                      <input id="tcoImpuestos" type="number" min="0" step="10" placeholder="Ej: 150">
+                    </div>
+                  </div>
+
+                  <div class="actions">
+                    <button class="btn btn-primary" onclick="calcularTCO()">Calcular coste total</button>
+                    <button class="btn btn-secondary" onclick="limpiarTCO()">Limpiar</button>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <h3>Resultado</h3>
+                  <p class="card-help">Estimación del periodo completo indicado.</p>
+
+                  <div class="result-grid">
+                    <div class="result-item primary">
+                      <div class="label">Coste total del periodo</div>
+                      <div class="value" id="rTcoTotal">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Media mensual</div>
+                      <div class="value" id="rTcoMensual">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste por km</div>
+                      <div class="value" id="rTcoKm">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Depreciación</div>
+                      <div class="value" id="rTcoDepreciacion">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Combustible total</div>
+                      <div class="value" id="rTcoCombustible">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Seguro + mant. + impuestos</div>
+                      <div class="value" id="rTcoFijos">—</div>
+                    </div>
+                  </div>
+
+                  <div class="result-note">
+                    Sigue siendo una estimación. No incluye financiación, aparcamiento, multas ni averías extraordinarias.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- 5 RENTING VS COMPRA -->
+          <details class="tool">
+            <summary class="tool-summary">
+              <div class="tool-left">
+                <div class="tool-icon">🔑</div>
+                <div class="tool-text">
+                  <div class="tool-title">5. Renting vs comprar</div>
+                  <p class="tool-desc">Compara ambos escenarios en el mismo número de años.</p>
+                </div>
+              </div>
+
+              <div class="summary-right">
+                <span class="summary-tag">Decisión final</span>
+                <div class="chevron">⌄</div>
+              </div>
+            </summary>
+
+            <div class="tool-content">
+              <div class="tool-intro">
+                Muy útil si estás dudando entre pagar una cuota de renting o comprar el coche y venderlo después.
+              </div>
+
+              <div class="tool-grid">
+                <div class="form-card">
+                  <h3>Datos para comparar</h3>
+                  <p class="card-help">La compra tiene en cuenta reventa, seguro, mantenimiento e impuestos.</p>
+
+                  <div class="fields">
+                    <div class="field">
+                      <label for="rbAnios">Periodo (años)</label>
+                      <input id="rbAnios" type="number" min="1" step="1" placeholder="Ej: 4">
+                    </div>
+
+                    <div class="field">
+                      <label for="rbRenting">Cuota de renting al mes (€)</label>
+                      <input id="rbRenting" type="number" min="0" step="1" placeholder="Ej: 380">
+                    </div>
+
+                    <div class="field">
+                      <label for="rbCompra">Precio de compra (€)</label>
+                      <input id="rbCompra" type="number" min="0" step="100" placeholder="Ej: 22000">
+                    </div>
+
+                    <div class="field">
+                      <label for="rbReventa">Valor de reventa (€)</label>
+                      <input id="rbReventa" type="number" min="0" step="100" placeholder="Ej: 12000">
+                    </div>
+
+                    <div class="field">
+                      <label for="rbSeguro">Seguro anual (€)</label>
+                      <input id="rbSeguro" type="number" min="0" step="10" placeholder="Ej: 600">
+                    </div>
+
+                    <div class="field">
+                      <label for="rbMantenimiento">Mantenimiento anual (€)</label>
+                      <input id="rbMantenimiento" type="number" min="0" step="10" placeholder="Ej: 500">
+                    </div>
+
+                    <div class="field full">
+                      <label for="rbImpuestos">Impuestos / ITV anuales (€)</label>
+                      <input id="rbImpuestos" type="number" min="0" step="10" placeholder="Ej: 150">
+                    </div>
+                  </div>
+
+                  <div class="actions">
+                    <button class="btn btn-primary" onclick="calcularRentingCompra()">Comparar opciones</button>
+                    <button class="btn btn-secondary" onclick="limpiarRentingCompra()">Limpiar</button>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <h3>Resultado</h3>
+                  <p class="card-help">Comparación económica del periodo introducido.</p>
+
+                  <div class="result-grid">
+                    <div class="result-item">
+                      <div class="label">Coste total renting</div>
+                      <div class="value" id="rRbRenting">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Coste total comprar</div>
+                      <div class="value" id="rRbComprar">—</div>
+                    </div>
+
+                    <div class="result-item primary">
+                      <div class="label">Opción más barata</div>
+                      <div class="value" id="rRbGanador">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Diferencia</div>
+                      <div class="value" id="rRbDiferencia">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Media mensual renting</div>
+                      <div class="value" id="rRbMensualRenting">—</div>
+                    </div>
+
+                    <div class="result-item">
+                      <div class="label">Media mensual comprar</div>
+                      <div class="value" id="rRbMensualComprar">—</div>
+                    </div>
+                  </div>
+
+                  <div class="result-note">
+                    Esta versión no incluye combustible porque suele ser un coste similar si el uso del coche es comparable.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Cómo funciona</span>
+          <h2 class="section-title">Pensada para entender costes de forma rápida</h2>
+          <p class="section-subtitle">
+            La idea de la web es que alguien entre y sepa en segundos dónde poner cada dato y qué significa el resultado.
+          </p>
+        </div>
+
+        <div class="how-grid">
+          <div class="info-box">
+            <h3>Qué hace bien esta web</h3>
+            <ul>
+              <li>Separa claramente cada tipo de cálculo.</li>
+              <li>No mezcla demasiados campos a la vez.</li>
+              <li>Muestra resultados destacados y fáciles de leer.</li>
+              <li>Sirve tanto para uso casual como para comparar escenarios.</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <h3>Qué no hace todavía</h3>
+            <ul>
+              <li>No consulta precios reales del combustible automáticamente.</li>
+              <li>No calcula financiación avanzada ni intereses.</li>
+              <li>No integra mapas ni rutas reales.</li>
+              <li>No sustituye un presupuesto contractual real.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title">Preguntas frecuentes</h2>
+          <p class="section-subtitle">
+            Respuestas cortas y directas a las dudas más habituales.
+          </p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>¿Qué consumo debería introducir?</summary>
+            <p>Idealmente el consumo real medio de tu coche. Si solo conoces el homologado, puedes usarlo como referencia, pero el real suele ser más útil.</p>
+          </details>
+
+          <details>
+            <summary>¿Puedo usar la web solo para una estimación rápida?</summary>
+            <p>Sí. De hecho está pensada para eso: metes pocos datos, obtienes una cifra clara y luego decides si quieres profundizar más.</p>
+          </details>
+
+          <details>
+            <summary>¿El coste total de propiedad es exacto?</summary>
+            <p>No. Es una estimación basada en los valores que tú introduces. Sirve sobre todo para comparar escenarios y tener un orden de magnitud realista.</p>
+          </details>
+
+          <details>
+            <summary>¿Se guardan mis datos?</summary>
+            <p>Los cálculos se hacen en tu navegador. La medición de visitas con Google Analytics solo se activa si la aceptas en el aviso inferior.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="legal">
+    <div class="container">
+      <div class="footer-card">
+        <div class="footer-grid">
+          <div>
+            <h3>CosteCoche</h3>
+            <p>
+              Herramienta para estimar cuánto cuesta realmente usar un coche.
+              Diseñada para ser clara, visual y fácil de usar.
+            </p>
+          </div>
+
+          <div>
+            <h3>Secciones</h3>
+            <div class="footer-links">
+              <a href="#calculadoras">Calculadoras</a>
+              <a href="#como-funciona">Cómo funciona</a>
+              <a href="#faq">Preguntas frecuentes</a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Información</h3>
+            <div class="footer-links">
+              <a href="sobre-costecoche.html">Sobre CosteCoche</a>
+              <a href="privacidad.html">Privacidad</a>
+              <a href="cookies.html">Cookies</a>
+              <a href="aviso-legal.html">Aviso legal</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          © <span id="year"></span> CosteCoche · Los resultados son estimaciones orientativas, no asesoramiento financiero ni contractual.
+        </div>
       </div>
     </div>
-    <div>
-      <h3>Información</h3>
-      <div class="footer-links">
-        <a href="sobre-costecoche.html">Sobre CosteCoche</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="cookies.html">Cookies</a>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="#" data-privacy-settings>Preferencias de privacidad</a>
-      </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <p>
+      Esta web funciona sin aceptar analítica. Si aceptas, cargaremos Google Analytics para medir visitas.
+    </p>
+    <div class="cookie-actions">
+      <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
+      <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
+      <a href="cookies.html" class="btn btn-secondary">Más información</a>
     </div>
   </div>
-  <div class="footer-bottom">
-    © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
-  </div>
-</footer>
-<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
-  <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
-  <div class="cookie-actions">
-    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
-    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
-    <a class="btn btn-secondary" href="cookies.html">Más información</a>
-  </div>
-</div>
-<script src="assets/app.js" defer></script>
+
+  <script>
+    const GA_ID = "G-EZJ4866V6M";
+    const PRIVACY_KEY = "costecoche_analytics_choice_v1";
+
+    function formatCurrency(value, decimals = 2) {
+      if (!Number.isFinite(value)) return "—";
+      return value.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function formatNumber(value, decimals = 1) {
+      if (!Number.isFinite(value)) return "—";
+      return value.toLocaleString("es-ES", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function getNum(id) {
+      const value = parseFloat(document.getElementById(id).value);
+      return Number.isFinite(value) ? value : NaN;
+    }
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function resetFields(ids) {
+      ids.forEach(id => document.getElementById(id).value = "");
+    }
+
+    function loadAnalytics() {
+      if (window.__analyticsLoaded) return;
+      window.__analyticsLoaded = true;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID, { anonymize_ip: true });
+    }
+
+    function initCookieBanner() {
+      const banner = document.getElementById("cookieBanner");
+      const saved = localStorage.getItem(PRIVACY_KEY);
+
+      if (saved === "accepted") {
+        loadAnalytics();
+        banner.hidden = true;
+      } else if (saved === "rejected") {
+        banner.hidden = true;
+      } else {
+        banner.hidden = false;
+      }
+
+      document.getElementById("acceptAnalytics").addEventListener("click", () => {
+        localStorage.setItem(PRIVACY_KEY, "accepted");
+        loadAnalytics();
+        banner.hidden = true;
+      });
+
+      document.getElementById("rejectAnalytics").addEventListener("click", () => {
+        localStorage.setItem(PRIVACY_KEY, "rejected");
+        banner.hidden = true;
+      });
+    }
+
+    function calcularCombustible() {
+      const km = getNum("kmAnual");
+      const consumo = getNum("consumoAnual");
+      const precio = getNum("precioAnual");
+
+      if (!(km >= 0) || !(consumo > 0) || !(precio > 0)) {
+        alert("Introduce valores válidos en la calculadora de combustible.");
+        return;
+      }
+
+      const litros = (km * consumo) / 100;
+      const costeAnual = litros * precio;
+      const costeMensual = costeAnual / 12;
+      const coste100 = consumo * precio;
+      const costeKm = km > 0 ? costeAnual / km : 0;
+
+      setText("rCosteAnual", formatCurrency(costeAnual));
+      setText("rCosteMensual", formatCurrency(costeMensual));
+      setText("rLitrosAnual", formatNumber(litros, 1) + " L");
+      setText("rCoste100", formatCurrency(coste100));
+      setText("rCosteKm", formatCurrency(costeKm, 3));
+    }
+
+    function limpiarCombustible() {
+      resetFields(["kmAnual", "consumoAnual", "precioAnual"]);
+      setText("rCosteAnual", "—");
+      setText("rCosteMensual", "—");
+      setText("rLitrosAnual", "—");
+      setText("rCoste100", "—");
+      setText("rCosteKm", "—");
+    }
+
+    function calcularViaje() {
+      const distancia = getNum("distanciaViaje");
+      const consumo = getNum("consumoViaje");
+      const precio = getNum("precioViaje");
+      const peajes = getNum("peajesViaje");
+      const personas = getNum("personasViaje");
+
+      if (!(distancia >= 0) || !(consumo > 0) || !(precio > 0) || !(peajes >= 0) || !(personas >= 1)) {
+        alert("Introduce valores válidos en la calculadora de viaje.");
+        return;
+      }
+
+      const litros = (distancia * consumo) / 100;
+      const combustible = litros * precio;
+      const total = combustible + peajes;
+      const porPersona = total / personas;
+      const coste100 = consumo * precio;
+
+      setText("rViajeTotal", formatCurrency(total));
+      setText("rViajeCombustible", formatCurrency(combustible));
+      setText("rViajePersona", formatCurrency(porPersona));
+      setText("rViajeLitros", formatNumber(litros, 1) + " L");
+      setText("rViaje100", formatCurrency(coste100));
+    }
+
+    function limpiarViaje() {
+      resetFields(["distanciaViaje", "consumoViaje", "precioViaje", "peajesViaje", "personasViaje"]);
+      setText("rViajeTotal", "—");
+      setText("rViajeCombustible", "—");
+      setText("rViajePersona", "—");
+      setText("rViajeLitros", "—");
+      setText("rViaje100", "—");
+    }
+
+    function calcularComparativa() {
+      const km = getNum("compareKm");
+      const precio = getNum("comparePrecio");
+      const a = getNum("compareA");
+      const b = getNum("compareB");
+      const sobreprecio = getNum("compareSobreprecio");
+
+      if (!(km >= 0) || !(precio > 0) || !(a > 0) || !(b > 0) || !(sobreprecio >= 0)) {
+        alert("Introduce valores válidos en la comparativa.");
+        return;
+      }
+
+      const costeA = (km * a / 100) * precio;
+      const costeB = (km * b / 100) * precio;
+      const ahorro = Math.abs(costeA - costeB);
+
+      let ganador = "Empate";
+      if (costeA < costeB) ganador = "Coche A";
+      if (costeB < costeA) ganador = "Coche B";
+
+      let amort = "No aplica";
+      if (ahorro > 0 && sobreprecio > 0) {
+        amort = formatNumber(sobreprecio / ahorro, 1) + " años";
+      }
+
+      setText("rCompareA", formatCurrency(costeA));
+      setText("rCompareB", formatCurrency(costeB));
+      setText("rCompareAhorro", formatCurrency(ahorro));
+      setText("rCompareGanador", ganador);
+      setText("rCompareAmort", amort);
+    }
+
+    function limpiarComparativa() {
+      resetFields(["compareKm", "comparePrecio", "compareA", "compareB", "compareSobreprecio"]);
+      setText("rCompareA", "—");
+      setText("rCompareB", "—");
+      setText("rCompareAhorro", "—");
+      setText("rCompareGanador", "—");
+      setText("rCompareAmort", "—");
+    }
+
+    function calcularTCO() {
+      const compra = getNum("tcoCompra");
+      const reventa = getNum("tcoReventa");
+      const anios = getNum("tcoAnios");
+      const kmAnio = getNum("tcoKm");
+      const consumo = getNum("tcoConsumo");
+      const precio = getNum("tcoPrecio");
+      const seguro = getNum("tcoSeguro");
+      const mantenimiento = getNum("tcoMantenimiento");
+      const impuestos = getNum("tcoImpuestos");
+
+      if (!(compra >= 0) || !(reventa >= 0) || !(anios >= 1) || !(kmAnio >= 0) || !(consumo > 0) || !(precio > 0) || !(seguro >= 0) || !(mantenimiento >= 0) || !(impuestos >= 0)) {
+        alert("Introduce valores válidos en la calculadora de coste total.");
+        return;
+      }
+
+      const depreciacion = Math.max(0, compra - reventa);
+      const combustibleAnual = (kmAnio * consumo / 100) * precio;
+      const combustibleTotal = combustibleAnual * anios;
+      const fijos = (seguro + mantenimiento + impuestos) * anios;
+      const total = depreciacion + combustibleTotal + fijos;
+      const mensual = total / (anios * 12);
+      const kmTotales = kmAnio * anios;
+      const costeKm = kmTotales > 0 ? total / kmTotales : 0;
+
+      setText("rTcoTotal", formatCurrency(total));
+      setText("rTcoMensual", formatCurrency(mensual));
+      setText("rTcoKm", formatCurrency(costeKm, 3));
+      setText("rTcoDepreciacion", formatCurrency(depreciacion));
+      setText("rTcoCombustible", formatCurrency(combustibleTotal));
+      setText("rTcoFijos", formatCurrency(fijos));
+    }
+
+    function limpiarTCO() {
+      resetFields(["tcoCompra", "tcoReventa", "tcoAnios", "tcoKm", "tcoConsumo", "tcoPrecio", "tcoSeguro", "tcoMantenimiento", "tcoImpuestos"]);
+      setText("rTcoTotal", "—");
+      setText("rTcoMensual", "—");
+      setText("rTcoKm", "—");
+      setText("rTcoDepreciacion", "—");
+      setText("rTcoCombustible", "—");
+      setText("rTcoFijos", "—");
+    }
+
+    function calcularRentingCompra() {
+      const anios = getNum("rbAnios");
+      const renting = getNum("rbRenting");
+      const compra = getNum("rbCompra");
+      const reventa = getNum("rbReventa");
+      const seguro = getNum("rbSeguro");
+      const mantenimiento = getNum("rbMantenimiento");
+      const impuestos = getNum("rbImpuestos");
+
+      if (!(anios >= 1) || !(renting >= 0) || !(compra >= 0) || !(reventa >= 0) || !(seguro >= 0) || !(mantenimiento >= 0) || !(impuestos >= 0)) {
+        alert("Introduce valores válidos en la comparación renting vs compra.");
+        return;
+      }
+
+      const totalRenting = renting * 12 * anios;
+      const totalComprar = Math.max(0, compra - reventa) + ((seguro + mantenimiento + impuestos) * anios);
+      const diferencia = Math.abs(totalRenting - totalComprar);
+
+      let ganador = "Empate";
+      if (totalRenting < totalComprar) ganador = "Renting";
+      if (totalComprar < totalRenting) ganador = "Comprar";
+
+      setText("rRbRenting", formatCurrency(totalRenting));
+      setText("rRbComprar", formatCurrency(totalComprar));
+      setText("rRbGanador", ganador);
+      setText("rRbDiferencia", formatCurrency(diferencia));
+      setText("rRbMensualRenting", formatCurrency(totalRenting / (anios * 12)));
+      setText("rRbMensualComprar", formatCurrency(totalComprar / (anios * 12)));
+    }
+
+    function limpiarRentingCompra() {
+      resetFields(["rbAnios", "rbRenting", "rbCompra", "rbReventa", "rbSeguro", "rbMantenimiento", "rbImpuestos"]);
+      setText("rRbRenting", "—");
+      setText("rRbComprar", "—");
+      setText("rRbGanador", "—");
+      setText("rRbDiferencia", "—");
+      setText("rRbMensualRenting", "—");
+      setText("rRbMensualComprar", "—");
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    initCookieBanner();
+  </script>
+</body>
+</html>
