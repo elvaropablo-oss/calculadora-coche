@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Calculadora de coste de coche | Combustible por mes y año</title>
+
+  <meta name="description"
+        content="Calcula cuánto gastas en combustible al mes y al año según los kilómetros, consumo de tu coche y precio del combustible.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1f2937;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .calculator {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border: 0;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #resultado {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 10px;
+    }
+
+    .numero {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .info {
+      margin-top: 35px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      margin: 50px 0 30px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Calculadora de coste de combustible</h1>
+  <p>Descubre cuánto te cuesta realmente utilizar tu coche.</p>
+</header>
+
+<main>
+
+  <section class="calculator">
+
+    <h2>Calcula tu gasto</h2>
+
+    <label for="km">Kilómetros que recorres al año</label>
+    <input id="km" type="number" min="0" placeholder="Ej: 15000">
+
+    <label for="consumo">Consumo del coche (L/100 km)</label>
+    <input id="consumo" type="number" min="0" step="0.1" placeholder="Ej: 5.5">
+
+    <label for="precio">Precio del combustible (€/L)</label>
+    <input id="precio" type="number" min="0" step="0.01" placeholder="Ej: 1.55">
+
+    <button onclick="calcular()">Calcular coste</button>
+
+    <div id="resultado">
+      <p>Combustible utilizado al año:</p>
+      <div class="numero" id="litros"></div>
+
+      <p>Coste anual:</p>
+      <div class="numero" id="anual"></div>
+
+      <p>Coste mensual aproximado:</p>
+      <div class="numero" id="mensual"></div>
+
+      <p>Coste por cada 100 km:</p>
+      <div class="numero" id="cada100"></div>
+    </div>
+
+  </section>
+
+  <section class="info">
+    <h2>¿Cómo se calcula el coste de combustible?</h2>
+
+    <p>
+      Introduce los kilómetros que recorres al año, el consumo medio de tu
+      vehículo y el precio actual del combustible. La calculadora estimará
+      automáticamente el gasto anual, mensual y por cada 100 kilómetros.
+    </p>
+
+    <p>
+      Puedes utilizarla para comparar diferentes coches o comprobar cuánto
+      cambiaría tu gasto si disminuyera el consumo o variara el precio del
+      combustible.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  Calculadora de coste de coche
+</footer>
+
+<script>
+function calcular() {
+
+  const km = parseFloat(document.getElementById("km").value);
+  const consumo = parseFloat(document.getElementById("consumo").value);
+  const precio = parseFloat(document.getElementById("precio").value);
+
+  if (
+    !Number.isFinite(km) ||
+    !Number.isFinite(consumo) ||
+    !Number.isFinite(precio) ||
+    km < 0 ||
+    consumo <= 0 ||
+    precio <= 0
+  ) {
+    alert("Introduce valores válidos.");
+    return;
+  }
+
+  const litros = (km / 100) * consumo;
+  const costeAnual = litros * precio;
+  const costeMensual = costeAnual / 12;
+  const coste100 = consumo * precio;
+
+  document.getElementById("litros").textContent =
+    litros.toLocaleString("es-ES", {
+      maximumFractionDigits: 1
+    }) + " L";
+
+  document.getElementById("anual").textContent =
+    costeAnual.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR"
+    });
+
+  document.getElementById("mensual").textContent =
+    costeMensual.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR"
+    });
+
+  document.getElementById("cada100").textContent =
+    coste100.toLocaleString("es-ES", {
+      style: "currency",
+      currency: "EUR"
+    });
+
+  document.getElementById("resultado").style.display = "block";
+}
+</script>
+
+</body>
+</html>
