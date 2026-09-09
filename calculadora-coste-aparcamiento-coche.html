@@ -1,0 +1,77 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de coste de aparcamiento | CosteCoche</title><meta name="description" content="Calcula cuánto gastas al año y al mes en garaje, zona regulada y parkings puntuales."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/calculadora-coste-aparcamiento-coche.html">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#162033;--muted:#667387;--line:#dce4ef;
+  --primary:#2a6df2;--primary-dark:#1f57c6;--primary-soft:#eaf1ff;
+  --shadow:0 18px 45px rgba(19,34,61,.08);--max:1180px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);line-height:1.55;
+  background:radial-gradient(circle at top left,#dfe9ff 0,transparent 35%),
+             radial-gradient(circle at top right,#eef3ff 0,transparent 28%),
+             linear-gradient(180deg,#f8fbff,#f3f6fb)
+}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+.top{position:sticky;top:0;z-index:30;background:rgba(245,247,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850}.brand:hover{text-decoration:none}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0f56da,#4d91ff);color:#fff;box-shadow:0 12px 24px rgba(42,109,242,.24)}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:var(--text);padding:9px 11px;border-radius:999px;font-size:.87rem}
+nav a:hover,nav a.on{background:#fff;box-shadow:var(--shadow);text-decoration:none}
+.crumb{padding-top:22px;color:var(--muted);font-size:.9rem}
+.hero{padding:38px 0 34px}.hero-grid,.calc,.content{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
+.badge,.pill{display:inline-flex;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:.88rem;box-shadow:var(--shadow)}
+h1,h2,h3{line-height:1.12;letter-spacing:-.025em}
+h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:16px 0 14px}
+h2{font-size:clamp(1.55rem,3vw,2.3rem);margin:6px 0 10px}
+.lead{font-size:1.08rem;color:var(--muted);max-width:760px}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{color:var(--muted);font-weight:600}
+.hero-card{background:linear-gradient(145deg,#0f1f4f,#183d96 55%,#2a6df2);color:#fff;border-radius:26px;padding:24px;box-shadow:0 28px 70px rgba(17,36,82,.22)}
+.hero-card small{opacity:.8}.hero-value{font-size:2.2rem;font-weight:850;margin:8px 0}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.mini div{padding:13px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}.mini strong{display:block;font-size:1.18rem}
+.section{padding:20px 0 36px}.eyebrow{color:var(--primary-dark);font-weight:850;font-size:.88rem}.sub{color:var(--muted);margin:0 0 20px}
+.card,.info{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}
+label{font-weight:750;font-size:.92rem}input,select{width:100%;border:1px solid #d6dfeb;border-radius:14px;background:#f9fbff;padding:14px;font:inherit;outline:none;color:var(--text)}
+input:focus,select:focus{border-color:#a8c3ff;background:#fff;box-shadow:0 0 0 4px rgba(42,109,242,.08)}.help{font-size:.8rem;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(180deg,#3579ff,#2a6df2);color:#fff}.secondary{background:#f5f8fd;color:var(--text);border:1px solid var(--line)}
+.result{background:#101d35;color:#fff;border-radius:24px;padding:22px;box-shadow:0 22px 55px rgba(17,29,53,.16)}.result p{color:#c7d2e5}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ri{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.ri.main{grid-column:1/-1;background:linear-gradient(145deg,#1e58cd,#2f73f7)}.rl{font-size:.82rem;color:#cbd7e9}.rv{font-size:1.42rem;font-weight:850}.ri.main .rv{font-size:1.9rem}
+.info p,.info li{color:#4f5f73}.formula{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:12px;padding:13px 15px;margin:14px 0;font-weight:800;color:#1c4f9b}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);color:var(--text)}.related small{display:block;color:var(--muted);margin-top:5px}
+.faq{display:grid;gap:12px}.faq details{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:0 18px;box-shadow:var(--shadow)}summary{cursor:pointer;font-weight:800;padding:16px 0}.faq p{color:var(--muted);margin:0 0 16px}
+footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;padding:26px}.foot a{color:#d7def0}.foot p{color:#b7c4df}
+.cookie{position:fixed;left:18px;right:18px;bottom:18px;max-width:760px;margin:auto;background:#0f1830;color:#fff;border-radius:20px;padding:18px;z-index:50;box-shadow:0 24px 60px rgba(0,0,0,.28)}.cookie[hidden]{display:none}.cookie p{margin:0 0 12px;color:#d5def1}
+@media(max-width:980px){.hero-grid,.calc,.content{grid-template-columns:1fr}.related{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){nav{display:none}.fields,.rg,.mini,.related{grid-template-columns:1fr}.ri.main{grid-column:auto}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Debo incluir multas?", "acceptedAnswer": {"@type": "Answer", "text": "No es recomendable tratarlas como un gasto normal y previsible."}}, {"@type": "Question", "name": "¿Qué hago si el coste varía cada mes?", "acceptedAnswer": {"@type": "Answer", "text": "Introduce una media aproximada."}}, {"@type": "Question", "name": "¿Sirve para comparar coche y transporte público?", "acceptedAnswer": {"@type": "Answer", "text": "Puede ayudarte a conocer una parte del coste del coche, pero necesitarías sumar el resto de gastos."}}, {"@type": "Question", "name": "¿El garaje de casa cuenta?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, si quieres medir el coste económico real de disponer de esa plaza."}}]}</script></head><body>
+<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav><a href="index.html">Inicio</a><a href="cuanto-cuesta-tener-un-coche-al-mes.html">Coste mensual</a><a href="cuanto-cuesta-cargar-coche-electrico-en-casa.html">Carga EV</a><a href="calculadora-autonomia-deposito-coche.html">Autonomía</a><a href="calculadora-kilometros-anuales-coche.html">Km/año</a><a href="mantener-coche-o-cambiarlo.html">Mantener/cambiar</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Aparcamiento</div><main>
+<section class="hero"><div class="container hero-grid"><div><span class="badge">Aparcamiento</span><h1>¿Cuánto gastas en aparcar el coche?</h1><p class="lead">Suma garaje, zona regulada y aparcamientos puntuales para conocer el coste anual real.</p><div class="pills"><span class="pill">Cálculo instantáneo</span><span class="pill">Sin registro</span><span class="pill">Datos en tu navegador</span></div></div><div class="hero-card"><small>Garaje, zona regulada y aparcamientos puntuales</small><div class="hero-value">Coste de aparcamiento</div><div>Convierte todos tus pagos de parking en una cifra mensual y anual.</div><div class="mini"><div><small>Media</small><strong>€/mes</strong></div><div><small>Total</small><strong>€/año</strong></div></div></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Calculadora</span><h2>Cuánto gastas en aparcar el coche</h2><p class="sub">Suma plaza fija, zona regulada y parkings puntuales.</p><div class="calc"><div class="card"><div class="fields">
+<div class="field"><label for="garage">Garaje/plaza al mes (€)</label><input id="garage" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="streetWeek">Zona regulada por semana (€)</label><input id="streetWeek" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="occasional">Parkings puntuales al mes (€)</label><input id="occasional" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="otherAnnual">Otros gastos al año (€)</label><input id="otherAnnual" type="number" min="0" step="10" value="0"></div></div>
+<div class="actions"><button class="btn primary" onclick="calcParking()">Calcular</button><button class="btn secondary" onclick="clearParking()">Limpiar</button></div></div>
+<aside class="result"><h2>Resultado</h2><p>Coste medio de aparcamiento.</p><div class="rg">
+<div class="ri main"><div class="rl">Coste al año</div><div class="rv" id="annual">—</div></div>
+<div class="ri"><div class="rl">Media mensual</div><div class="rv" id="monthly">—</div></div>
+<div class="ri"><div class="rl">Media semanal</div><div class="rv" id="weekly">—</div></div></div></aside></div></div></section>
+<section class="section"><div class="container content"><article class="info"><h2>Un gasto que suele olvidarse</h2><p>El aparcamiento puede representar una parte importante del coste total del coche, especialmente en grandes ciudades.</p><div class="formula">Coste anual = garaje × 12 + zona semanal × 52 + parkings mensuales × 12 + otros</div><p>Convertirlo en una cifra anual permite compararlo con seguro, combustible o mantenimiento.</p></article><article class="info"><h2>Qué puedes incluir</h2><ul><li>Plaza de garaje.</li><li>Zona azul o verde.</li><li>Aparcamientos de centros urbanos.</li><li>Parkings de aeropuerto o estación.</li><li>Abonos de aparcamiento.</li></ul></article></div></section>
+<section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span><h2>Más calculadoras</h2><div class="related"><a href="cuanto-cuesta-tener-un-coche-al-mes.html"><strong>Coste mensual</strong><small>Añade parking al resto de gastos.</small></a><a href="coste-por-kilometro-coche.html"><strong>Coste por km</strong><small>Reparte todos los costes entre kilómetros.</small></a><a href="cuanto-cuesta-mantener-un-coche-al-ano.html"><strong>Coste al año</strong><small>Desglosa más gastos.</small></a></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Preguntas frecuentes</span><h2>Dudas habituales</h2><div class="faq"><details><summary>¿Debo incluir multas?</summary><p>No es recomendable tratarlas como un gasto normal y previsible.</p></details><details><summary>¿Qué hago si el coste varía cada mes?</summary><p>Introduce una media aproximada.</p></details><details><summary>¿Sirve para comparar coche y transporte público?</summary><p>Puede ayudarte a conocer una parte del coste del coche, pero necesitarías sumar el resto de gastos.</p></details><details><summary>¿El garaje de casa cuenta?</summary><p>Sí, si quieres medir el coste económico real de disponer de esa plaza.</p></details></div></div></section></main>
+<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras para entender mejor cuánto cuesta conducir.</p><a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="aviso-legal.html">Aviso legal</a><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
+<div class="cookie" id="cookie" hidden><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept">Aceptar analítica</button><button class="btn secondary" id="reject">Rechazar</button></div></div><script>function calcParking(){const g=v("garage"),s=v("streetWeek"),o=v("occasional"),a=v("otherAnnual");if(![g,s,o,a].every(x=>x>=0)){alert("Introduce valores válidos.");return}const annual=g*12+s*52+o*12+a;t("annual",E(annual));t("monthly",E(annual/12));t("weekly",E(annual/52))}function clearParking(){["garage","streetWeek","occasional","otherAnnual"].forEach(x=>document.getElementById(x).value="");["annual","monthly","weekly"].forEach(x=>t(x,"—"))}
+const GA="G-EZJ4866V6M",KEY="costecoche_analytics_choice_v1";
+const E=(v,d=2)=>v.toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:d,maximumFractionDigits:d});
+const N=(v,d=1)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+function v(id){return parseFloat(document.getElementById(id).value)}function t(id,x){document.getElementById(id).textContent=x}
+function loadGA(){if(window.__ga)return;window.__ga=1;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",GA,{anonymize_ip:true});const s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+GA;document.head.appendChild(s)}
+const cb=document.getElementById("cookie"),choice=localStorage.getItem(KEY);if(choice==="accepted"){loadGA()}else if(!choice)cb.hidden=false;
+document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");loadGA();cb.hidden=true};
+document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");cb.hidden=true};
+document.getElementById("year").textContent=new Date().getFullYear();
+</script></body></html>

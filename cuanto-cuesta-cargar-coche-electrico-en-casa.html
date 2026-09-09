@@ -1,0 +1,79 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cuánto cuesta cargar un coche eléctrico en casa | CosteCoche</title><meta name="description" content="Calcula el coste de cargar un coche eléctrico en casa según batería, porcentaje de recarga, precio del kWh y consumo."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/cuanto-cuesta-cargar-coche-electrico-en-casa.html">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#162033;--muted:#667387;--line:#dce4ef;
+  --primary:#2a6df2;--primary-dark:#1f57c6;--primary-soft:#eaf1ff;
+  --shadow:0 18px 45px rgba(19,34,61,.08);--max:1180px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);line-height:1.55;
+  background:radial-gradient(circle at top left,#dfe9ff 0,transparent 35%),
+             radial-gradient(circle at top right,#eef3ff 0,transparent 28%),
+             linear-gradient(180deg,#f8fbff,#f3f6fb)
+}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+.top{position:sticky;top:0;z-index:30;background:rgba(245,247,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850}.brand:hover{text-decoration:none}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0f56da,#4d91ff);color:#fff;box-shadow:0 12px 24px rgba(42,109,242,.24)}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:var(--text);padding:9px 11px;border-radius:999px;font-size:.87rem}
+nav a:hover,nav a.on{background:#fff;box-shadow:var(--shadow);text-decoration:none}
+.crumb{padding-top:22px;color:var(--muted);font-size:.9rem}
+.hero{padding:38px 0 34px}.hero-grid,.calc,.content{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
+.badge,.pill{display:inline-flex;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:.88rem;box-shadow:var(--shadow)}
+h1,h2,h3{line-height:1.12;letter-spacing:-.025em}
+h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:16px 0 14px}
+h2{font-size:clamp(1.55rem,3vw,2.3rem);margin:6px 0 10px}
+.lead{font-size:1.08rem;color:var(--muted);max-width:760px}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{color:var(--muted);font-weight:600}
+.hero-card{background:linear-gradient(145deg,#0f1f4f,#183d96 55%,#2a6df2);color:#fff;border-radius:26px;padding:24px;box-shadow:0 28px 70px rgba(17,36,82,.22)}
+.hero-card small{opacity:.8}.hero-value{font-size:2.2rem;font-weight:850;margin:8px 0}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.mini div{padding:13px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}.mini strong{display:block;font-size:1.18rem}
+.section{padding:20px 0 36px}.eyebrow{color:var(--primary-dark);font-weight:850;font-size:.88rem}.sub{color:var(--muted);margin:0 0 20px}
+.card,.info{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}
+label{font-weight:750;font-size:.92rem}input,select{width:100%;border:1px solid #d6dfeb;border-radius:14px;background:#f9fbff;padding:14px;font:inherit;outline:none;color:var(--text)}
+input:focus,select:focus{border-color:#a8c3ff;background:#fff;box-shadow:0 0 0 4px rgba(42,109,242,.08)}.help{font-size:.8rem;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(180deg,#3579ff,#2a6df2);color:#fff}.secondary{background:#f5f8fd;color:var(--text);border:1px solid var(--line)}
+.result{background:#101d35;color:#fff;border-radius:24px;padding:22px;box-shadow:0 22px 55px rgba(17,29,53,.16)}.result p{color:#c7d2e5}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ri{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.ri.main{grid-column:1/-1;background:linear-gradient(145deg,#1e58cd,#2f73f7)}.rl{font-size:.82rem;color:#cbd7e9}.rv{font-size:1.42rem;font-weight:850}.ri.main .rv{font-size:1.9rem}
+.info p,.info li{color:#4f5f73}.formula{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:12px;padding:13px 15px;margin:14px 0;font-weight:800;color:#1c4f9b}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);color:var(--text)}.related small{display:block;color:var(--muted);margin-top:5px}
+.faq{display:grid;gap:12px}.faq details{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:0 18px;box-shadow:var(--shadow)}summary{cursor:pointer;font-weight:800;padding:16px 0}.faq p{color:var(--muted);margin:0 0 16px}
+footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;padding:26px}.foot a{color:#d7def0}.foot p{color:#b7c4df}
+.cookie{position:fixed;left:18px;right:18px;bottom:18px;max-width:760px;margin:auto;background:#0f1830;color:#fff;border-radius:20px;padding:18px;z-index:50;box-shadow:0 24px 60px rgba(0,0,0,.28)}.cookie[hidden]{display:none}.cookie p{margin:0 0 12px;color:#d5def1}
+@media(max-width:980px){.hero-grid,.calc,.content{grid-template-columns:1fr}.related{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){nav{display:none}.fields,.rg,.mini,.related{grid-template-columns:1fr}.ri.main{grid-column:auto}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Incluye las pérdidas de carga?", "acceptedAnswer": {"@type": "Answer", "text": "No de forma separada. Puedes aproximarlas aumentando el consumo o la energía añadida."}}, {"@type": "Question", "name": "¿Qué precio por kWh debo usar?", "acceptedAnswer": {"@type": "Answer", "text": "El coste efectivo que pagas por la energía en la franja en la que normalmente cargas."}}, {"@type": "Question", "name": "¿Sirve para carga pública?", "acceptedAnswer": {"@type": "Answer", "text": "Matemáticamente sí, pero esta página está pensada para carga doméstica."}}, {"@type": "Question", "name": "¿La capacidad de batería debe ser bruta o útil?", "acceptedAnswer": {"@type": "Answer", "text": "Es mejor usar la capacidad útil si la conoces."}}]}</script></head><body>
+<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav><a href="index.html">Inicio</a><a href="cuanto-cuesta-tener-un-coche-al-mes.html">Coste mensual</a><a class="on" href="cuanto-cuesta-cargar-coche-electrico-en-casa.html">Carga EV</a><a href="calculadora-autonomia-deposito-coche.html">Autonomía</a><a href="calculadora-kilometros-anuales-coche.html">Km/año</a><a href="mantener-coche-o-cambiarlo.html">Mantener/cambiar</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Carga en casa</div><main>
+<section class="hero"><div class="container hero-grid"><div><span class="badge">Carga en casa</span><h1>¿Cuánto cuesta cargar un coche eléctrico en casa?</h1><p class="lead">Calcula el precio de una recarga doméstica y el coste aproximado por cada 100 km.</p><div class="pills"><span class="pill">Cálculo instantáneo</span><span class="pill">Sin registro</span><span class="pill">Datos en tu navegador</span></div></div><div class="hero-card"><small>Batería, porcentaje de carga y precio del kWh</small><div class="hero-value">Coste de cargar en casa</div><div>Calcula cuánto cuesta una recarga y cuánto pagas por cada 100 km.</div><div class="mini"><div><small>Recarga</small><strong>€</strong></div><div><small>Uso</small><strong>€/100 km</strong></div></div></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Calculadora</span><h2>Cuánto cuesta cargar un coche eléctrico en casa</h2><p class="sub">Introduce batería, nivel inicial, nivel final y tu precio de electricidad.</p><div class="calc"><div class="card"><div class="fields">
+<div class="field"><label for="battery">Capacidad batería (kWh)</label><input id="battery" type="number" min="1" step=".1" placeholder="Ej: 60"></div>
+<div class="field"><label for="price">Precio electricidad (€/kWh)</label><input id="price" type="number" min="0" step=".001" placeholder="Ej: 0.18"></div>
+<div class="field"><label for="start">Batería inicial (%)</label><input id="start" type="number" min="0" max="100" step="1" placeholder="Ej: 20"></div>
+<div class="field"><label for="end">Batería final (%)</label><input id="end" type="number" min="0" max="100" step="1" placeholder="Ej: 80"></div>
+<div class="field full"><label for="cons">Consumo del coche (kWh/100 km)</label><input id="cons" type="number" min="0" step=".1" placeholder="Ej: 17"></div></div>
+<div class="actions"><button class="btn primary" onclick="calcCharge()">Calcular carga</button><button class="btn secondary" onclick="clearCharge()">Limpiar</button></div></div>
+<aside class="result"><h2>Resultado</h2><p>Sin separar pérdidas de carga.</p><div class="rg">
+<div class="ri main"><div class="rl">Coste de la recarga</div><div class="rv" id="cost">—</div></div>
+<div class="ri"><div class="rl">Energía añadida</div><div class="rv" id="energy">—</div></div>
+<div class="ri"><div class="rl">Coste / 100 km</div><div class="rv" id="per100">—</div></div>
+<div class="ri"><div class="rl">Autonomía añadida aprox.</div><div class="rv" id="range">—</div></div></div></aside></div></div></section>
+<section class="section"><div class="container content"><article class="info"><h2>La fórmula de una recarga</h2><p>La energía añadida depende de la capacidad útil de batería y del porcentaje que recuperas.</p><div class="formula">kWh añadidos = batería × (nivel final − nivel inicial) ÷ 100</div><div class="formula">Coste = kWh añadidos × €/kWh</div><p>En la realidad puede haber pérdidas entre la red y la batería.</p></article><article class="info"><h2>Cómo afinar el cálculo</h2><ul><li>Usa el precio efectivo de tu tarifa.</li><li>Si quieres contemplar pérdidas, aumenta ligeramente los kWh consumidos.</li><li>Para comparar con gasolina, usa también el coste por 100 km.</li><li>Si cargas con distintas tarifas, calcula una media.</li></ul></article></div></section>
+<section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span><h2>Más calculadoras</h2><div class="related"><a href="electrico-o-gasolina.html"><strong>Eléctrico o gasolina</strong><small>Compara energía con gasolina.</small></a><a href="calculadora-autonomia-deposito-coche.html"><strong>Autonomía</strong><small>Calcula autonomía de un coche de combustión.</small></a><a href="cuanto-cuesta-tener-un-coche-al-mes.html"><strong>Coste mensual</strong><small>Integra el gasto energético en tu presupuesto.</small></a></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Preguntas frecuentes</span><h2>Dudas habituales</h2><div class="faq"><details><summary>¿Incluye las pérdidas de carga?</summary><p>No de forma separada. Puedes aproximarlas aumentando el consumo o la energía añadida.</p></details><details><summary>¿Qué precio por kWh debo usar?</summary><p>El coste efectivo que pagas por la energía en la franja en la que normalmente cargas.</p></details><details><summary>¿Sirve para carga pública?</summary><p>Matemáticamente sí, pero esta página está pensada para carga doméstica.</p></details><details><summary>¿La capacidad de batería debe ser bruta o útil?</summary><p>Es mejor usar la capacidad útil si la conoces.</p></details></div></div></section></main>
+<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras para entender mejor cuánto cuesta conducir.</p><a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="aviso-legal.html">Aviso legal</a><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
+<div class="cookie" id="cookie" hidden><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept">Aceptar analítica</button><button class="btn secondary" id="reject">Rechazar</button></div></div><script>function calcCharge(){const b=v("battery"),p=v("price"),s=v("start"),e=v("end"),c=v("cons");if(!(b>0)||!(p>=0)||!(s>=0&&s<=100)||!(e>=0&&e<=100)||!(e>s)||!(c>0)){alert("Introduce valores válidos.");return}const energy=b*(e-s)/100,cost=energy*p,range=energy/c*100;t("cost",E(cost));t("energy",N(energy,1)+" kWh");t("per100",E(c*p));t("range",N(range,0)+" km")}function clearCharge(){["battery","price","start","end","cons"].forEach(x=>document.getElementById(x).value="");["cost","energy","per100","range"].forEach(x=>t(x,"—"))}
+const GA="G-EZJ4866V6M",KEY="costecoche_analytics_choice_v1";
+const E=(v,d=2)=>v.toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:d,maximumFractionDigits:d});
+const N=(v,d=1)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+function v(id){return parseFloat(document.getElementById(id).value)}function t(id,x){document.getElementById(id).textContent=x}
+function loadGA(){if(window.__ga)return;window.__ga=1;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",GA,{anonymize_ip:true});const s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+GA;document.head.appendChild(s)}
+const cb=document.getElementById("cookie"),choice=localStorage.getItem(KEY);if(choice==="accepted"){loadGA()}else if(!choice)cb.hidden=false;
+document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");loadGA();cb.hidden=true};
+document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");cb.hidden=true};
+document.getElementById("year").textContent=new Date().getFullYear();
+</script></body></html>
