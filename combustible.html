@@ -1,130 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Calculadora de gasto de combustible por mes y año | CosteCoche</title>
-  <meta name="description" content="Calcula litros, gasto anual, gasto mensual, coste por 100 km y coste por kilómetro según tus km, consumo y precio del combustible.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/combustible.html">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
-  <meta property="og:title" content="Calculadora de gasto de combustible por mes y año | CosteCoche">
-  <meta property="og:description" content="Calcula litros, gasto anual, gasto mensual, coste por 100 km y coste por kilómetro según tus km, consumo y precio del combustible.">
-  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/combustible.html">
-  <meta name="theme-color" content="#1769e0">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Página trasladada | CosteCoche</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html">
+<meta http-equiv="refresh" content="0; url=https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html">
+<script>location.replace("https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html");</script>
+<style>body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;margin:0;background:#f5f7fb;color:#162033}main{max-width:720px;margin:10vh auto;padding:28px;background:#fff;border:1px solid #dce4ef;border-radius:22px;box-shadow:0 18px 45px rgba(19,34,61,.08)}a{color:#2a6df2}</style>
 </head>
-<a class="skip-link" href="#contenido">Saltar al contenido</a>
-<header class="site-header">
-  <nav class="nav" aria-label="Navegación principal">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">€</span>
-      <span>CosteCoche</span>
-    </a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menú</button>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Inicio</a><a href="combustible.html" aria-current="page">Combustible</a><a href="viaje.html">Viaje</a><a href="comparar-coches.html">Comparar coches</a><a href="coste-total.html">Coste total</a><a href="renting-o-comprar.html">Renting vs compra</a>
-    </div>
-  </nav>
-</header>
-
-<div class="breadcrumbs"><a href="index.html">Inicio</a> / Combustible</div>
-<main id="contenido">
-  <section class="page-hero">
-    <span class="eyebrow">Combustible</span>
-    <h1>Calculadora de gasto de combustible</h1>
-    <p class="lead">Convierte kilómetros, consumo medio y precio por litro en una estimación clara de tu gasto de combustible mensual y anual.</p>
-  </section>
-  <section class="section">
-    <div class="calculator-shell">
-      <form class="card" id="fuelForm">
-        <div class="form-grid">
-          <div class="field"><label for="fuelKm">Kilómetros al año</label><input id="fuelKm" type="number" min="0" step="100" value="15000" required><span class="help">Si haces 1.250 km/mes, serían unos 15.000 km/año.</span></div>
-          <div class="field"><label for="fuelConsumption">Consumo real (L/100 km)</label><input id="fuelConsumption" type="number" min="0" step="0.1" value="6.2" required><span class="help">Mejor el real que el homologado.</span></div>
-          <div class="field full"><label for="fuelPrice">Precio del combustible (€/L)</label><input id="fuelPrice" type="number" min="0" step="0.01" value="1.65" required></div>
-        </div>
-        <div class="form-actions"><button class="btn btn-primary">Calcular gasto</button></div>
-      </form>
-      <aside class="results" aria-live="polite">
-        <h2>Resultado</h2>
-        <div class="result-grid">
-          <div class="result-item result-primary"><span>Coste anual</span><strong id="fuelAnnual">—</strong></div>
-          <div class="result-item"><span>Coste mensual</span><strong id="fuelMonthly">—</strong></div>
-          <div class="result-item"><span>Litros/año</span><strong id="fuelLiters">—</strong></div>
-          <div class="result-item"><span>Coste/100 km</span><strong id="fuelPer100">—</strong></div>
-          <div class="result-item"><span>Coste/km</span><strong id="fuelPerKm">—</strong></div>
-        </div>
-      </aside>
-    </div>
-  </section>
-  <section class="section">
-    <div class="content-grid">
-      <article class="prose">
-        <h2>Cómo obtener una estimación más realista</h2>
-        <p>El dato que más suele distorsionar el resultado es el consumo. Si el ordenador de a bordo marca 6,2 L/100 km pero tu consumo real calculado al llenar el depósito es 6,8, utiliza 6,8. La diferencia se acumula durante todo el año.</p>
-        <p>También conviene usar un precio de combustible que represente lo que pagas normalmente, no un máximo o mínimo puntual. Si sueles repostar en varias estaciones, una media aproximada puede ser más útil.</p>
-        <h3>Qué no incluye</h3>
-        <p>Esta herramienta calcula energía consumida y su precio. No incluye seguro, mantenimiento, neumáticos, impuestos, aparcamiento, financiación ni depreciación.</p>
-      </article>
-      <article class="prose">
-        <h2>Ejemplo práctico</h2>
-        <p>Con 20.000 km al año, un consumo de 7 L/100 km y un combustible a 1,60 €/L, el coche necesita unos 1.400 litros al año. El gasto de combustible sería aproximadamente 2.240 € al año, o 186,67 € al mes.</p>
-        <div class="formula">20.000 × 7 ÷ 100 = 1.400 L</div>
-        <div class="formula">1.400 × 1,60 € = 2.240 €</div>
-        <p>Si estás comparando dos coches, no hagas el cálculo dos veces: usa nuestra <a href="comparar-coches.html">comparadora de consumo</a>.</p>
-      </article>
-    </div>
-  </section>
-  <section class="section section-tight">
-    <h2>Preguntas frecuentes</h2>
-    <div class="faq">
-      <details><summary>¿Cómo paso de kilómetros mensuales a anuales?</summary><p>Multiplica tus kilómetros de un mes típico por 12. Si tu uso cambia mucho entre meses, es mejor sumar una estimación de todo el año.</p></details>
-      <details><summary>¿Sirve para gasolina y diésel?</summary><p>Sí. La fórmula es la misma siempre que introduzcas consumo en litros por 100 km y precio en euros por litro.</p></details>
-      <details><summary>¿Y para híbridos enchufables o eléctricos?</summary><p>Esta calculadora está pensada para combustible líquido. En un híbrido enchufable habría que sumar también el coste eléctrico; una calculadora específica sería más precisa.</p></details>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h3>CosteCoche</h3>
-      <p>Calculadoras gratuitas para entender el coste real de conducir. Los cálculos se realizan en tu navegador y son orientativos.</p>
-    </div>
-    <div>
-      <h3>Calculadoras</h3>
-      <div class="footer-links">
-        <a href="combustible.html">Coste de combustible</a>
-        <a href="viaje.html">Coste de un viaje</a>
-        <a href="comparar-coches.html">Comparar dos coches</a>
-        <a href="coste-total.html">Coste total de propiedad</a>
-        <a href="renting-o-comprar.html">Renting vs compra</a>
-      </div>
-    </div>
-    <div>
-      <h3>Información</h3>
-      <div class="footer-links">
-        <a href="sobre-costecoche.html">Sobre CosteCoche</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="cookies.html">Cookies</a>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="#" data-privacy-settings>Preferencias de privacidad</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
-  </div>
-</footer>
-<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
-  <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
-  <div class="cookie-actions">
-    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
-    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
-    <a class="btn btn-secondary" href="cookies.html">Más información</a>
-  </div>
-</div>
-<script src="assets/app.js" defer></script>
+<body><main><h1>Esta página se ha trasladado</h1><p>Te llevamos automáticamente a la versión principal y actualizada de esta calculadora.</p><p><a href="https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html">Ir a la página actualizada</a></p></main></body>
+</html>
