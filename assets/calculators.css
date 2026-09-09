@@ -50,3 +50,15 @@ footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #80aaff;outline-offset:3px}
 .foot-links{display:flex;gap:10px 14px;flex-wrap:wrap;margin-top:10px}.foot-links a{color:#d7def0}.example-note{color:#667387;font-size:.92rem;margin-top:10px}
 @media(max-width:680px){.topin{flex-wrap:wrap;padding:10px 0}.top nav{display:flex!important;width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding:0 0 5px;scrollbar-width:none}.top nav::-webkit-scrollbar{display:none}}
+
+
+/* seo-content-upgrade-2026-09 */
+.updated{margin:18px 0 0;color:#667387;font-size:.84rem}
+.table-wrap{overflow-x:auto;margin-top:18px;border:1px solid #dce4ef;border-radius:18px;background:#fff;box-shadow:0 14px 35px rgba(19,34,61,.06)}
+.data-table{width:100%;border-collapse:collapse;min-width:620px}
+.data-table th,.data-table td{padding:13px 15px;text-align:left;border-bottom:1px solid #e8edf4;vertical-align:top}
+.data-table th{background:#f4f7fc;color:#24334d;font-size:.9rem}
+.data-table td{color:#4f5f73}
+.data-table tbody tr:last-child td,.data-table tbody tr:last-child th{border-bottom:0}
+.data-table tbody tr:hover{background:#f9fbff}
+@media(max-width:700px){.updated{margin-top:12px}.table-wrap{margin-left:-2px;margin-right:-2px}.data-table th,.data-table td{padding:11px 12px}}
