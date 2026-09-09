@@ -1,124 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Renting o comprar coche: comparador de costes | CosteCoche</title>
-  <meta name="description" content="Compara el coste de renting frente a comprar un coche durante el mismo número de años, incluyendo reventa, seguro, mantenimiento e impuestos.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar.html">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
-  <meta property="og:title" content="Renting o comprar coche: comparador de costes | CosteCoche">
-  <meta property="og:description" content="Compara el coste de renting frente a comprar un coche durante el mismo número de años, incluyendo reventa, seguro, mantenimiento e impuestos.">
-  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar.html">
-  <meta name="theme-color" content="#1769e0">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Página trasladada | CosteCoche</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar-coche.html">
+<meta http-equiv="refresh" content="0; url=https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar-coche.html">
+<script>location.replace("https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar-coche.html");</script>
+<style>body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;margin:0;background:#f5f7fb;color:#162033}main{max-width:720px;margin:10vh auto;padding:28px;background:#fff;border:1px solid #dce4ef;border-radius:22px;box-shadow:0 18px 45px rgba(19,34,61,.08)}a{color:#2a6df2}</style>
 </head>
-<a class="skip-link" href="#contenido">Saltar al contenido</a>
-<header class="site-header">
-  <nav class="nav" aria-label="Navegación principal">
-    <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true">€</span>
-      <span>CosteCoche</span>
-    </a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menú</button>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Inicio</a><a href="combustible.html">Combustible</a><a href="viaje.html">Viaje</a><a href="comparar-coches.html">Comparar coches</a><a href="coste-total.html">Coste total</a><a href="renting-o-comprar.html" aria-current="page">Renting vs compra</a>
-    </div>
-  </nav>
-</header>
-
-<div class="breadcrumbs"><a href="index.html">Inicio</a> / Renting o comprar</div>
-<main id="contenido">
-  <section class="page-hero">
-    <span class="eyebrow">Renting vs compra</span>
-    <h1>¿Sale más barato un renting o comprar el coche?</h1>
-    <p class="lead">Compara ambas opciones en el mismo periodo. La herramienta separa el coste del renting de la depreciación y gastos recurrentes de un coche comprado.</p>
-  </section>
-  <section class="section">
-    <div class="calculator-shell">
-      <form class="card" id="rentBuyForm">
-        <div class="form-grid">
-          <div class="field"><label for="rbYears">Periodo (años)</label><input id="rbYears" type="number" min="1" step="1" value="4" required></div>
-          <div class="field"><label for="rbRent">Cuota de renting/mes (€)</label><input id="rbRent" type="number" min="0" step="1" value="380" required></div>
-          <div class="field"><label for="rbPurchase">Precio de compra (€)</label><input id="rbPurchase" type="number" min="0" step="100" value="22000" required></div>
-          <div class="field"><label for="rbResale">Valor de reventa al final (€)</label><input id="rbResale" type="number" min="0" step="100" value="12000" required></div>
-          <div class="field"><label for="rbInsurance">Seguro anual compra (€)</label><input id="rbInsurance" type="number" min="0" step="10" value="600" required></div>
-          <div class="field"><label for="rbMaintenance">Mantenimiento anual compra (€)</label><input id="rbMaintenance" type="number" min="0" step="10" value="500" required></div>
-          <div class="field full"><label for="rbTaxes">Impuestos/ITV anuales compra (€)</label><input id="rbTaxes" type="number" min="0" step="10" value="150" required></div>
-        </div>
-        <div class="form-actions"><button class="btn btn-primary">Comparar opciones</button></div>
-      </form>
-      <aside class="results" aria-live="polite">
-        <h2>Resultado</h2>
-        <div class="result-grid">
-          <div class="result-item"><span>Renting total</span><strong id="rbRentTotal">—</strong></div>
-          <div class="result-item"><span>Compra total</span><strong id="rbBuyTotal">—</strong></div>
-          <div class="result-item result-primary"><span>Opción más barata en este escenario</span><strong id="rbWinner">—</strong></div>
-          <div class="result-item"><span>Diferencia</span><strong id="rbDifference">—</strong></div>
-          <div class="result-item"><span>Renting: media mensual</span><strong id="rbRentMonthlyAvg">—</strong></div>
-          <div class="result-item"><span>Compra: media mensual</span><strong id="rbBuyMonthlyAvg">—</strong></div>
-        </div>
-        <p class="result-note">No se incluye combustible porque, si el uso y el coche son equivalentes, afectaría de forma similar a ambas opciones. Revisa qué servicios cubre exactamente tu contrato de renting.</p>
-      </aside>
-    </div>
-  </section>
-  <section class="section">
-    <div class="content-grid">
-      <article class="prose">
-        <h2>Cómo interpreta la compra</h2>
-        <p>Para el coche comprado contamos como coste la pérdida de valor entre compra y reventa, más seguro, mantenimiento e impuestos durante el periodo. Eso evita el error de tratar todo el precio de compra como dinero “perdido”.</p>
-        <p>Si financias la compra, deberías sumar intereses y comisiones. Esta versión no calcula financiación.</p>
-      </article>
-      <article class="prose">
-        <h2>Cómo interpreta el renting</h2>
-        <p>La herramienta multiplica la cuota mensual por todos los meses del periodo. Antes de comparar, comprueba qué incluye la oferta: seguro, mantenimiento, neumáticos, impuestos, asistencia y límites de kilometraje pueden variar entre contratos.</p>
-        <p>Un resultado más barato no significa necesariamente mejor opción: flexibilidad, riesgo de averías, necesidad de liquidez y condiciones de cancelación también importan.</p>
-      </article>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <h3>CosteCoche</h3>
-      <p>Calculadoras gratuitas para entender el coste real de conducir. Los cálculos se realizan en tu navegador y son orientativos.</p>
-    </div>
-    <div>
-      <h3>Calculadoras</h3>
-      <div class="footer-links">
-        <a href="combustible.html">Coste de combustible</a>
-        <a href="viaje.html">Coste de un viaje</a>
-        <a href="comparar-coches.html">Comparar dos coches</a>
-        <a href="coste-total.html">Coste total de propiedad</a>
-        <a href="renting-o-comprar.html">Renting vs compra</a>
-      </div>
-    </div>
-    <div>
-      <h3>Información</h3>
-      <div class="footer-links">
-        <a href="sobre-costecoche.html">Sobre CosteCoche</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="cookies.html">Cookies</a>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="#" data-privacy-settings>Preferencias de privacidad</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
-  </div>
-</footer>
-<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
-  <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
-  <div class="cookie-actions">
-    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
-    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
-    <a class="btn btn-secondary" href="cookies.html">Más información</a>
-  </div>
-</div>
-<script src="assets/app.js" defer></script>
+<body><main><h1>Esta página se ha trasladado</h1><p>Te llevamos automáticamente a la versión principal y actualizada de esta calculadora.</p><p><a href="https://elvaropablo-oss.github.io/calculadora-coche/renting-o-comprar-coche.html">Ir a la página actualizada</a></p></main></body>
+</html>
