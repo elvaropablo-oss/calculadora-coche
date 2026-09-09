@@ -1,0 +1,83 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eléctrico o gasolina: coste por km y amortización | CosteCoche</title><meta name="description" content="Compara coche eléctrico y gasolina según consumo, precio de energía y kilometraje. Calcula coste por 100 km y amortización."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/electrico-o-gasolina.html">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#162033;--muted:#667387;--line:#dce4ef;
+  --primary:#2a6df2;--primary-dark:#1f57c6;--primary-soft:#eaf1ff;
+  --shadow:0 18px 45px rgba(19,34,61,.08);--max:1180px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);line-height:1.55;
+  background:radial-gradient(circle at top left,#dfe9ff 0,transparent 35%),
+             radial-gradient(circle at top right,#eef3ff 0,transparent 28%),
+             linear-gradient(180deg,#f8fbff,#f3f6fb)
+}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+.top{position:sticky;top:0;z-index:30;background:rgba(245,247,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850}.brand:hover{text-decoration:none}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0f56da,#4d91ff);color:#fff;box-shadow:0 12px 24px rgba(42,109,242,.24)}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:var(--text);padding:9px 11px;border-radius:999px;font-size:.88rem}
+nav a:hover,nav a.on{background:#fff;box-shadow:var(--shadow);text-decoration:none}
+.crumb{padding-top:22px;color:var(--muted);font-size:.9rem}
+.hero{padding:38px 0 34px}.hero-grid,.calc,.content{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
+.badge,.pill{display:inline-flex;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:.88rem;box-shadow:var(--shadow)}
+h1,h2,h3{line-height:1.12;letter-spacing:-.025em}
+h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:16px 0 14px}
+h2{font-size:clamp(1.55rem,3vw,2.3rem);margin:6px 0 10px}
+.lead{font-size:1.08rem;color:var(--muted);max-width:760px}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{color:var(--muted);font-weight:600}
+.hero-card{background:linear-gradient(145deg,#0f1f4f,#183d96 55%,#2a6df2);color:#fff;border-radius:26px;padding:24px;box-shadow:0 28px 70px rgba(17,36,82,.22)}
+.hero-card small{opacity:.8}.hero-value{font-size:2.2rem;font-weight:850;margin:8px 0}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.mini div{padding:13px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}.mini strong{display:block;font-size:1.18rem}
+.section{padding:20px 0 36px}.eyebrow{color:var(--primary-dark);font-weight:850;font-size:.88rem}.sub{color:var(--muted);margin:0 0 20px}
+.card,.info{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}
+label{font-weight:750;font-size:.92rem}input,select{width:100%;border:1px solid #d6dfeb;border-radius:14px;background:#f9fbff;padding:14px;font:inherit;outline:none;color:var(--text)}
+input:focus,select:focus{border-color:#a8c3ff;background:#fff;box-shadow:0 0 0 4px rgba(42,109,242,.08)}.help{font-size:.8rem;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(180deg,#3579ff,#2a6df2);color:#fff}.secondary{background:#f5f8fd;color:var(--text);border:1px solid var(--line)}
+.result{background:#101d35;color:#fff;border-radius:24px;padding:22px;box-shadow:0 22px 55px rgba(17,29,53,.16)}.result p{color:#c7d2e5}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ri{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.ri.main{grid-column:1/-1;background:linear-gradient(145deg,#1e58cd,#2f73f7)}.rl{font-size:.82rem;color:#cbd7e9}.rv{font-size:1.42rem;font-weight:850}.ri.main .rv{font-size:1.9rem}
+.info p,.info li{color:#4f5f73}.formula{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:12px;padding:13px 15px;margin:14px 0;font-weight:800;color:#1c4f9b}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);color:var(--text)}.related small{display:block;color:var(--muted);margin-top:5px}
+.faq{display:grid;gap:12px}.faq details{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:0 18px;box-shadow:var(--shadow)}summary{cursor:pointer;font-weight:800;padding:16px 0}.faq p{color:var(--muted);margin:0 0 16px}
+footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;padding:26px}.foot a{color:#d7def0}.foot p{color:#b7c4df}
+.cookie{position:fixed;left:18px;right:18px;bottom:18px;max-width:760px;margin:auto;background:#0f1830;color:#fff;border-radius:20px;padding:18px;z-index:50;box-shadow:0 24px 60px rgba(0,0,0,.28)}.cookie[hidden]{display:none}.cookie p{margin:0 0 12px;color:#d5def1}
+@media(max-width:980px){.hero-grid,.calc,.content{grid-template-columns:1fr}.related{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){nav{display:none}.fields,.rg,.mini,.related{grid-template-columns:1fr}.ri.main{grid-column:auto}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Qué precio de electricidad debo usar?", "acceptedAnswer": {"@type": "Answer", "text": "Una media aproximada de lo que realmente pagarás por kWh."}}, {"@type": "Question", "name": "¿Incluye pérdidas de carga?", "acceptedAnswer": {"@type": "Answer", "text": "No de forma separada. Puedes compensarlas usando un consumo efectivo algo mayor."}}, {"@type": "Question", "name": "¿Incluye mantenimiento?", "acceptedAnswer": {"@type": "Answer", "text": "No. Esta página compara energía y sobrecoste inicial."}}, {"@type": "Question", "name": "¿Un eléctrico siempre sale más barato por kilómetro?", "acceptedAnswer": {"@type": "Answer", "text": "No necesariamente; depende del precio de carga, consumo y coste de la gasolina."}}]}</script></head><body>
+<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav><a href="index.html">Inicio</a><a href="gasolina-o-diesel.html">Gasolina o diésel</a><a href="hibrido-o-gasolina.html">Híbrido o gasolina</a><a class="on" href="electrico-o-gasolina.html">Eléctrico o gasolina</a><a href="calculadora-financiacion-coche.html">Financiación</a><a href="calculadora-depreciacion-coche.html">Depreciación</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Eléctrico o gasolina</div><main>
+<section class="hero"><div class="container hero-grid"><div><span class="badge">Eléctrico o gasolina</span><h1>Eléctrico o gasolina: ¿cuál cuesta menos por kilómetro?</h1><p class="lead">Compara el coste energético anual y estima cuánto tardaría el ahorro en compensar un mayor precio de compra.</p><div class="pills"><span class="pill">Cálculo instantáneo</span><span class="pill">Sin registro</span><span class="pill">Datos en tu navegador</span></div></div><div class="hero-card"><small>Compara €/100 km y amortización</small><div class="hero-value">Eléctrico vs gasolina</div><div>Calcula cuánto cambia el coste de energía por kilómetro.</div><div class="mini"><div><small>Eléctrico</small><strong>kWh/100 km</strong></div><div><small>Gasolina</small><strong>L/100 km</strong></div></div></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Calculadora</span><h2>Eléctrico o gasolina: compara el coste</h2><p class="sub">Introduce consumo, precio de energía y diferencia de precio de compra.</p><div class="calc"><div class="card"><div class="fields">
+<div class="field"><label for="km">Kilómetros/año</label><input id="km" type="number" min="0" step="100" placeholder="Ej: 15000"></div>
+<div class="field"><label for="premium">Sobrecoste del eléctrico (€)</label><input id="premium" type="number" min="0" step="100" placeholder="Ej: 6000"></div>
+<div class="field"><label for="gCons">Gasolina (L/100 km)</label><input id="gCons" type="number" min="0" step=".1" placeholder="Ej: 6.5"></div>
+<div class="field"><label for="gPrice">Gasolina (€/L)</label><input id="gPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65"></div>
+<div class="field"><label for="eCons">Eléctrico (kWh/100 km)</label><input id="eCons" type="number" min="0" step=".1" placeholder="Ej: 17"></div>
+<div class="field"><label for="ePrice">Electricidad (€/kWh)</label><input id="ePrice" type="number" min="0" step=".01" placeholder="Ej: 0.20"></div></div>
+<div class="actions"><button class="btn primary" onclick="calcEV()">Comparar</button><button class="btn secondary" onclick="clearEV()">Limpiar</button></div></div>
+<aside class="result"><h2>Resultado</h2><p>Comparación de energía y amortización.</p><div class="rg">
+<div class="ri main"><div class="rl">Amortización por ahorro energético</div><div class="rv" id="years">—</div></div>
+<div class="ri"><div class="rl">Gasolina/año</div><div class="rv" id="gas">—</div></div>
+<div class="ri"><div class="rl">Electricidad/año</div><div class="rv" id="elec">—</div></div>
+<div class="ri"><div class="rl">Ahorro anual</div><div class="rv" id="save">—</div></div>
+<div class="ri"><div class="rl">Gasolina/100 km</div><div class="rv" id="g100">—</div></div>
+<div class="ri"><div class="rl">Eléctrico/100 km</div><div class="rv" id="e100">—</div></div></div></aside></div></div></section>
+<section class="section"><div class="container content"><article class="info"><h2>Coste de energía: la comparación básica</h2><p>La gasolina se calcula con litros por 100 km y el eléctrico con kWh por 100 km.</p><div class="formula">Gasolina/100 km = L/100 km × €/L</div><div class="formula">Eléctrico/100 km = kWh/100 km × €/kWh</div><p>La diferencia anual depende directamente de los kilómetros recorridos.</p></article>
+<article class="info"><h2>El precio de carga cambia mucho el resultado</h2><p>Cargar principalmente en casa puede dar una cifra muy distinta a depender de carga pública rápida.</p><ul><li>Usa el precio medio que realmente esperas pagar.</li><li>Si mezclas carga doméstica y pública, introduce una media.</li><li>La calculadora no incluye instalación de cargador.</li><li>Tampoco incluye mantenimiento, seguro o depreciación.</li></ul></article></div></section>
+<section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span><h2>Más calculadoras</h2><div class="related"><a href="hibrido-o-gasolina.html"><strong>Híbrido o gasolina</strong><small>Compara ahorro y amortización.</small></a><a href="calculadora-depreciacion-coche.html"><strong>Depreciación</strong><small>Estima pérdida de valor.</small></a><a href="coste-por-kilometro-coche.html"><strong>Coste por kilómetro</strong><small>Incluye más costes.</small></a></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Preguntas frecuentes</span><h2>Dudas habituales</h2><div class="faq"><details><summary>¿Qué precio de electricidad debo usar?</summary><p>Una media aproximada de lo que realmente pagarás por kWh.</p></details><details><summary>¿Incluye pérdidas de carga?</summary><p>No de forma separada. Puedes compensarlas usando un consumo efectivo algo mayor.</p></details><details><summary>¿Incluye mantenimiento?</summary><p>No. Esta página compara energía y sobrecoste inicial.</p></details><details><summary>¿Un eléctrico siempre sale más barato por kilómetro?</summary><p>No necesariamente; depende del precio de carga, consumo y coste de la gasolina.</p></details></div></div></section></main>
+<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras para entender mejor cuánto cuesta conducir.</p><a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="aviso-legal.html">Aviso legal</a><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
+<div class="cookie" id="cookie" hidden><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept">Aceptar analítica</button><button class="btn secondary" id="reject">Rechazar</button></div></div><script>function calcEV(){const km=v("km"),prem=v("premium"),gc=v("gCons"),gp=v("gPrice"),ec=v("eCons"),ep=v("ePrice");if(!(km>=0)||!(prem>=0)||![gc,gp,ec,ep].every(x=>x>0)){alert("Introduce valores válidos.");return}const g100=gc*gp,e100=ec*ep,g=km/100*g100,e=km/100*e100,save=g-e;t("gas",E(g));t("elec",E(e));t("save",E(save));t("g100",E(g100));t("e100",E(e100));t("years",save>0?(prem/save).toLocaleString("es-ES",{maximumFractionDigits:1})+" años":"No se amortiza")}function clearEV(){["km","premium","gCons","gPrice","eCons","ePrice"].forEach(x=>document.getElementById(x).value="");["years","gas","elec","save","g100","e100"].forEach(x=>t(x,"—"))}
+const GA="G-EZJ4866V6M",KEY="costecoche_analytics_choice_v1";
+const E=(v,d=2)=>v.toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:d,maximumFractionDigits:d});
+const N=(v,d=1)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+function v(id){return parseFloat(document.getElementById(id).value)}function t(id,x){document.getElementById(id).textContent=x}
+function loadGA(){if(window.__ga)return;window.__ga=1;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",GA,{anonymize_ip:true});const s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+GA;document.head.appendChild(s)}
+const cb=document.getElementById("cookie"),choice=localStorage.getItem(KEY);if(choice==="accepted"){loadGA()}else if(!choice)cb.hidden=false;
+document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");loadGA();cb.hidden=true};
+document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");cb.hidden=true};
+document.getElementById("year").textContent=new Date().getFullYear();
+</script></body></html>

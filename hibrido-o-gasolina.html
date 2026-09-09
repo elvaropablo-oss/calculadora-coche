@@ -1,0 +1,81 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Híbrido o gasolina: calculadora de ahorro y amortización | CosteCoche</title><meta name="description" content="Compara híbrido y gasolina, calcula el ahorro anual y estima cuántos años tardas en amortizar el sobrecoste."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/hibrido-o-gasolina.html">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#162033;--muted:#667387;--line:#dce4ef;
+  --primary:#2a6df2;--primary-dark:#1f57c6;--primary-soft:#eaf1ff;
+  --shadow:0 18px 45px rgba(19,34,61,.08);--max:1180px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);line-height:1.55;
+  background:radial-gradient(circle at top left,#dfe9ff 0,transparent 35%),
+             radial-gradient(circle at top right,#eef3ff 0,transparent 28%),
+             linear-gradient(180deg,#f8fbff,#f3f6fb)
+}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(var(--max),calc(100% - 32px));margin:auto}
+.top{position:sticky;top:0;z-index:30;background:rgba(245,247,251,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:850}.brand:hover{text-decoration:none}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#0f56da,#4d91ff);color:#fff;box-shadow:0 12px 24px rgba(42,109,242,.24)}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:var(--text);padding:9px 11px;border-radius:999px;font-size:.88rem}
+nav a:hover,nav a.on{background:#fff;box-shadow:var(--shadow);text-decoration:none}
+.crumb{padding-top:22px;color:var(--muted);font-size:.9rem}
+.hero{padding:38px 0 34px}.hero-grid,.calc,.content{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:center}
+.badge,.pill{display:inline-flex;padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:.88rem;box-shadow:var(--shadow)}
+h1,h2,h3{line-height:1.12;letter-spacing:-.025em}
+h1{font-size:clamp(2.35rem,5vw,4.2rem);margin:16px 0 14px}
+h2{font-size:clamp(1.55rem,3vw,2.3rem);margin:6px 0 10px}
+.lead{font-size:1.08rem;color:var(--muted);max-width:760px}.pills{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{color:var(--muted);font-weight:600}
+.hero-card{background:linear-gradient(145deg,#0f1f4f,#183d96 55%,#2a6df2);color:#fff;border-radius:26px;padding:24px;box-shadow:0 28px 70px rgba(17,36,82,.22)}
+.hero-card small{opacity:.8}.hero-value{font-size:2.2rem;font-weight:850;margin:8px 0}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.mini div{padding:13px;border-radius:16px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}.mini strong{display:block;font-size:1.18rem}
+.section{padding:20px 0 36px}.eyebrow{color:var(--primary-dark);font-weight:850;font-size:.88rem}.sub{color:var(--muted);margin:0 0 20px}
+.card,.info{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}
+label{font-weight:750;font-size:.92rem}input,select{width:100%;border:1px solid #d6dfeb;border-radius:14px;background:#f9fbff;padding:14px;font:inherit;outline:none;color:var(--text)}
+input:focus,select:focus{border-color:#a8c3ff;background:#fff;box-shadow:0 0 0 4px rgba(42,109,242,.08)}.help{font-size:.8rem;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(180deg,#3579ff,#2a6df2);color:#fff}.secondary{background:#f5f8fd;color:var(--text);border:1px solid var(--line)}
+.result{background:#101d35;color:#fff;border-radius:24px;padding:22px;box-shadow:0 22px 55px rgba(17,29,53,.16)}.result p{color:#c7d2e5}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ri{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)}.ri.main{grid-column:1/-1;background:linear-gradient(145deg,#1e58cd,#2f73f7)}.rl{font-size:.82rem;color:#cbd7e9}.rv{font-size:1.42rem;font-weight:850}.ri.main .rv{font-size:1.9rem}
+.info p,.info li{color:#4f5f73}.formula{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:12px;padding:13px 15px;margin:14px 0;font-weight:800;color:#1c4f9b}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.related a{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);color:var(--text)}.related small{display:block;color:var(--muted);margin-top:5px}
+.faq{display:grid;gap:12px}.faq details{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:0 18px;box-shadow:var(--shadow)}summary{cursor:pointer;font-weight:800;padding:16px 0}.faq p{color:var(--muted);margin:0 0 16px}
+footer{padding:28px 0}.foot{background:#0f1830;color:#d7def0;border-radius:28px;padding:26px}.foot a{color:#d7def0}.foot p{color:#b7c4df}
+.cookie{position:fixed;left:18px;right:18px;bottom:18px;max-width:760px;margin:auto;background:#0f1830;color:#fff;border-radius:20px;padding:18px;z-index:50;box-shadow:0 24px 60px rgba(0,0,0,.28)}.cookie[hidden]{display:none}.cookie p{margin:0 0 12px;color:#d5def1}
+@media(max-width:980px){.hero-grid,.calc,.content{grid-template-columns:1fr}.related{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){nav{display:none}.fields,.rg,.mini,.related{grid-template-columns:1fr}.ri.main{grid-column:auto}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Un híbrido siempre ahorra combustible?", "acceptedAnswer": {"@type": "Answer", "text": "No necesariamente. Depende del modelo y del tipo de trayecto."}}, {"@type": "Question", "name": "¿La calculadora incluye mantenimiento?", "acceptedAnswer": {"@type": "Answer", "text": "No. Se centra en combustible y sobrecoste de compra."}}, {"@type": "Question", "name": "¿Qué pasa si el ahorro anual es cero?", "acceptedAnswer": {"@type": "Answer", "text": "En ese caso el sobrecoste no se amortiza mediante combustible."}}, {"@type": "Question", "name": "¿Sirve para híbridos enchufables?", "acceptedAnswer": {"@type": "Answer", "text": "No es la comparación ideal, porque en un enchufable también hay que introducir consumo eléctrico y frecuencia de carga."}}]}</script></head><body>
+<header class="top"><div class="container topin"><a class="brand" href="index.html"><span class="logo">€</span>CosteCoche</a><nav><a href="index.html">Inicio</a><a href="gasolina-o-diesel.html">Gasolina o diésel</a><a class="on" href="hibrido-o-gasolina.html">Híbrido o gasolina</a><a href="electrico-o-gasolina.html">Eléctrico o gasolina</a><a href="calculadora-financiacion-coche.html">Financiación</a><a href="calculadora-depreciacion-coche.html">Depreciación</a></nav></div></header><div class="container crumb"><a href="index.html">Inicio</a> / Híbrido o gasolina</div><main>
+<section class="hero"><div class="container hero-grid"><div><span class="badge">Híbrido o gasolina</span><h1>Híbrido o gasolina: ¿cuándo compensa pagar más?</h1><p class="lead">Calcula el ahorro anual de combustible y cuánto tardaría en recuperar el sobrecoste inicial.</p><div class="pills"><span class="pill">Cálculo instantáneo</span><span class="pill">Sin registro</span><span class="pill">Datos en tu navegador</span></div></div><div class="hero-card"><small>Compara ahorro anual y tiempo de amortización</small><div class="hero-value">Híbrido vs gasolina</div><div>Calcula si el ahorro de combustible compensa pagar más por el híbrido.</div><div class="mini"><div><small>Ahorro</small><strong>€/año</strong></div><div><small>Clave</small><strong>Amortización</strong></div></div></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Calculadora</span><h2>¿Cuándo amortizas un híbrido?</h2><p class="sub">Compara consumos y añade cuánto cuesta más el híbrido al comprarlo.</p><div class="calc"><div class="card"><div class="fields">
+<div class="field"><label for="km">Kilómetros/año</label><input id="km" type="number" min="0" step="100" placeholder="Ej: 15000"></div>
+<div class="field"><label for="price">Gasolina (€/L)</label><input id="price" type="number" min="0" step=".01" placeholder="Ej: 1.65"></div>
+<div class="field"><label for="gCons">Gasolina convencional (L/100 km)</label><input id="gCons" type="number" min="0" step=".1" placeholder="Ej: 6.8"></div>
+<div class="field"><label for="hCons">Híbrido (L/100 km)</label><input id="hCons" type="number" min="0" step=".1" placeholder="Ej: 4.8"></div>
+<div class="field full"><label for="premium">Sobrecoste del híbrido (€)</label><input id="premium" type="number" min="0" step="100" placeholder="Ej: 3000"></div></div>
+<div class="actions"><button class="btn primary" onclick="calcHybrid()">Calcular</button><button class="btn secondary" onclick="clearHybrid()">Limpiar</button></div></div>
+<aside class="result"><h2>Resultado</h2><p>Estimación basada en combustible y sobreprecio inicial.</p><div class="rg">
+<div class="ri main"><div class="rl">Tiempo estimado de amortización</div><div class="rv" id="years">—</div></div>
+<div class="ri"><div class="rl">Gasolina/año</div><div class="rv" id="gas">—</div></div>
+<div class="ri"><div class="rl">Híbrido/año</div><div class="rv" id="hyb">—</div></div>
+<div class="ri"><div class="rl">Ahorro anual</div><div class="rv" id="save">—</div></div>
+<div class="ri"><div class="rl">Ahorro/100 km</div><div class="rv" id="save100">—</div></div></div></aside></div></div></section>
+<section class="section"><div class="container content"><article class="info"><h2>Cómo funciona la amortización</h2><p>Si el híbrido cuesta más al comprarlo, el ahorro anual de combustible puede ir recuperando esa diferencia con el tiempo.</p><div class="formula">Años para amortizar = sobrecoste inicial ÷ ahorro anual</div><p>Es una comparación simplificada: no incluye diferencias de mantenimiento, financiación, seguro o valor de reventa.</p></article>
+<article class="info"><h2>El resultado depende mucho del uso</h2><p>Los híbridos suelen destacar especialmente en conducción urbana con paradas frecuentes, mientras que en carretera la diferencia puede reducirse.</p><ul><li>Usa consumos reales si los conoces.</li><li>Compara versiones equivalentes.</li><li>Incluye promociones y descuentos en el sobrecoste.</li><li>Valora etiqueta ECO y posibles ventajas locales.</li></ul></article></div></section>
+<section class="section"><div class="container"><span class="eyebrow">También puede interesarte</span><h2>Más calculadoras</h2><div class="related"><a href="electrico-o-gasolina.html"><strong>Eléctrico o gasolina</strong><small>Compara energía y amortización.</small></a><a href="gasolina-o-diesel.html"><strong>Gasolina o diésel</strong><small>Compara dos combustibles.</small></a><a href="calculadora-depreciacion-coche.html"><strong>Depreciación</strong><small>Estima la pérdida de valor.</small></a></div></div></section>
+<section class="section"><div class="container"><span class="eyebrow">Preguntas frecuentes</span><h2>Dudas habituales</h2><div class="faq"><details><summary>¿Un híbrido siempre ahorra combustible?</summary><p>No necesariamente. Depende del modelo y del tipo de trayecto.</p></details><details><summary>¿La calculadora incluye mantenimiento?</summary><p>No. Se centra en combustible y sobrecoste de compra.</p></details><details><summary>¿Qué pasa si el ahorro anual es cero?</summary><p>En ese caso el sobrecoste no se amortiza mediante combustible.</p></details><details><summary>¿Sirve para híbridos enchufables?</summary><p>No es la comparación ideal, porque en un enchufable también hay que introducir consumo eléctrico y frecuencia de carga.</p></details></div></div></section></main>
+<footer><div class="container"><div class="foot"><strong>CosteCoche</strong><p>Calculadoras para entender mejor cuánto cuesta conducir.</p><a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="aviso-legal.html">Aviso legal</a><p>© <span id="year"></span> CosteCoche</p></div></div></footer>
+<div class="cookie" id="cookie" hidden><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept">Aceptar analítica</button><button class="btn secondary" id="reject">Rechazar</button></div></div><script>function calcHybrid(){const km=v("km"),p=v("price"),g=v("gCons"),h=v("hCons"),prem=v("premium");if(!(km>=0)||!(p>0)||!(g>0)||!(h>0)||!(prem>=0)){alert("Introduce valores válidos.");return}const cg=km*g/100*p,ch=km*h/100*p,save=cg-ch;t("gas",E(cg));t("hyb",E(ch));t("save",E(save));t("save100",E((g-h)*p));t("years",save>0?(prem/save).toLocaleString("es-ES",{maximumFractionDigits:1})+" años":"No se amortiza")}function clearHybrid(){["km","price","gCons","hCons","premium"].forEach(x=>document.getElementById(x).value="");["years","gas","hyb","save","save100"].forEach(x=>t(x,"—"))}
+const GA="G-EZJ4866V6M",KEY="costecoche_analytics_choice_v1";
+const E=(v,d=2)=>v.toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:d,maximumFractionDigits:d});
+const N=(v,d=1)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+function v(id){return parseFloat(document.getElementById(id).value)}function t(id,x){document.getElementById(id).textContent=x}
+function loadGA(){if(window.__ga)return;window.__ga=1;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",GA,{anonymize_ip:true});const s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+GA;document.head.appendChild(s)}
+const cb=document.getElementById("cookie"),choice=localStorage.getItem(KEY);if(choice==="accepted"){loadGA()}else if(!choice)cb.hidden=false;
+document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");loadGA();cb.hidden=true};
+document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");cb.hidden=true};
+document.getElementById("year").textContent=new Date().getFullYear();
+</script></body></html>
