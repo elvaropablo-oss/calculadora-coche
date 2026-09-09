@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elvaropablo-oss.github.io/calculadora-coche/sitemap.xml
