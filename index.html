@@ -1,230 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EZJ4866V6M"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calculadora de coche: combustible, viajes y coste total | CosteCoche</title>
+  <meta name="description" content="Calcula cuánto cuesta usar un coche: combustible al mes y al año, coste de viajes, comparación entre coches, coste total y renting frente a compra.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Calculadora de coche: combustible, viajes y coste total | CosteCoche">
+  <meta property="og:description" content="Calcula cuánto cuesta usar un coche: combustible al mes y al año, coste de viajes, comparación entre coches, coste total y renting frente a compra.">
+  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/">
+  <meta name="theme-color" content="#1769e0">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
 
-  gtag('config', 'G-EZJ4866V6M');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Calculadora de coste de coche | Combustible por mes y año</title>
-
-  <meta name="description"
-        content="Calcula cuánto gastas en combustible al mes y al año según los kilómetros, consumo de tu coche y precio del combustible.">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f6f8;
-      color: #1f2937;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0 0 8px;
-    }
-
-    main {
-      max-width: 850px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .calculator {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.08);
-    }
-
-    label {
-      display: block;
-      margin-top: 20px;
-      margin-bottom: 7px;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 15px;
-      border: 0;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    #resultado {
-      display: none;
-      margin-top: 25px;
-      padding: 20px;
-      background: #eff6ff;
-      border-radius: 10px;
-    }
-
-    .numero {
-      font-size: 26px;
-      font-weight: bold;
-    }
-
-    .info {
-      margin-top: 35px;
-      line-height: 1.7;
-    }
-
-    footer {
-      text-align: center;
-      margin: 50px 0 30px;
-      color: #6b7280;
-      font-size: 14px;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>Calculadora de coste de combustible</h1>
-  <p>Descubre cuánto te cuesta realmente utilizar tu coche.</p>
-</header>
-
-<main>
-
-  <section class="calculator">
-
-    <h2>Calcula tu gasto</h2>
-
-    <label for="km">Kilómetros que recorres al año</label>
-    <input id="km" type="number" min="0" placeholder="Ej: 15000">
-
-    <label for="consumo">Consumo del coche (L/100 km)</label>
-    <input id="consumo" type="number" min="0" step="0.1" placeholder="Ej: 5.5">
-
-    <label for="precio">Precio del combustible (€/L)</label>
-    <input id="precio" type="number" min="0" step="0.01" placeholder="Ej: 1.55">
-
-    <button onclick="calcular()">Calcular coste</button>
-
-    <div id="resultado">
-      <p>Combustible utilizado al año:</p>
-      <div class="numero" id="litros"></div>
-
-      <p>Coste anual:</p>
-      <div class="numero" id="anual"></div>
-
-      <p>Coste mensual aproximado:</p>
-      <div class="numero" id="mensual"></div>
-
-      <p>Coste por cada 100 km:</p>
-      <div class="numero" id="cada100"></div>
-    </div>
-
-  </section>
-
-  <section class="info">
-    <h2>¿Cómo se calcula el coste de combustible?</h2>
-
-    <p>
-      Introduce los kilómetros que recorres al año, el consumo medio de tu
-      vehículo y el precio actual del combustible. La calculadora estimará
-      automáticamente el gasto anual, mensual y por cada 100 kilómetros.
-    </p>
-
-    <p>
-      Puedes utilizarla para comparar diferentes coches o comprobar cuánto
-      cambiaría tu gasto si disminuyera el consumo o variara el precio del
-      combustible.
-    </p>
-  </section>
-
-</main>
-
-<footer>
-  Calculadora de coste de coche
-</footer>
-
-<script>
-function calcular() {
-
-  const km = parseFloat(document.getElementById("km").value);
-  const consumo = parseFloat(document.getElementById("consumo").value);
-  const precio = parseFloat(document.getElementById("precio").value);
-
-  if (
-    !Number.isFinite(km) ||
-    !Number.isFinite(consumo) ||
-    !Number.isFinite(precio) ||
-    km < 0 ||
-    consumo <= 0 ||
-    precio <= 0
-  ) {
-    alert("Introduce valores válidos.");
-    return;
-  }
-
-  const litros = (km / 100) * consumo;
-  const costeAnual = litros * precio;
-  const costeMensual = costeAnual / 12;
-  const coste100 = consumo * precio;
-
-  document.getElementById("litros").textContent =
-    litros.toLocaleString("es-ES", {
-      maximumFractionDigits: 1
-    }) + " L";
-
-  document.getElementById("anual").textContent =
-    costeAnual.toLocaleString("es-ES", {
-      style: "currency",
-      currency: "EUR"
-    });
-
-  document.getElementById("mensual").textContent =
-    costeMensual.toLocaleString("es-ES", {
-      style: "currency",
-      currency: "EUR"
-    });
-
-  document.getElementById("cada100").textContent =
-    coste100.toLocaleString("es-ES", {
-      style: "currency",
-      currency: "EUR"
-    });
-
-  document.getElementById("resultado").style.display = "block";
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"CosteCoche",
+  "url":"https://elvaropablo-oss.github.io/calculadora-coche/",
+  "inLanguage":"es",
+  "description":"Calculadoras gratuitas de combustible, viajes, comparación de coches y coste total de propiedad."
 }
 </script>
 
-</body>
-</html>
+</head>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Navegación principal">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">€</span>
+      <span>CosteCoche</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menú</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" aria-current="page">Inicio</a><a href="combustible.html">Combustible</a><a href="viaje.html">Viaje</a><a href="comparar-coches.html">Comparar coches</a><a href="coste-total.html">Coste total</a><a href="renting-o-comprar.html">Renting vs compra</a>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Calculadoras gratuitas · Sin registro</span>
+      <h1>Descubre cuánto te cuesta conducir de verdad</h1>
+      <p class="lead">Convierte kilómetros, consumo y precio del combustible en cifras útiles: coste mensual, anual, por viaje y por kilómetro. Después compara coches y calcula el coste total de propiedad.</p>
+      <div class="hero-points">
+        <span class="pill">Cálculo instantáneo</span>
+        <span class="pill">Funciona en móvil</span>
+        <span class="pill">Los valores del cálculo no se envían</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Ejemplo de resultado">
+      <div class="hero-caption">Ejemplo con 15.000 km/año, 6,2 L/100 km y 1,65 €/L</div>
+      <div class="mini-card">
+        <div class="hero-caption">Gasto estimado al año</div>
+        <div class="hero-number">1.534,50 €</div>
+      </div>
+      <div class="mini-card">
+        <div class="hero-caption">Equivale aproximadamente a</div>
+        <div class="hero-number">127,88 €/mes</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="calc-title">
+    <div class="section-head">
+      <span class="kicker">Calculadora principal</span>
+      <h2 id="calc-title">Coste de combustible al mes y al año</h2>
+      <p>Introduce tres datos. Actualizamos el resultado mientras escribes para que puedas probar escenarios rápidamente.</p>
+    </div>
+    <div class="calculator-shell">
+      <form class="card" id="fuelForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="fuelKm">Kilómetros al año</label>
+            <input id="fuelKm" inputmode="decimal" value="15000" min="0" type="number" step="100" required>
+            <span class="help">Ejemplo: 15.000 km</span>
+          </div>
+          <div class="field">
+            <label for="fuelConsumption">Consumo medio (L/100 km)</label>
+            <input id="fuelConsumption" inputmode="decimal" value="6.2" min="0" type="number" step="0.1" required>
+            <span class="help">Usa el consumo real si lo conoces</span>
+          </div>
+          <div class="field full">
+            <label for="fuelPrice">Precio del combustible (€/L)</label>
+            <input id="fuelPrice" inputmode="decimal" value="1.65" min="0" type="number" step="0.01" required>
+            <span class="help">Puedes poner gasolina, diésel o cualquier precio por litro</span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Calcular</button>
+          <a class="btn btn-secondary" href="combustible.html">Ver calculadora detallada</a>
+        </div>
+      </form>
+
+      <aside class="results" aria-live="polite">
+        <h2>Tu estimación</h2>
+        <div class="result-grid">
+          <div class="result-item result-primary"><span>Coste anual</span><strong id="fuelAnnual">—</strong></div>
+          <div class="result-item"><span>Coste mensual</span><strong id="fuelMonthly">—</strong></div>
+          <div class="result-item"><span>Litros al año</span><strong id="fuelLiters">—</strong></div>
+          <div class="result-item"><span>Coste cada 100 km</span><strong id="fuelPer100">—</strong></div>
+          <div class="result-item"><span>Coste por km</span><strong id="fuelPerKm">—</strong></div>
+        </div>
+        <p class="result-note">Estimación basada únicamente en combustible. Seguro, mantenimiento, impuestos, financiación y depreciación se calculan aparte.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="kicker">Más herramientas</span>
+      <h2>Elige qué quieres calcular</h2>
+      <p>Separar cada decisión en una herramienta específica hace que la estimación sea más clara y evita mezclar conceptos.</p>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="combustible.html"><div class="icon">⛽</div><h3>Combustible</h3><p>Gasto mensual, anual, por 100 km y por kilómetro.</p></a>
+      <a class="tool-card" href="viaje.html"><div class="icon">🛣️</div><h3>Coste de un viaje</h3><p>Combustible, peajes, litros y coste por persona.</p></a>
+      <a class="tool-card" href="comparar-coches.html"><div class="icon">↔️</div><h3>Comparar dos coches</h3><p>Descubre cuánto ahorra al año el coche más eficiente.</p></a>
+      <a class="tool-card" href="coste-total.html"><div class="icon">📊</div><h3>Coste total</h3><p>Depreciación, combustible, seguro, mantenimiento e impuestos.</p></a>
+      <a class="tool-card" href="renting-o-comprar.html"><div class="icon">🔑</div><h3>Renting o comprar</h3><p>Compara el coste estimado de ambas opciones en el mismo periodo.</p></a>
+      <a class="tool-card" href="sobre-costecoche.html"><div class="icon">✓</div><h3>Cómo calculamos</h3><p>Metodología, límites de las estimaciones y principios del sitio.</p></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="content-grid">
+      <article class="prose">
+        <h2>Cómo se calcula el gasto de combustible</h2>
+        <p>La idea es sencilla: primero calculamos cuántos litros necesitas para recorrer tus kilómetros anuales y después multiplicamos esos litros por el precio del combustible.</p>
+        <div class="formula">Litros/año = kilómetros/año × consumo ÷ 100</div>
+        <div class="formula">Coste/año = litros/año × precio por litro</div>
+        <p>Por ejemplo, un coche que recorre 15.000 km al año y consume 6,2 L/100 km utiliza aproximadamente 930 litros. A 1,65 €/L, el gasto estimado sería 1.534,50 € al año.</p>
+      </article>
+      <article class="prose">
+        <h2>Por qué mirar solo el combustible puede engañar</h2>
+        <p>Dos coches con consumos diferentes pueden acabar teniendo un coste total parecido si también cambian el precio de compra, el valor de reventa, el seguro o el mantenimiento. Por eso CosteCoche separa el gasto de uso del coste total de propiedad.</p>
+        <p>Para una compra importante, prueba primero la comparación de consumos y después la calculadora de coste total. Así puedes distinguir el ahorro operativo del coste de adquirir y mantener el vehículo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="section-head">
+      <h2>Preguntas frecuentes</h2>
+    </div>
+    <div class="faq">
+      <details><summary>¿Qué consumo debo introducir?</summary><p>Si puedes, usa tu consumo real medio de varios depósitos. El dato homologado sirve como referencia, pero tu resultado real puede variar por velocidad, tráfico, temperatura, neumáticos, carga y estilo de conducción.</p></details>
+      <details><summary>¿El cálculo incluye mantenimiento y seguro?</summary><p>No en la calculadora básica. Para incluir depreciación, seguro, mantenimiento e impuestos utiliza la calculadora de coste total.</p></details>
+      <details><summary>¿Puedo usar decimales?</summary><p>Sí. Los campos aceptan decimales y los resultados se muestran con formato de euros.</p></details>
+      <details><summary>¿Guardáis los datos que escribo?</summary><p>No enviamos los valores de las calculadoras a un servidor propio. Los cálculos se realizan en tu navegador. La medición de audiencia con Google Analytics solo se carga si la aceptas.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h3>CosteCoche</h3>
+      <p>Calculadoras gratuitas para entender el coste real de conducir. Los cálculos se realizan en tu navegador y son orientativos.</p>
+    </div>
+    <div>
+      <h3>Calculadoras</h3>
+      <div class="footer-links">
+        <a href="combustible.html">Coste de combustible</a>
+        <a href="viaje.html">Coste de un viaje</a>
+        <a href="comparar-coches.html">Comparar dos coches</a>
+        <a href="coste-total.html">Coste total de propiedad</a>
+        <a href="renting-o-comprar.html">Renting vs compra</a>
+      </div>
+    </div>
+    <div>
+      <h3>Información</h3>
+      <div class="footer-links">
+        <a href="sobre-costecoche.html">Sobre CosteCoche</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="#" data-privacy-settings>Preferencias de privacidad</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
+  </div>
+</footer>
+<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
+  <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
+    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
+    <a class="btn btn-secondary" href="cookies.html">Más información</a>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>

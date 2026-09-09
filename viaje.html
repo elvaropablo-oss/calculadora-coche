@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calculadora de coste de viaje en coche: gasolina, peajes y reparto | CosteCoche</title>
+  <meta name="description" content="Calcula cuánto cuesta un viaje en coche según distancia, consumo, combustible, peajes y número de personas.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/viaje.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Calculadora de coste de viaje en coche: gasolina, peajes y reparto | CosteCoche">
+  <meta property="og:description" content="Calcula cuánto cuesta un viaje en coche según distancia, consumo, combustible, peajes y número de personas.">
+  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/viaje.html">
+  <meta name="theme-color" content="#1769e0">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+
+</head>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Navegación principal">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">€</span>
+      <span>CosteCoche</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menú</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a><a href="combustible.html">Combustible</a><a href="viaje.html" aria-current="page">Viaje</a><a href="comparar-coches.html">Comparar coches</a><a href="coste-total.html">Coste total</a><a href="renting-o-comprar.html">Renting vs compra</a>
+    </div>
+  </nav>
+</header>
+
+<div class="breadcrumbs"><a href="index.html">Inicio</a> / Coste de un viaje</div>
+<main id="contenido">
+  <section class="page-hero">
+    <span class="eyebrow">Viajes</span>
+    <h1>Calculadora de coste de un viaje en coche</h1>
+    <p class="lead">Calcula combustible, peajes y coste por persona antes de salir. Útil para escapadas, vacaciones y reparto de gastos.</p>
+  </section>
+  <section class="section">
+    <div class="calculator-shell">
+      <form class="card" id="tripForm">
+        <div class="form-grid">
+          <div class="field"><label for="tripKm">Distancia total (km)</label><input id="tripKm" type="number" min="0" step="1" value="650" required><span class="help">Incluye ida y vuelta si corresponde.</span></div>
+          <div class="field"><label for="tripConsumption">Consumo (L/100 km)</label><input id="tripConsumption" type="number" min="0" step="0.1" value="6.2" required></div>
+          <div class="field"><label for="tripPrice">Combustible (€/L)</label><input id="tripPrice" type="number" min="0" step="0.01" value="1.65" required></div>
+          <div class="field"><label for="tripTolls">Peajes totales (€)</label><input id="tripTolls" type="number" min="0" step="0.01" value="0"></div>
+          <div class="field full"><label for="tripPeople">Personas que comparten gasto</label><input id="tripPeople" type="number" min="1" step="1" value="2" required></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary">Calcular viaje</button></div>
+      </form>
+      <aside class="results" aria-live="polite">
+        <h2>Resultado del viaje</h2>
+        <div class="result-grid">
+          <div class="result-item result-primary"><span>Coste total</span><strong id="tripTotal">—</strong></div>
+          <div class="result-item"><span>Solo combustible</span><strong id="tripFuel">—</strong></div>
+          <div class="result-item"><span>Por persona</span><strong id="tripPerson">—</strong></div>
+          <div class="result-item"><span>Litros necesarios</span><strong id="tripLiters">—</strong></div>
+          <div class="result-item"><span>Coste/100 km</span><strong id="tripPer100">—</strong></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <section class="section">
+    <div class="content-grid">
+      <article class="prose">
+        <h2>Qué distancia debes introducir</h2>
+        <p>Introduce la distancia total que realmente recorrerá el coche. Si Google Maps te muestra 325 km hasta el destino y después vas a volver por una ruta similar, la distancia total será aproximadamente 650 km.</p>
+        <p>Si sabes que harás desplazamientos adicionales durante el viaje, añádelos. La herramienta no consulta rutas ni peajes automáticamente: trabaja únicamente con los datos que introduces.</p>
+      </article>
+      <article class="prose">
+        <h2>Cómo repartir el coste</h2>
+        <p>El coste por persona divide combustible y peajes entre el número de viajeros que has indicado. No incluye aparcamiento, comidas, alquiler del vehículo ni desgaste mecánico.</p>
+        <p>Para un reparto estrictamente económico del uso del coche, podrías añadir aparte un importe por kilómetro que cubra depreciación y mantenimiento. Nuestra calculadora de <a href="coste-total.html">coste total</a> ayuda a estimar esos conceptos.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h3>CosteCoche</h3>
+      <p>Calculadoras gratuitas para entender el coste real de conducir. Los cálculos se realizan en tu navegador y son orientativos.</p>
+    </div>
+    <div>
+      <h3>Calculadoras</h3>
+      <div class="footer-links">
+        <a href="combustible.html">Coste de combustible</a>
+        <a href="viaje.html">Coste de un viaje</a>
+        <a href="comparar-coches.html">Comparar dos coches</a>
+        <a href="coste-total.html">Coste total de propiedad</a>
+        <a href="renting-o-comprar.html">Renting vs compra</a>
+      </div>
+    </div>
+    <div>
+      <h3>Información</h3>
+      <div class="footer-links">
+        <a href="sobre-costecoche.html">Sobre CosteCoche</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="#" data-privacy-settings>Preferencias de privacidad</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
+  </div>
+</footer>
+<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
+  <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
+    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
+    <a class="btn btn-secondary" href="cookies.html">Más información</a>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
