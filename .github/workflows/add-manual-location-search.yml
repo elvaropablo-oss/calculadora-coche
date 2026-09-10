@@ -1,0 +1,71 @@
+name: Añadir búsqueda manual ciudad y CP
+on:
+  push:
+    paths:
+      - '.github/workflows/add-manual-location-search.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Comprobar JavaScript
+        run: |
+          node --check assets/geo-search.js
+          node --check assets/gasolineras-cerca-v2.js
+          node --check assets/puntos-recarga-v3.js
+      - name: Actualizar interfaces
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def patch(path, replacements):
+              p=Path(path)
+              s=p.read_text(encoding='utf-8')
+              for old,new in replacements:
+                  if old not in s:
+                      raise SystemExit(f'No se encontró fragmento esperado en {path}: {old[:80]}')
+                  s=s.replace(old,new,1)
+              p.write_text(s,encoding='utf-8')
+
+          patch('gasolineras-cerca-de-mi.html',[
+              ('.near-field select{','.near-field select,.near-field input{'),
+              ('.near-search{width:100%;min-height:52px;margin-top:4px}', '.near-search{width:100%;min-height:52px;margin-top:4px}.near-search.secondary-loc{background:#fff;color:#2358b8;border:1px solid #b9c9e4;margin-top:8px}.near-search.secondary-loc:hover{background:#f5f8ff}'),
+              ('<p class="sub">El permiso de ubicación solo se solicita al pulsar el botón.</p><div class="near-field"><label for="nearFuel">Combustible</label>', '<p class="sub">Busca por ciudad o código postal, o usa tu ubicación si prefieres encontrar lo que tienes alrededor.</p><div class="near-field"><label for="nearPlace">Ciudad o código postal</label><input id="nearPlace" type="search" inputmode="search" autocomplete="postal-code" placeholder="Ej. Barcelona o 08001" aria-describedby="nearStatus"></div><div class="near-field"><label for="nearFuel">Combustible</label>'),
+              ('<button id="nearSearch" class="btn primary near-search" type="button">Buscar gasolineras cerca de mí</button>', '<button id="nearManualSearch" class="btn near-search secondary-loc" type="button">Buscar por ciudad o código postal</button><button id="nearSearch" class="btn primary near-search" type="button">Usar mi ubicación y buscar</button>'),
+              ('<div class="near-note"><strong>Privacidad:</strong> CosteCoche no guarda tus coordenadas ni las envía a Analytics. Se usan en tu navegador para calcular distancias. Si abres el mapa, se cargan mapas de OpenStreetMap/Leaflet.</div><div id="nearStatus" class="near-status" aria-live="polite">Todavía no hemos solicitado tu ubicación.</div>', '<div class="near-note"><strong>Privacidad:</strong> si usas tu ubicación, CosteCoche no guarda tus coordenadas ni las envía a Analytics. Si buscas por ciudad o código postal, ese texto se consulta en OpenStreetMap/Nominatim para obtener un punto aproximado; no enviamos la consulta a Analytics. El mapa usa OpenStreetMap/Leaflet.</div><div id="nearStatus" class="near-status" aria-live="polite">Puedes buscar por ciudad o código postal o usar tu ubicación.</div>'),
+              ('<div id="nearResults" class="near-results"><div class="near-empty"><strong>Haz una búsqueda para empezar.</strong><span>El navegador te pedirá permiso para usar tu ubicación.</span></div>', '<div id="nearResults" class="near-results"><div class="near-empty"><strong>Haz una búsqueda para empezar.</strong><span>Escribe una ciudad o código postal, o usa tu ubicación.</span></div>'),
+              ('<details><summary>¿Guardáis mi ubicación?</summary><p>No. Las coordenadas no se almacenan en CosteCoche ni se incluyen en nuestros eventos personalizados de Analytics. Se usan durante la búsqueda para calcular distancias.</p></details>', '<details><summary>¿Guardáis mi ubicación?</summary><p>No. Las coordenadas no se almacenan en CosteCoche ni se incluyen en nuestros eventos personalizados de Analytics. Si buscas manualmente por ciudad o código postal, esa consulta se usa para obtener una posición aproximada mediante OpenStreetMap/Nominatim y tampoco se envía a Analytics.</p></details>'),
+              ('<script src="assets/gasolineras-cerca.js" defer></script>', '<script src="assets/geo-search.js?v=20260910c" defer></script>\n<script src="assets/gasolineras-cerca-v2.js?v=20260910c" defer></script>')
+          ])
+
+          patch('puntos-recarga-cerca-de-mi.html',[
+              ('.charge-field select{','.charge-field select,.charge-field input{'),
+              ('.charge-search{width:100%;min-height:52px;margin-top:3px}', '.charge-search{width:100%;min-height:52px;margin-top:3px}.charge-search.secondary-loc{background:#fff;color:#2358b8;border:1px solid #b9c9e4;margin-top:8px}.charge-search.secondary-loc:hover{background:#f5f8ff}'),
+              ('<p class="sub">El permiso de ubicación solo se solicita cuando pulsas Buscar.</p><div class="charge-field"><label for="chargeRadius">Radio de búsqueda</label>', '<p class="sub">Busca por ciudad o código postal, o usa tu ubicación para encontrar cargadores alrededor de ti.</p><div class="charge-field"><label for="chargePlace">Ciudad o código postal</label><input id="chargePlace" type="search" inputmode="search" autocomplete="postal-code" placeholder="Ej. Madrid o 28001" aria-describedby="chargeStatus"></div><div class="charge-field"><label for="chargeRadius">Radio de búsqueda</label>'),
+              ('<button id="chargeSearch" class="btn primary charge-search" type="button">Buscar puntos de carga cerca de mí</button>', '<button id="chargeManualSearch" class="btn charge-search secondary-loc" type="button">Buscar por ciudad o código postal</button><button id="chargeSearch" class="btn primary charge-search" type="button">Usar mi ubicación y buscar</button>'),
+              ('<div class="charge-note"><strong>Privacidad:</strong> tus coordenadas no se guardan ni se mandan a Analytics. Se utilizan en tu navegador para calcular distancias. El mapa se carga solo después de buscar.</div><div id="chargeStatus" class="charge-status" aria-live="polite">Todavía no hemos solicitado tu ubicación.</div>', '<div class="charge-note"><strong>Privacidad:</strong> si usas tu ubicación, tus coordenadas no se guardan ni se mandan a Analytics. Si buscas por ciudad o código postal, ese texto se consulta en OpenStreetMap/Nominatim para obtener un punto aproximado y no se envía a Analytics. El mapa se carga después de buscar.</div><div id="chargeStatus" class="charge-status" aria-live="polite">Preparando el buscador…</div>'),
+              ('<div id="chargeResults" class="charge-results"><div class="charge-empty"><strong>Haz una búsqueda para empezar.</strong><span>El navegador te pedirá permiso para utilizar tu ubicación.</span></div>', '<div id="chargeResults" class="charge-results"><div class="charge-empty"><strong>Haz una búsqueda para empezar.</strong><span>Escribe una ciudad o código postal, o usa tu ubicación.</span></div>'),
+              ('<details><summary>¿Guardáis mi ubicación?</summary><p>No. Las coordenadas se usan durante la búsqueda en tu navegador para calcular distancias y no se incluyen en nuestros eventos personalizados de Analytics.</p></details>', '<details><summary>¿Guardáis mi ubicación?</summary><p>No. Las coordenadas se usan durante la búsqueda para calcular distancias y no se incluyen en nuestros eventos personalizados de Analytics. Si buscas por ciudad o código postal, la consulta se usa para obtener una posición aproximada mediante OpenStreetMap/Nominatim y tampoco se envía a Analytics.</p></details>'),
+              ('<script src="assets/puntos-recarga-v2.js?v=20260910b" defer></script>', '<script src="assets/geo-search.js?v=20260910c" defer></script>\n<script src="assets/puntos-recarga-v3.js?v=20260910c" defer></script>')
+          ])
+          PY
+      - name: Verificar cambios
+        run: |
+          grep -q 'id="nearPlace"' gasolineras-cerca-de-mi.html
+          grep -q 'id="nearManualSearch"' gasolineras-cerca-de-mi.html
+          grep -q 'gasolineras-cerca-v2.js' gasolineras-cerca-de-mi.html
+          grep -q 'id="chargePlace"' puntos-recarga-cerca-de-mi.html
+          grep -q 'id="chargeManualSearch"' puntos-recarga-cerca-de-mi.html
+          grep -q 'puntos-recarga-v3.js' puntos-recarga-cerca-de-mi.html
+      - name: Publicar cambios y limpiar workflow temporal
+        run: |
+          rm .github/workflows/add-manual-location-search.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add gasolineras-cerca-de-mi.html puntos-recarga-cerca-de-mi.html .github/workflows/add-manual-location-search.yml
+          git commit -m 'UX: buscar por ciudad o código postal'
+          git push
