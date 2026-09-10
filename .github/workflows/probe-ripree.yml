@@ -1,0 +1,23 @@
+name: Probe RIPREE export
+on:
+  push:
+    paths:
+      - '.github/workflows/probe-ripree.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect export page
+        shell: bash
+        run: |
+          set -e
+          URL='https://energia.serviciosmin.gob.es/Ripree/ExportarInstalaciones/Export'
+          curl -L -sS -D headers.txt "$URL" -o page.html
+          echo '=== HEADERS ==='
+          sed -n '1,80p' headers.txt
+          echo '=== LINKS/FORMS ==='
+          grep -Eio '<(a|form|input|button)[^>]*>' page.html | sed -n '1,200p'
+          echo '=== RELEVANT LINES ==='
+          grep -Ein 'csv|xml|export|action=|href=|form' page.html | sed -n '1,220p'
