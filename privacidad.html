@@ -17,6 +17,11 @@
   <link rel="stylesheet" href="assets/styles.css">
 
   <meta name="twitter:card" content="summary">
+
+  <!-- CosteCoche privacy bootstrap v3: sincroniza el consentimiento antes de cualquier cargador antiguo de Analytics -->
+  <script id="cc-consent-bootstrap">(()=>{const G="G-EZJ4866V6M",K="costecoche_consent_v3",L="costecoche_privacy_v2",MAX=31536000000;try{let c=localStorage.getItem(L),r=localStorage.getItem(K);if(r){const s=JSON.parse(r);if(s&&s.version===3&&typeof s.analytics==="boolean"&&Date.now()-Number(s.updatedAt)<=MAX){c=s.analytics?"accepted":"rejected";localStorage.setItem(L,c)}else{localStorage.removeItem(K);localStorage.removeItem(L);c=null}}window["ga-disable-"+G]=c!=="accepted"}catch(e){window["ga-disable-"+G]=true}})();</script>
+  <link rel="stylesheet" href="assets/consent.css">
+  <script src="assets/consent.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -47,10 +52,10 @@
       <h2>Alojamiento</h2>
       <p>El sitio está publicado mediante GitHub Pages. Como proveedor de infraestructura, GitHub puede tratar datos técnicos necesarios para servir la web de acuerdo con sus propias políticas.</p>
       <h2>Google Analytics</h2>
-      <p>CosteCoche utiliza Google Analytics únicamente cuando aceptas expresamente la medición de audiencia mediante el aviso de privacidad. Si rechazas esa opción, el script de Google Analytics no se carga desde este sitio.</p>
-      <p>Analytics puede procesar información técnica y de uso para generar estadísticas agregadas sobre visitas y navegación. La gestión y conservación de esos datos depende de la configuración de la propiedad de Google Analytics y de las políticas de Google.</p>
+      <p>CosteCoche utiliza Google Analytics únicamente cuando aceptas expresamente la categoría de analítica en el panel de privacidad. Si la rechazas, CosteCoche no activa el cargador de Google Analytics para esa visita.</p>
+      <p>Analytics puede procesar información técnica y de uso para generar estadísticas agregadas sobre visitas y navegación. Si aceptas, también registramos eventos técnicos como el uso de una calculadora, el uso de una referencia de precio de España o un clic de navegación interna. Los eventos personalizados de CosteCoche no incluyen los números que introduces en los campos. La gestión y conservación de los datos de Analytics depende de la configuración de la propiedad y de las políticas de Google.</p>
       <h2>Preferencia de privacidad</h2>
-      <p>Guardamos en el almacenamiento local del navegador tu decisión de aceptar o rechazar Analytics para no preguntártelo en cada página. Puedes cambiarla en cualquier momento desde “Preferencias de privacidad” en el pie de página.</p>
+      <p>Guardamos en el almacenamiento local del navegador tu elección de privacidad, incluida la categoría de analítica, para no preguntártelo en cada página. Puedes cambiarla en cualquier momento desde “Preferencias de privacidad” en el pie de página.</p>
       <h2>Enlaces externos</h2>
       <p>Los enlaces a servicios externos están sujetos a las políticas de privacidad de sus respectivos responsables.</p>
       <div class="notice">Esta política describe la configuración técnica actual del sitio. Si se incorporan formularios, publicidad, cuentas de usuario u otros proveedores, deberá actualizarse antes de utilizarlos.</div>
@@ -89,7 +94,7 @@
     © <span data-year></span> CosteCoche · Herramientas informativas, sin asesoramiento financiero.
   </div>
 </footer>
-<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de analítica">
+<div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-live="polite" aria-label="Preferencias de privacidad">
   <p><strong>Tu privacidad primero.</strong> La calculadora funciona sin cookies. Google Analytics solo se carga si aceptas la medición de audiencia. Puedes rechazarla y seguir usando toda la web.</p>
   <div class="cookie-actions">
     <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
