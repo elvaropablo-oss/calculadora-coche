@@ -9,11 +9,32 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect export page
+      - name: Download public charging-point export
         shell: bash
         run: |
           set -e
-          URL='https://energia.serviciosmin.gob.es/Ripree/ExportarInstalaciones/Export'
-          curl -L -sS -c cookies.txt -D headers.txt "$URL" -o page.html
-          echo '=== SCRIPT BLOCK ==='
-          sed -n '145,270p' page.html
+          BASE='https://energia.serviciosmin.gob.es/Ripree'
+          curl -L -sS -c cookies.txt "$BASE/ExportarInstalaciones/Export" -o page.html
+          curl -L -sS -b cookies.txt -D postheaders.txt \
+            -H 'Content-Type: application/json' \
+            --data '{"soloConsolidado":true}' \
+            "$BASE/ExportarInstalaciones/GenerarExcel" -o export.bin
+          echo '=== POST HEADERS ==='
+          sed -n '1,100p' postheaders.txt
+          echo '=== FILE ==='
+          file export.bin || true
+          wc -c export.bin
+          echo '=== FIRST BYTES/TEXT ==='
+          python - <<'PY'
+          from pathlib import Path
+          b=Path('export.bin').read_bytes()
+          print(b[:120])
+          for enc in ('utf-8-sig','utf-16','cp1252','latin1'):
+              try:
+                  s=b.decode(enc)
+                  print('ENC',enc)
+                  print(s[:5000])
+                  break
+              except Exception:
+                  pass
+          PY
