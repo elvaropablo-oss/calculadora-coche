@@ -14,10 +14,6 @@ jobs:
         run: |
           set -e
           URL='https://energia.serviciosmin.gob.es/Ripree/ExportarInstalaciones/Export'
-          curl -L -sS -D headers.txt "$URL" -o page.html
-          echo '=== HEADERS ==='
-          sed -n '1,80p' headers.txt
-          echo '=== LINKS/FORMS ==='
-          grep -Eio '<(a|form|input|button)[^>]*>' page.html | sed -n '1,200p'
-          echo '=== RELEVANT LINES ==='
-          grep -Ein 'csv|xml|export|action=|href=|form' page.html | sed -n '1,220p'
+          curl -L -sS -c cookies.txt -D headers.txt "$URL" -o page.html
+          echo '=== SCRIPT BLOCK ==='
+          sed -n '145,270p' page.html
