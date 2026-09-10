@@ -162,3 +162,5 @@ jobs:
           fi
           git commit -m "Datos: actualizar puntos de recarga MITECO"
           git push
+
+# Disparador manual 2026-09-10: regenerar el índice oficial tras publicar el buscador.
