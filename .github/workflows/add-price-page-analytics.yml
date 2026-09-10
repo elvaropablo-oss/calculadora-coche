@@ -1,0 +1,31 @@
+name: Add analytics consent to price page
+on:
+  push:
+    paths:
+      - '.github/workflows/add-price-page-analytics.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep analytics consistent
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('precios-combustible-espana.html')
+          s=p.read_text(encoding='utf-8')
+          if 'id="cookie"' not in s:
+              block='''\n<div aria-label="Preferencias de analítica" aria-live="polite" class="cookie" hidden id="cookie" role="dialog"><p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p><div class="actions"><button class="btn primary" id="accept" type="button">Aceptar analítica</button><button class="btn secondary" id="reject" type="button">Rechazar</button></div></div>\n<script>\n(()=>{const GA="G-EZJ4866V6M",KEY="costecoche_privacy_v2",c=document.getElementById("cookie"),disabled="ga-disable-"+GA;window[disabled]=localStorage.getItem(KEY)!=="accepted";function load(){if(window.__ga)return;window.__ga=1;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",GA,{anonymize_ip:true});const x=document.createElement("script");x.async=true;x.src="https://www.googletagmanager.com/gtag/js?id="+GA;document.head.appendChild(x)}const choice=localStorage.getItem(KEY);if(choice==="accepted")load();else if(!choice)c.hidden=false;document.getElementById("accept").onclick=()=>{localStorage.setItem(KEY,"accepted");window[disabled]=false;load();c.hidden=true};document.getElementById("reject").onclick=()=>{localStorage.setItem(KEY,"rejected");window[disabled]=true;c.hidden=true}})();\n</script>\n'''
+              s=s.replace('<script>document.getElementById(\'year\').textContent=new Date().getFullYear();</script>',block+'<script>document.getElementById(\'year\').textContent=new Date().getFullYear();</script>',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+          rm -f .github/workflows/add-price-page-analytics.yml
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Analytics: medir página de precios con consentimiento" || exit 0
+          git push
