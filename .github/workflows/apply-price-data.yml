@@ -1,0 +1,54 @@
+name: Integrate Spain price references
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-price-data.yml'
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add live price helpers and homepage link
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          script='<script src="assets/precios-espana.js" defer></script>'
+          exclude={'404.html','aviso-legal.html','privacidad.html','cookies.html','combustible.html','viaje.html','renting-o-comprar.html','google2d20e7a6f29de9ef.html','precios-combustible-espana.html'}
+          pattern=re.compile(r'<label[^>]*>[^<]*(?:combustible|gasolina|gasóleo|gasoleo|diésel|diesel|€/L|€/l|kWh|electric)',re.I)
+          changed=[]
+          for p in Path('.').glob('*.html'):
+              if p.name in exclude: continue
+              text=p.read_text(encoding='utf-8')
+              if script in text: continue
+              if p.name=='index.html' or pattern.search(text):
+                  if '</body>' in text:
+                      text=text.replace('</body>',script+'\n</body>',1)
+                      p.write_text(text,encoding='utf-8')
+                      changed.append(p.name)
+
+          index=Path('index.html')
+          text=index.read_text(encoding='utf-8')
+          if 'precios-combustible-espana.html' not in text:
+              marker='''      <a class="seo-card" href="coste-viaje-coche-electrico.html">\n        <div class="seo-icon">⚡</div>\n        <h3>Coste de viaje en coche eléctrico</h3>\n        <p>Calcula kWh, recargas, peajes y coste por persona.</p>\n        <span class="seo-link">Calcular viaje eléctrico →</span>\n      </a>'''
+              card='''\n\n      <a class="seo-card" href="precios-combustible-espana.html">\n        <div class="seo-icon">📡</div>\n        <h3>Precios de combustible en España</h3>\n        <p>Consulta mínimo, media, máximo y rango habitual de gasolina 95 y diésel con datos oficiales.</p>\n        <span class="seo-link">Ver precios de referencia →</span>\n      </a>'''
+              if marker not in text:
+                  raise SystemExit('Homepage marker not found')
+              text=text.replace(marker,marker+card,1)
+              index.write_text(text,encoding='utf-8')
+
+          print('Enhanced:', ', '.join(changed))
+          PY
+          rm -f .github/workflows/apply-price-data.yml
+      - name: Commit integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Datos: integrar precios de referencia en calculadoras" || exit 0
+          git push
