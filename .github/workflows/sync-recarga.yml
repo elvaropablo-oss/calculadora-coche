@@ -1,0 +1,164 @@
+name: Actualizar puntos de recarga MITECO
+on:
+  push:
+    paths:
+      - '.github/workflows/sync-recarga.yml'
+  schedule:
+    - cron: '20 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: sync-recarga-miteco
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar y compactar el registro público RIPREE
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv, io, json, math, os, re, shutil
+          from collections import defaultdict
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import requests
+
+          BASE='https://energia.serviciosmin.gob.es/Ripree'
+          EXPORT=f'{BASE}/ExportarInstalaciones/Export'
+          GENERATE=f'{BASE}/ExportarInstalaciones/GenerarExcel'
+          SOURCE_PAGE='https://catalogo.datosabiertos.miteco.gob.es/catalogo/es/dataset/6ee8d46f-93bd-478f-8e29-3ba4f6d8405c'
+          out=Path('data/recarga')
+          out.mkdir(parents=True,exist_ok=True)
+
+          s=requests.Session()
+          r=s.get(EXPORT,timeout=45)
+          r.raise_for_status()
+          r=s.post(GENERATE,json={'soloConsolidado':True},timeout=420)
+          r.raise_for_status()
+          if 'text/csv' not in (r.headers.get('content-type') or '').lower():
+              raise RuntimeError('MITECO no devolvió el CSV esperado')
+          raw=r.content
+          if len(raw)<100000:
+              raise RuntimeError('El CSV de MITECO parece incompleto')
+          text=raw.decode('utf-16')
+          reader=csv.DictReader(io.StringIO(text),delimiter=';')
+
+          def clean(v):
+              x=(v or '').strip()
+              if x.startswith('="') and x.endswith('"'):
+                  x=x[2:-1]
+              return x.strip()
+          def number(v):
+              x=clean(v).lower().replace('kw','').replace('v','').replace('a','').strip()
+              x=x.replace('.','').replace(',','.') if ',' in x else x
+              x=re.sub(r'[^0-9.\-]','',x)
+              try:return float(x)
+              except:return None
+          def coord(v):
+              x=clean(v).replace(',','.')
+              x=re.sub(r'[^0-9.\-]','',x)
+              try:return float(x)
+              except:return None
+          def latest(a,b):
+              def p(x):
+                  try:return datetime.strptime(x,'%d/%m/%Y %H:%M:%S')
+                  except:return datetime.min
+              return b if p(b)>p(a) else a
+          def addset(store,key,val):
+              val=clean(val)
+              if val: store[key].add(val)
+
+          # Agrupa conectores del mismo punto de recarga para evitar duplicados visuales.
+          pts={}
+          source_rows=0
+          for row in reader:
+              source_rows+=1
+              lat,lon=coord(row.get('LATITUD')),coord(row.get('LONGITUD'))
+              if lat is None or lon is None or not (27<=lat<=44.5 and -19<=lon<=5):
+                  continue
+              point=clean(row.get('COD. PUNTO DE RECARGA')) or clean(row.get('ID. PUNTO DE RECARGA'))
+              if not point:
+                  point='|'.join([f'{lat:.5f}',f'{lon:.5f}',clean(row.get('NOMBRE INSTALACION')),clean(row.get('DIRECCIÓN'))])
+              if point not in pts:
+                  pts[point]={
+                    'lat':lat,'lon':lon,
+                    'name':clean(row.get('NOMBRE INSTALACION')) or 'Punto de recarga',
+                    'address':clean(row.get('DIRECCIÓN')),
+                    'municipality':clean(row.get('MUNICIPIO')),
+                    'province':clean(row.get('PROVINCIA')),
+                    'community':clean(row.get('COMUNIDAD AUTONOMA')),
+                    'operator':clean(row.get('NOMBRE OPERADOR')),
+                    'max_kw':0.0,'connectors':set(),'charge_types':set(),'formats':set(),
+                    'access':set(),'payments':set(),'schedule_types':set(),
+                    'last_modified':clean(row.get('FECHA DE ULTIMA MODIFICACION')),
+                    'connector_count':0
+                  }
+              p=pts[point]
+              kw=number(row.get('POTENCIA MAXIMA'))
+              if kw is not None and 0<kw<2000: p['max_kw']=max(p['max_kw'],kw)
+              addset(p,'connectors',row.get('TIPO CONECTOR'))
+              addset(p,'charge_types',row.get('TIPO DE CARGA'))
+              addset(p,'formats',row.get('FORMATO'))
+              addset(p,'access',row.get('ACCESIBILIDAD'))
+              addset(p,'payments',row.get('METODOS DE PAGOS'))
+              addset(p,'schedule_types',row.get('TIPO HORARIO APERTURA'))
+              p['last_modified']=latest(p['last_modified'],clean(row.get('FECHA DE ULTIMA MODIFICACION')))
+              p['connector_count']+=1
+
+          cells=defaultdict(list)
+          for point,p in pts.items():
+              key=f"{math.floor(p['lat'])}_{math.floor(p['lon'])}"
+              cells[key].append([
+                round(p['lat'],6),round(p['lon'],6),p['name'],p['address'],p['municipality'],p['province'],p['community'],p['operator'],
+                round(p['max_kw'],2) if p['max_kw'] else None,p['connector_count'],sorted(p['connectors']),sorted(p['charge_types']),
+                ' · '.join(sorted(p['access'])),' · '.join(sorted(p['payments'])),' · '.join(sorted(p['schedule_types'])),p['last_modified']
+              ])
+
+          # No publica una actualización si el registro llega vacío o anormalmente pequeño.
+          if len(pts)<1000:
+              raise RuntimeError(f'Solo se han podido procesar {len(pts)} puntos; se conserva la copia anterior')
+
+          for old in out.glob('c_*.json'):
+              old.unlink()
+          manifest_cells={}
+          for key,rows in sorted(cells.items()):
+              rows.sort(key=lambda x:(x[5],x[4],x[2]))
+              name=f'c_{key}.json'
+              (out/name).write_text(json.dumps(rows,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+              manifest_cells[key]={'file':name,'count':len(rows)}
+
+          cd=r.headers.get('content-disposition','')
+          m=re.search(r'filename=([^;]+)',cd,re.I)
+          source_file=m.group(1).strip('" ') if m else ''
+          manifest={
+            'version':1,
+            'synced_at':datetime.now(timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z'),
+            'source':'MITECO · Registro de puntos de recarga (RIPREE)',
+            'source_page':SOURCE_PAGE,
+            'source_file':source_file,
+            'cell_degrees':1,
+            'source_rows':source_rows,
+            'total_points':len(pts),
+            'fields':['lat','lon','name','address','municipality','province','community','operator','max_kw','connector_count','connectors','charge_types','access','payment_methods','schedule_type','last_modified'],
+            'cells':manifest_cells
+          }
+          (out/'index.json').write_text(json.dumps(manifest,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+          print(f'Procesadas {source_rows:,} filas -> {len(pts):,} puntos en {len(cells)} celdas')
+          print(f'CSV origen: {source_file or "sin nombre"} ({len(raw)/1024/1024:.1f} MiB)')
+          PY
+      - name: Publicar los datos si han cambiado
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/recarga
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos"
+            exit 0
+          fi
+          git commit -m "Datos: actualizar puntos de recarga MITECO"
+          git push
