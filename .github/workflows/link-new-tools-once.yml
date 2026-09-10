@@ -1,0 +1,91 @@
+name: Link new CosteCoche tools once
+on:
+  push:
+    paths:
+      - '.github/workflows/link-new-tools-once.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add homepage links and sitemap URLs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          cards = '''
+
+      <a class="seo-card" href="calculadora-consumo-real-coche.html">
+        <div class="seo-icon">📐</div>
+        <h3>Consumo real del coche</h3>
+        <p>Calcula tus L/100 km usando kilómetros recorridos y litros repostados.</p>
+        <span class="seo-link">Calcular consumo real →</span>
+      </a>
+
+      <a class="seo-card" href="cuanto-cuesta-llenar-deposito-coche.html">
+        <div class="seo-icon">⛽</div>
+        <h3>Cuánto cuesta llenar el depósito</h3>
+        <p>Calcula litros, coste del repostaje y autonomía estimada.</p>
+        <span class="seo-link">Calcular repostaje →</span>
+      </a>
+
+      <a class="seo-card" href="cuantos-km-puedo-hacer-con-x-euros-gasolina.html">
+        <div class="seo-icon">💶</div>
+        <h3>Km con 20, 50 o 100 €</h3>
+        <p>Convierte un presupuesto de combustible en kilómetros aproximados.</p>
+        <span class="seo-link">Calcular kilómetros →</span>
+      </a>
+
+      <a class="seo-card" href="calculadora-ahorro-gasolinera-barata.html">
+        <div class="seo-icon">🏷️</div>
+        <h3>Ahorro en una gasolinera barata</h3>
+        <p>Compara precios y descuenta incluso el coste de desviarte.</p>
+        <span class="seo-link">Calcular ahorro →</span>
+      </a>
+
+      <a class="seo-card" href="coste-viaje-coche-electrico.html">
+        <div class="seo-icon">⚡</div>
+        <h3>Coste de viaje en coche eléctrico</h3>
+        <p>Calcula kWh, recargas, peajes y coste por persona.</p>
+        <span class="seo-link">Calcular viaje eléctrico →</span>
+      </a>'''
+          if 'calculadora-consumo-real-coche.html' not in text:
+              needle = '''      <a class="seo-card" href="mantener-coche-o-cambiarlo.html">
+        <div class="seo-icon">🔄</div>
+        <h3>Mantener el coche o cambiarlo</h3>
+        <p>Compara el coste anual de tu coche actual frente a uno nuevo.</p>
+        <span class="seo-link">Comparar escenarios →</span>
+      </a>'''
+              if needle not in text:
+                  raise SystemExit('Homepage insertion marker not found')
+              text = text.replace(needle, needle + cards, 1)
+              index.write_text(text, encoding='utf-8')
+
+          sm = Path('sitemap.xml')
+          s = sm.read_text(encoding='utf-8')
+          urls = [
+              'calculadora-consumo-real-coche.html',
+              'cuanto-cuesta-llenar-deposito-coche.html',
+              'cuantos-km-puedo-hacer-con-x-euros-gasolina.html',
+              'calculadora-ahorro-gasolinera-barata.html',
+              'coste-viaje-coche-electrico.html',
+          ]
+          lines = ''.join(f'  <url><loc>https://elvaropablo-oss.github.io/calculadora-coche/{u}</loc><lastmod>2026-09-10</lastmod></url>\n' for u in urls if u not in s)
+          if lines:
+              s = s.replace('</urlset>', lines + '</urlset>')
+              sm.write_text(s, encoding='utf-8')
+          PY
+          rm -f .github/workflows/link-new-tools-once.yml
+      - name: Commit final changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html sitemap.xml .github/workflows/link-new-tools-once.yml
+          git commit -m "SEO: enlazar cinco nuevas calculadoras" || exit 0
+          git push
