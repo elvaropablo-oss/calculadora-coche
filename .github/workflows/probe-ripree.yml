@@ -1,4 +1,4 @@
-name: Probe RIPREE export
+name: Probe charging data
 on:
   push:
     paths:
@@ -9,32 +9,23 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Download public charging-point export
+      - name: Inspect MITECO OGC collections
         shell: bash
         run: |
           set -e
-          BASE='https://energia.serviciosmin.gob.es/Ripree'
-          curl -L -sS -c cookies.txt "$BASE/ExportarInstalaciones/Export" -o page.html
-          curl -L -sS -b cookies.txt -D postheaders.txt \
-            -H 'Content-Type: application/json' \
-            --data '{"soloConsolidado":true}' \
-            "$BASE/ExportarInstalaciones/GenerarExcel" -o export.bin
-          echo '=== POST HEADERS ==='
-          sed -n '1,100p' postheaders.txt
-          echo '=== FILE ==='
-          file export.bin || true
-          wc -c export.bin
-          echo '=== FIRST BYTES/TEXT ==='
+          URL='https://gis.miteco.gob.es/geoserver/ogc/features/v1/collections?f=application/json'
+          curl --max-time 60 -L -sS "$URL" -o collections.json
+          echo 'bytes:' $(wc -c < collections.json)
           python - <<'PY'
-          from pathlib import Path
-          b=Path('export.bin').read_bytes()
-          print(b[:120])
-          for enc in ('utf-8-sig','utf-16','cp1252','latin1'):
-              try:
-                  s=b.decode(enc)
-                  print('ENC',enc)
-                  print(s[:5000])
-                  break
-              except Exception:
-                  pass
+          import json,re
+          d=json.load(open('collections.json',encoding='utf-8'))
+          cols=d.get('collections',[])
+          print('collections',len(cols))
+          for c in cols:
+              text=' '.join(str(c.get(k,'')) for k in ('id','title','description')).lower()
+              if any(w in text for w in ('recarga','carga','electr','vehiculo','vehículo')):
+                  print('MATCH',c.get('id'),'|',c.get('title'),'|',c.get('description','')[:300])
+                  for l in c.get('links',[]):
+                      if l.get('rel') in ('items','self','alternate'):
+                          print('LINK',l)
           PY
