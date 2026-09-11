@@ -31,7 +31,8 @@ function keepLauncherClear(){
   const max=Math.max(16,innerHeight-launcher.offsetHeight-24);
   launcher.style.bottom=`${Math.min(desired,max)}px`;
 }
+function addPortfolioHubLink(){const footer=document.querySelector('footer');if(!footer||footer.querySelector('[data-portfolio-hub]'))return;const host=footer.querySelector('nav')||footer.querySelector('.footer-links')||footer;const a=document.createElement('a');a.href='https://elvaropablo-oss.github.io/';a.textContent='Todas las herramientas';a.dataset.portfolioHub='';a.setAttribute('aria-label','Ver todas las herramientas de la colección');host.appendChild(a)}
 function styles(){if(document.getElementById('ccQualityFixStyles'))return;const s=document.createElement('style');s.id='ccQualityFixStyles';s.textContent=`#cookie.cookie{display:none!important}.cc-price-loaded-note{margin-top:.55rem;padding:.55rem .7rem;border-radius:.65rem;background:#eef4ff;color:#29486f;font-size:.78rem;line-height:1.4}.cc-price-zone-link{color:#1d5fdc!important}.cc-project-launcher{transition:bottom .16s ease}@media print{.cc-project-launcher{display:none!important}}`;document.head.appendChild(s)}
-function init(){styles();loadFuelPrice();keepLauncherClear();addEventListener('scroll',keepLauncherClear,{passive:true});addEventListener('resize',keepLauncherClear);new MutationObserver(keepLauncherClear).observe(document.body,{childList:true,subtree:true})}
+function init(){styles();loadFuelPrice();addPortfolioHubLink();keepLauncherClear();addEventListener('scroll',keepLauncherClear,{passive:true});addEventListener('resize',keepLauncherClear);new MutationObserver(keepLauncherClear).observe(document.body,{childList:true,subtree:true})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
