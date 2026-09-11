@@ -52,4 +52,14 @@ test.describe('Herramientas Exactas hub',()=>{
     for(const url of toolUrls)expect(robotsText).toContain(`Sitemap: ${url}sitemap.xml`);
     const sitemap=await request.get(base+'sitemap.xml');expect(sitemap.ok()).toBeTruthy();const xml=await sitemap.text();expect(xml).toContain('<loc>https://elvaropablo-oss.github.io/</loc>');expect(xml).toContain('<loc>https://elvaropablo-oss.github.io/privacidad.html</loc>');
   });
+
+  test('las diez webs enlazan de vuelta a la colección',async({page},testInfo)=>{
+    test.skip(testInfo.project.name!=='desktop');
+    for(const url of toolUrls){
+      const response=await openSettled(page,url);expect(response?.status()||0,url).toBeLessThan(400);
+      const backlink=page.locator('a[data-portfolio-hub][href="https://elvaropablo-oss.github.io/"]').first();
+      await expect(backlink,`${url}: enlace de vuelta al hub`).toBeVisible();
+      await expect(backlink).toHaveText('Todas las herramientas');
+    }
+  });
 });
