@@ -1,4 +1,5 @@
 const sites = [
+  ['Herramientas Exactas', 'https://elvaropablo-oss.github.io/'],
   ['CosteCoche', 'https://elvaropablo-oss.github.io/calculadora-coche/'],
   ['CuántoMaterial', 'https://elvaropablo-oss.github.io/cuanto-material/'],
   ['HornoExacto', 'https://elvaropablo-oss.github.io/horno-exacto/'],
@@ -106,8 +107,8 @@ for (const [siteName, baseUrl] of sites) {
   }
   if (new Set(urls).size !== urls.length) failures.push(`${siteName}: sitemap contiene URLs duplicadas`);
 
-  // These ten sites are GitHub Project Pages under /repo/. robots.txt is only
-  // authoritative at the origin root (/robots.txt), never at /repo/robots.txt.
+  // The ten tool sites are GitHub Project Pages under /repo/. robots.txt is only
+  // authoritative at the origin root (/robots.txt), supplied by Herramientas Exactas.
   // Per-project crawl directives therefore belong in page robots metadata and
   // sitemap membership, both of which are checked below.
   const titleOwners = new Map();
