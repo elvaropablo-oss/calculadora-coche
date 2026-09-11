@@ -1,0 +1,35 @@
+name: Quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          set -e
+          for file in assets/*.js; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+
+      - name: Check parity integration
+        shell: bash
+        run: |
+          set -e
+          test -f assets/product-parity.js
+          grep -q 'product-parity.js' assets/consent.js
+          grep -q 'costecoche:v1:projects' assets/product-parity.js
+          grep -q "const PARAM='calc'" assets/product-parity.js
+          echo "Parity integration OK"
