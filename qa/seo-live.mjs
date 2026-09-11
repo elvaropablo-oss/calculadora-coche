@@ -106,14 +106,10 @@ for (const [siteName, baseUrl] of sites) {
   }
   if (new Set(urls).size !== urls.length) failures.push(`${siteName}: sitemap contiene URLs duplicadas`);
 
-  try {
-    const { response, text } = await fetchText(`${baseUrl}robots.txt`);
-    if (!response.ok) warnings.push(`${siteName}: robots.txt devuelve ${response.status}`);
-    else if (!/sitemap\s*:/i.test(text)) warnings.push(`${siteName}: robots.txt no declara Sitemap`);
-  } catch (error) {
-    warnings.push(`${siteName}: no se pudo comprobar robots.txt (${error.message})`);
-  }
-
+  // These ten sites are GitHub Project Pages under /repo/. robots.txt is only
+  // authoritative at the origin root (/robots.txt), never at /repo/robots.txt.
+  // Per-project crawl directives therefore belong in page robots metadata and
+  // sitemap membership, both of which are checked below.
   const titleOwners = new Map();
   const descriptionOwners = new Map();
   let checked = 0;
