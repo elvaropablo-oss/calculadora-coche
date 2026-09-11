@@ -290,3 +290,4 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
 })();
+(()=>{if(document.querySelector('script[src*="product-parity.js"]'))return;const s=document.createElement('script');s.src='assets/product-parity.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
