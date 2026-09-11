@@ -65,3 +65,16 @@ jobs:
           path: lighthouse-results
           if-no-files-found: ignore
           retention-days: 14
+
+  seo-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Allow recent Pages deployments to settle
+        run: sleep 180
+      - name: Audit sitemap pages across all ten sites
+        run: node qa/seo-live.mjs
