@@ -41,3 +41,5 @@ function init(){styles();refresh();document.addEventListener('click',e=>{const b
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 (()=>{if(document.querySelector('script[src*="visuals.js"]'))return;const s=document.createElement('script');s.src='assets/visuals.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[src*="fuel-price-actions.js"]'))return;const s=document.createElement('script');s.src='assets/fuel-price-actions.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[src*="quality-fixes.js"]'))return;const s=document.createElement('script');s.src='assets/quality-fixes.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
