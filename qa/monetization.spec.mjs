@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const asset='https://elvaropablo-oss.github.io/assets/monetization.js';
+const disclosure='https://elvaropablo-oss.github.io/afiliacion.html';
 const sites=[
   {slug:'calculadora-coche',url:'https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html'},
   {slug:'cuanto-material',url:'https://elvaropablo-oss.github.io/cuanto-material/pintura-paredes.html'},
@@ -29,6 +30,11 @@ test.describe('Infraestructura de monetización',()=>{
     const code=await response.text();
     expect(code).toContain('rel="sponsored noopener"');
     expect(code).toContain('affiliate_click');
+    expect(code).toContain('approved===true');
+
+    const disclosureResponse=await request.get(disclosure);
+    expect(disclosureResponse.ok()).toBeTruthy();
+    expect(await disclosureResponse.text()).toContain('Afiliación y recomendaciones');
 
     for(const site of sites){
       const pageResponse=await settled(page,site.url);
@@ -48,11 +54,15 @@ test.describe('Infraestructura de monetización',()=>{
     }
   });
 
-  test('una oferta aprobada de prueba se renderiza con aviso y rel sponsored',async({page},testInfo)=>{
+  test('solo una oferta aprobada y segura se renderiza con aviso y rel sponsored',async({page},testInfo)=>{
     test.skip(testInfo.project.name!=='desktop');
     await page.addInitScript(()=>{
       window.HERRAMIENTAS_EXACTAS_AFFILIATE_OVERRIDES={
-        'horno-exacto':{offers:[{id:'qa-offer',merchant:'QA',title:'Oferta de prueba',description:'Solo para validar la infraestructura.',url:'https://example.com/affiliate-test',paths:['escalar-receta'],cta:'Ver opción'}]}
+        'horno-exacto':{offers:[
+          {id:'qa-offer',merchant:'QA',approved:true,title:'Oferta de prueba',description:'Solo para validar la infraestructura.',url:'https://example.com/affiliate-test',paths:['escalar-receta'],cta:'Ver opción'},
+          {id:'not-approved',merchant:'QA',approved:false,title:'No aprobada',url:'https://example.com/no'},
+          {id:'bad-protocol',merchant:'QA',approved:true,title:'Protocolo no seguro',url:'javascript:alert(1)'}
+        ]}
       };
     });
     await settled(page,'https://elvaropablo-oss.github.io/horno-exacto/escalar-receta/');
@@ -60,7 +70,10 @@ test.describe('Infraestructura de monetización',()=>{
     const box=page.locator('.he-affiliate');
     await expect(box).toBeVisible();
     await expect(box).toContainText('podemos recibir una comisión sin coste extra para ti');
-    const link=box.locator('a[data-affiliate-link]').first();
+    await expect(box.getByRole('link',{name:'Cómo funciona'})).toHaveAttribute('href',disclosure);
+    const links=box.locator('a[data-affiliate-link]');
+    await expect(links).toHaveCount(1);
+    const link=links.first();
     await expect(link).toHaveAttribute('href','https://example.com/affiliate-test');
     await expect(link).toHaveAttribute('rel',/sponsored/);
     await expect(link).toHaveAttribute('rel',/noopener/);
