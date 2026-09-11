@@ -49,7 +49,7 @@ async function settledGoto(page,url){
 
 async function dismissConsent(page){
   for(let pass=0;pass<3;pass++){
-    const reject=page.getByRole('button',{name:/^Rechazar(?: no necesarias)?$/i}).filter({visible:true}).first();
+    const reject=page.getByRole('button',{name:/^Rechazar(?: no necesarias)?$/i}).first();
     if(!await reject.isVisible().catch(()=>false))break;
     await reject.click();
     await page.waitForTimeout(120);
