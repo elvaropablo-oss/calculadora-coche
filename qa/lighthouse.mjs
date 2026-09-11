@@ -3,6 +3,8 @@ import * as chromeLauncher from 'chrome-launcher';
 import { mkdir, writeFile } from 'node:fs/promises';
 
 const targets = [
+  ['hub-home','https://elvaropablo-oss.github.io/'],
+  ['hub-privacy','https://elvaropablo-oss.github.io/privacidad.html'],
   ['costecoche-home','https://elvaropablo-oss.github.io/calculadora-coche/'],
   ['costecoche-tool','https://elvaropablo-oss.github.io/calculadora-coche/cuanto-gasto-gasolina-al-mes.html'],
   ['material-home','https://elvaropablo-oss.github.io/cuanto-material/'],
