@@ -47,6 +47,15 @@ async function settledGoto(page,url){
   return response;
 }
 
+async function dismissConsent(page){
+  for(let pass=0;pass<3;pass++){
+    const reject=page.getByRole('button',{name:/^Rechazar(?: no necesarias)?$/i}).filter({visible:true}).first();
+    if(!await reject.isVisible().catch(()=>false))break;
+    await reject.click();
+    await page.waitForTimeout(120);
+  }
+}
+
 async function fillEmptyNumbers(form){
   const inputs=form.locator('input[type="number"]');
   for(let i=0;i<await inputs.count();i++){
@@ -65,6 +74,12 @@ async function assertNoOverflow(page,label){
   expect(overflow.scroll,`${label}: overflow horizontal ${overflow.scroll}-${overflow.client}px`).toBeLessThanOrEqual(overflow.client+3);
 }
 
+async function assertAxe(page,label){
+  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  const serious=axe.violations.filter(v=>['critical','serious'].includes(v.impact));
+  expect(serious,`${label}: ${serious.map(v=>`${v.id} (${v.nodes.length})`).join(', ')}`).toEqual([]);
+}
+
 async function attachScreenshot(page,testInfo,name){
   const shot=await page.screenshot({fullPage:true});
   await testInfo.attach(name,{body:shot,contentType:'image/png'});
@@ -78,9 +93,7 @@ for(const site of sites){
       expect(response?.status()||0).toBeLessThan(400);
       await expect(page.locator('h1').first()).toBeVisible();
       await assertNoOverflow(page,site.name);
-      const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
-      const serious=axe.violations.filter(v=>['critical','serious'].includes(v.impact));
-      expect(serious,`${site.name}: ${serious.map(v=>`${v.id} (${v.nodes.length})`).join(', ')}`).toEqual([]);
+      await assertAxe(page,site.name);
       expect(errors.pageErrors,`${site.name}: pageerror`).toEqual([]);
       expect(errors.consoleErrors,`${site.name}: console.error`).toEqual([]);
       expect(errors.badLocalResponses,`${site.name}: recursos locales >=400`).toEqual([]);
@@ -106,6 +119,7 @@ test.describe('Regresiones y flujos críticos',()=>{
     await context.grantPermissions(['clipboard-read','clipboard-write'],{origin:'https://elvaropablo-oss.github.io'});
     const errors=monitor(page);
     await settledGoto(page,sites[0].base+'cuanto-gasto-gasolina-al-mes.html?price=1.649&fuel=gasolina&priceType=media&source=precios-region');
+    await dismissConsent(page);
     await expect(page.locator('#precio')).toHaveValue('1.649');
     await page.locator('#km').fill('1250');
     await page.locator('#consumo').fill('6.2');
@@ -124,6 +138,9 @@ test.describe('Regresiones y flujos críticos',()=>{
     test.skip(testInfo.project.name!=='desktop');
     const errors=monitor(page);
     await settledGoto(page,sites[1].base+'reforma-habitacion.html');
+    await dismissConsent(page);
+    await page.locator('#modePlan').click();
+    await expect(page.locator('#planMode')).toBeVisible();
     const preset=page.locator('#fpPresetL');
     await expect(preset).toBeVisible();
     await preset.click();
@@ -162,6 +179,7 @@ test.describe('Regresiones y flujos críticos',()=>{
       await page.addInitScript(()=>{window.print=()=>{window.__qaPrintCalled=true;};});
       const errors=monitor(page);
       await settledGoto(page,new URL(site.tool,site.base).href);
+      await dismissConsent(page);
       const form=page.locator('form').first();
       await expect(form).toBeVisible();
       await fillEmptyNumbers(form);
@@ -218,7 +236,7 @@ test.describe('Regresiones y flujos críticos',()=>{
     test.skip(testInfo.project.name!=='desktop');
     for(const site of sites){
       await settledGoto(page,site.base);
-      const accept=page.getByRole('button',{name:/Aceptar (analítica|Analytics)/i}).first();
+      const accept=page.getByRole('button',{name:/Aceptar (todas|analítica|Analytics)/i}).first();
       await expect(accept,`${site.name}: consentimiento en sesión limpia`).toBeVisible();
       const gaBefore=await page.evaluate(()=>performance.getEntriesByType('resource').some(r=>r.name.includes('googletagmanager.com/gtag/js')));
       expect(gaBefore,`${site.name}: Analytics cargado antes de aceptar`).toBeFalsy();
