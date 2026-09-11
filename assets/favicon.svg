@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CosteCoche">
-  <rect width="64" height="64" rx="18" fill="#1769e0"/>
-  <g transform="translate(0 -4)">
-    <path d="M18 39h28l-3-11c-1-4-4-6-8-6h-6c-4 0-7 2-8 6l-3 11Z" fill="white"/>
-    <path d="M15 39h34v8a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4H25a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4v-8Z" fill="white"/>
-    <circle cx="23" cy="41" r="3" fill="#1769e0"/>
-    <circle cx="41" cy="41" r="3" fill="#1769e0"/>
-  </g>
-</svg>

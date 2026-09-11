@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://elvaropablo-oss.github.io/sitemap.xml
 Sitemap: https://elvaropablo-oss.github.io/calculadora-coche/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/cuanto-material/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/horno-exacto/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/teje-con-medida/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/imprime-medido/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/escala-clara/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/cuelga-medido/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/estante-medido/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/embala-exacto/sitemap.xml
+Sitemap: https://elvaropablo-oss.github.io/tierra-exacta/sitemap.xml

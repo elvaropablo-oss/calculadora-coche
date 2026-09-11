@@ -1,12 +1,15 @@
-# CosteCoche
+# Herramientas Exactas — staging
 
-Sitio estático de calculadoras de costes de automóvil publicado con GitHub Pages.
+Portada madre preparada para publicarse en el repositorio especial `elvaropablo-oss/elvaropablo-oss.github.io`.
 
-## SEO y estructura
-- `sitemap.xml` contiene solo URLs canónicas e indexables.
-- `robots.txt` apunta al sitemap.
-- `viaje.html`, `combustible.html` y `renting-o-comprar.html` son URLs antiguas que redirigen a sus versiones canónicas.
-- No eliminar `google2d20e7a6f29de9ef.html`: verifica la propiedad de Google Search Console.
+## Contenido
 
-## Analítica
-Google Analytics se carga únicamente después del consentimiento del usuario. La preferencia se guarda en `localStorage` con la clave `costecoche_privacy_v2`.
+- `index.html`: directorio accesible de las 10 herramientas.
+- `styles.css`: estilos responsivos sin dependencias externas.
+- `privacidad.html`: política específica de la portada.
+- `404.html`: página de error.
+- `robots.txt`: archivo raíz del host con los 11 sitemaps (portada + 10 proyectos).
+- `sitemap.xml`: sitemap de la portada.
+- `favicon.svg`: icono de la colección.
+
+No incorpora analítica propia en esta primera versión. Antes de activar analítica, debe añadirse consentimiento y actualizarse privacidad.

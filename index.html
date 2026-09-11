@@ -1,948 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>CosteCoche | Calculadoras para saber cuánto cuesta tu coche</title>
-  <meta name="description" content="Calcula combustible, viajes, coste por kilómetro, coste total, mantenimiento y compara renting frente a comprar coche.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Herramientas Exactas: 10 calculadoras útiles y gratuitas</title>
+  <meta name="description" content="Diez herramientas gratuitas para calcular costes de coche, materiales, recetas, impresión, escalas, cuadros, estantes, embalaje y sustrato.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://elvaropablo-oss.github.io/calculadora-coche/">
-  <meta name="theme-color" content="#2a6df2">
+  <link rel="canonical" href="https://elvaropablo-oss.github.io/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
-  <meta property="og:title" content="CosteCoche | Calculadoras para saber cuánto cuesta tu coche">
-  <meta property="og:description" content="Calcula combustible, viajes, coste por kilómetro, coste total, mantenimiento y compara renting frente a comprar coche.">
-  <meta property="og:url" content="https://elvaropablo-oss.github.io/calculadora-coche/">
+  <meta property="og:title" content="Herramientas Exactas: 10 calculadoras útiles y gratuitas">
+  <meta property="og:description" content="Calculadoras prácticas para coche, obra, cocina, impresión, hogar, embalaje y jardín.">
+  <meta property="og:url" content="https://elvaropablo-oss.github.io/">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/home.css">
-
+  <meta name="twitter:title" content="Herramientas Exactas">
+  <meta name="twitter:description" content="Diez calculadoras gratuitas para resolver problemas concretos con resultados explicados.">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"CosteCoche",
-    "url":"https://elvaropablo-oss.github.io/calculadora-coche/",
-    "inLanguage":"es"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"¿Los resultados son exactos?","acceptedAnswer":{"@type":"Answer","text":"Son estimaciones matemáticas basadas en los datos introducidos. El consumo, mantenimiento, precio del combustible y valor de reventa reales pueden variar."}},
-      {"@type":"Question","name":"¿Se guardan los números que introduzco?","acceptedAnswer":{"@type":"Answer","text":"Los cálculos se realizan directamente en el navegador y no requieren registro."}},
-      {"@type":"Question","name":"¿Para qué sirven las páginas específicas?","acceptedAnswer":{"@type":"Answer","text":"Cada página se centra en una pregunta concreta e incluye calculadora, explicación y ejemplos relacionados."}}
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "name":"Herramientas Exactas",
+        "url":"https://elvaropablo-oss.github.io/",
+        "inLanguage":"es-ES",
+        "description":"Colección de diez calculadoras gratuitas para problemas cotidianos de coche, materiales, cocina, impresión, hogar, embalaje y jardín."
+      },
+      {
+        "@type":"ItemList",
+        "name":"Herramientas disponibles",
+        "numberOfItems":10,
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"url":"https://elvaropablo-oss.github.io/calculadora-coche/","name":"CosteCoche"},
+          {"@type":"ListItem","position":2,"url":"https://elvaropablo-oss.github.io/cuanto-material/","name":"CuántoMaterial"},
+          {"@type":"ListItem","position":3,"url":"https://elvaropablo-oss.github.io/horno-exacto/","name":"HornoExacto"},
+          {"@type":"ListItem","position":4,"url":"https://elvaropablo-oss.github.io/teje-con-medida/","name":"TejeConMedida"},
+          {"@type":"ListItem","position":5,"url":"https://elvaropablo-oss.github.io/imprime-medido/","name":"ImprimeMedido"},
+          {"@type":"ListItem","position":6,"url":"https://elvaropablo-oss.github.io/escala-clara/","name":"EscalaClara"},
+          {"@type":"ListItem","position":7,"url":"https://elvaropablo-oss.github.io/cuelga-medido/","name":"CuelgaMedido"},
+          {"@type":"ListItem","position":8,"url":"https://elvaropablo-oss.github.io/estante-medido/","name":"EstanteMedido"},
+          {"@type":"ListItem","position":9,"url":"https://elvaropablo-oss.github.io/embala-exacto/","name":"EmbalaExacto"},
+          {"@type":"ListItem","position":10,"url":"https://elvaropablo-oss.github.io/tierra-exacta/","name":"TierraExacta"}
+        ]
+      }
     ]
   }
   </script>
-
-  <!-- CosteCoche privacy bootstrap v3: sincroniza el consentimiento antes de cualquier cargador antiguo de Analytics -->
-  <script id="cc-consent-bootstrap">(()=>{const G="G-EZJ4866V6M",K="costecoche_consent_v3",L="costecoche_privacy_v2",MAX=31536000000;try{let c=localStorage.getItem(L),r=localStorage.getItem(K);if(r){const s=JSON.parse(r);if(s&&s.version===3&&typeof s.analytics==="boolean"&&Date.now()-Number(s.updatedAt)<=MAX){c=s.analytics?"accepted":"rejected";localStorage.setItem(L,c)}else{localStorage.removeItem(K);localStorage.removeItem(L);c=null}}window["ga-disable-"+G]=c!=="accepted"}catch(e){window["ga-disable-"+G]=true}})();</script>
-  <link rel="stylesheet" href="assets/consent.css">
-  <script src="assets/consent.js" defer></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#herramientas">Ir a las herramientas</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="/" aria-label="Herramientas Exactas, inicio"><span class="brand-mark" aria-hidden="true">↗</span><span>Herramientas Exactas</span></a>
+      <nav aria-label="Principal">
+        <a href="#herramientas">Herramientas</a>
+        <a href="#como-funciona">Cómo funcionan</a>
+        <a href="/privacidad.html">Privacidad</a>
+      </nav>
+    </div>
+  </header>
 
-<header class="topbar">
-  <div class="container topbar-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-logo">€</span>
-      <span>CosteCoche</span>
-    </a>
-
-    <nav class="nav-links" aria-label="Navegación principal">
-      <a href="#calculadoras">Calculadoras</a>
-      <a href="#guias">Guías</a>
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-<section class="hero">
-  <div class="container hero-grid">
-
-    <div>
-      <span class="badge">Calculadoras gratuitas · Sin registro</span>
-
-      <h1>Calcula cuánto te cuesta de verdad usar tu coche</h1>
-
-      <p class="lead">
-        Combustible, viajes, comparación entre coches, coste total y renting frente a compra.
-        Todo explicado de forma clara y con herramientas fáciles de usar.
-      </p>
-
-      <div class="pills">
-        <span class="pill">Resultados instantáneos</span>
-        <span class="pill">Diseñada para móvil</span>
-        <span class="pill">Tus cálculos se hacen en el navegador</span>
+  <main>
+    <section class="hero shell">
+      <p class="eyebrow">10 herramientas · gratuitas · sin registro</p>
+      <h1>Calculadoras claras para problemas que sí tienes</h1>
+      <p class="hero-copy">Costes de coche, materiales para una reforma, cantidades de una receta, medidas de impresión, colocación de cuadros, embalaje o litros de sustrato. Elige el problema y entra directamente en la herramienta.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#herramientas">Ver las 10 herramientas</a>
+        <a class="button button-secondary" href="#como-funciona">Qué tienen en común</a>
       </div>
-    </div>
-
-    <div class="hero-card">
-      <div class="hero-label">Ejemplo · 15.000 km/año · 6,2 L/100 km · 1,65 €/L</div>
-      <div class="hero-value">1.534,50 €/año</div>
-      <div>Una forma rápida de convertir consumo y kilómetros en dinero real.</div>
-
-      <div class="hero-mini">
-        <div>
-          <span class="hero-label">Media mensual</span>
-          <strong>127,88 €</strong>
-        </div>
-        <div>
-          <span class="hero-label">Coste / 100 km</span>
-          <strong>10,23 €</strong>
-        </div>
+      <div class="trust-row" aria-label="Características de la colección">
+        <span>Resultados explicados</span><span>Enlaces compartibles</span><span>Proyectos guardables</span><span>Diseño móvil</span>
       </div>
-    </div>
+    </section>
 
-  </div>
-</section>
+    <section class="shell categories" aria-labelledby="elige-problema">
+      <div class="section-heading">
+        <p class="eyebrow">Empieza por aquí</p>
+        <h2 id="elige-problema">¿Qué quieres resolver?</h2>
+      </div>
+      <div class="category-grid">
+        <a href="#movilidad"><strong>Coche y movilidad</strong><span>Consumo, coste real y comparaciones</span></a>
+        <a href="#hogar"><strong>Obra y hogar</strong><span>Materiales, cuadros y estanterías</span></a>
+        <a href="#crear"><strong>Cocina y manualidades</strong><span>Recetas, moldes y tejido</span></a>
+        <a href="#medir"><strong>Impresión y escalas</strong><span>Medidas físicas, DPI y planos</span></a>
+        <a href="#logistica"><strong>Embalaje y jardín</strong><span>Cajas, peso volumétrico y sustrato</span></a>
+      </div>
+    </section>
 
-
-<section class="section">
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">Qué puedes calcular</div>
-      <h2>Una web, varias herramientas</h2>
-      <p class="sub">
-        Abre únicamente el cálculo que necesites. No tienes que navegar entre formularios enormes ni rellenar datos que no te interesan.
-      </p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⛽</div>
-        <h3>Combustible</h3>
-        <p>Gasto anual, mensual, litros y coste por kilómetro.</p>
+    <section id="herramientas" class="shell tools-section" aria-labelledby="todas-herramientas">
+      <div class="section-heading">
+        <p class="eyebrow">La colección completa</p>
+        <h2 id="todas-herramientas">Diez webs, diez problemas concretos</h2>
+        <p>No hay una herramienta “principal”: cada web está especializada y enlaza sus cálculos, fórmulas y proyectos dentro de su propio contexto.</p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">🛣️</div>
-        <h3>Viajes</h3>
-        <p>Combustible, peajes y coste por persona.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🚗</div>
-        <h3>Comparar coches</h3>
-        <p>Comprueba cuánto ahorra el vehículo más eficiente.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Coste real</h3>
-        <p>Depreciación, seguro, mantenimiento y más.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<section class="section" id="calculadoras">
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">Calculadoras rápidas</div>
-      <h2>Elige una función</h2>
-      <p class="sub">Cada apartado se abre de forma independiente.</p>
-    </div>
-
-    <div class="accordion">
-
-      <!-- COMBUSTIBLE -->
-      <details class="tool" open>
-        <summary class="tool-summary">
-          <div class="tool-left">
-            <div class="tool-icon">⛽</div>
-            <div>
-              <div class="tool-title">Coste de combustible</div>
-              <div class="tool-desc">Gasto mensual, anual y por kilómetro.</div>
-            </div>
-          </div>
-          <div class="chevron">⌄</div>
-        </summary>
-
-        <div class="tool-body">
-          <p class="tool-intro">
-            Introduce tus kilómetros anuales, consumo y precio por litro.
-          </p>
-
-          <div class="calculator">
-            <div class="form-card">
-              <div class="fields">
-                <div class="field">
-                  <label for="fuelKm">Kilómetros al año</label>
-                  <input id="fuelKm" type="number" min="0" step="100" placeholder="Ej: 15000">
-                </div>
-
-                <div class="field">
-                  <label for="fuelCons">Consumo (L/100 km)</label>
-                  <input id="fuelCons" type="number" min="0" step=".1" placeholder="Ej: 6.2">
-                </div>
-
-                <div class="field full">
-                  <label for="fuelPrice">Precio combustible (€/L)</label>
-                  <input id="fuelPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn-primary" onclick="calcFuel()">Calcular</button>
-                <button class="btn btn-secondary" onclick="clearFuel()">Limpiar</button>
-              </div>
-            </div>
-
-            <div class="result-card">
-              <h3>Resultado</h3>
-              <p>Estimación únicamente de combustible.</p>
-
-              <div class="results">
-                <div class="result-item main">
-                  <div class="result-label">Coste anual</div>
-                  <div class="result-value" id="fuelAnnual">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coste mensual</div>
-                  <div class="result-value" id="fuelMonthly">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Litros/año</div>
-                  <div class="result-value" id="fuelLiters">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coste/100 km</div>
-                  <div class="result-value" id="fuel100">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coste/km</div>
-                  <div class="result-value" id="fuelPerKm">—</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-
-      <!-- VIAJE -->
-      <details class="tool">
-        <summary class="tool-summary">
-          <div class="tool-left">
-            <div class="tool-icon">🛣️</div>
-            <div>
-              <div class="tool-title">Coste de un viaje</div>
-              <div class="tool-desc">Combustible, peajes y reparto entre pasajeros.</div>
-            </div>
-          </div>
-          <div class="chevron">⌄</div>
-        </summary>
-
-        <div class="tool-body">
-          <p class="tool-intro">Introduce la distancia total del trayecto.</p>
-
-          <div class="calculator">
-            <div class="form-card">
-              <div class="fields">
-                <div class="field">
-                  <label for="tripKm">Distancia total (km)</label>
-                  <input id="tripKm" type="number" min="0" step="1" placeholder="Ej: 650">
-                </div>
-
-                <div class="field">
-                  <label for="tripCons">Consumo (L/100 km)</label>
-                  <input id="tripCons" type="number" min="0" step=".1" placeholder="Ej: 6.2">
-                </div>
-
-                <div class="field">
-                  <label for="tripPrice">Combustible (€/L)</label>
-                  <input id="tripPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65">
-                </div>
-
-                <div class="field">
-                  <label for="tripTolls">Peajes (€)</label>
-                  <input id="tripTolls" type="number" min="0" step=".01" value="0">
-                </div>
-
-                <div class="field full">
-                  <label for="tripPeople">Personas</label>
-                  <input id="tripPeople" type="number" min="1" step="1" value="2">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn-primary" onclick="calcTrip()">Calcular viaje</button>
-                <button class="btn btn-secondary" onclick="clearTrip()">Limpiar</button>
-              </div>
-            </div>
-
-            <div class="result-card">
-              <h3>Resultado</h3>
-              <p>Combustible más peajes.</p>
-
-              <div class="results">
-                <div class="result-item main">
-                  <div class="result-label">Coste total</div>
-                  <div class="result-value" id="tripTotal">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Combustible</div>
-                  <div class="result-value" id="tripFuel">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Por persona</div>
-                  <div class="result-value" id="tripPerson">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Litros</div>
-                  <div class="result-value" id="tripLiters">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coste/100 km</div>
-                  <div class="result-value" id="trip100">—</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-
-      <!-- COMPARAR -->
-      <details class="tool">
-        <summary class="tool-summary">
-          <div class="tool-left">
-            <div class="tool-icon">↔️</div>
-            <div>
-              <div class="tool-title">Comparar dos coches</div>
-              <div class="tool-desc">Compara el gasto anual de combustible.</div>
-            </div>
-          </div>
-          <div class="chevron">⌄</div>
-        </summary>
-
-        <div class="tool-body">
-          <p class="tool-intro">Comprueba cuánto puede ahorrar el coche más eficiente.</p>
-
-          <div class="calculator">
-            <div class="form-card">
-              <div class="fields">
-                <div class="field">
-                  <label for="cmpKm">Kilómetros/año</label>
-                  <input id="cmpKm" type="number" min="0" step="100" placeholder="Ej: 15000">
-                </div>
-
-                <div class="field">
-                  <label for="cmpPrice">Combustible (€/L)</label>
-                  <input id="cmpPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65">
-                </div>
-
-                <div class="field">
-                  <label for="cmpA">Coche A (L/100 km)</label>
-                  <input id="cmpA" type="number" min="0" step=".1" placeholder="Ej: 5.5">
-                </div>
-
-                <div class="field">
-                  <label for="cmpB">Coche B (L/100 km)</label>
-                  <input id="cmpB" type="number" min="0" step=".1" placeholder="Ej: 7.0">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn-primary" onclick="calcCompare()">Comparar</button>
-                <button class="btn btn-secondary" onclick="clearCompare()">Limpiar</button>
-              </div>
-            </div>
-
-            <div class="result-card">
-              <h3>Comparación</h3>
-              <p>Gasto anual estimado.</p>
-
-              <div class="results">
-                <div class="result-item">
-                  <div class="result-label">Coche A</div>
-                  <div class="result-value" id="cmpCostA">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coche B</div>
-                  <div class="result-value" id="cmpCostB">—</div>
-                </div>
-
-                <div class="result-item main">
-                  <div class="result-label">Ahorro anual</div>
-                  <div class="result-value" id="cmpSaving">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Más económico</div>
-                  <div class="result-value" id="cmpWinner">—</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-
-      <!-- COSTE TOTAL -->
-      <details class="tool">
-        <summary class="tool-summary">
-          <div class="tool-left">
-            <div class="tool-icon">📊</div>
-            <div>
-              <div class="tool-title">Coste total del coche</div>
-              <div class="tool-desc">Incluye depreciación, combustible, seguro y mantenimiento.</div>
-            </div>
-          </div>
-          <div class="chevron">⌄</div>
-        </summary>
-
-        <div class="tool-body">
-          <p class="tool-intro">Una estimación más completa del coste de propiedad.</p>
-
-          <div class="calculator">
-            <div class="form-card">
-              <div class="fields">
-                <div class="field">
-                  <label for="tcoBuy">Precio de compra (€)</label>
-                  <input id="tcoBuy" type="number" min="0" step="100" placeholder="Ej: 28000">
-                </div>
-
-                <div class="field">
-                  <label for="tcoResale">Valor de reventa (€)</label>
-                  <input id="tcoResale" type="number" min="0" step="100" placeholder="Ej: 13000">
-                </div>
-
-                <div class="field">
-                  <label for="tcoYears">Años</label>
-                  <input id="tcoYears" type="number" min="1" step="1" placeholder="Ej: 5">
-                </div>
-
-                <div class="field">
-                  <label for="tcoKm">Kilómetros/año</label>
-                  <input id="tcoKm" type="number" min="0" step="100" placeholder="Ej: 15000">
-                </div>
-
-                <div class="field">
-                  <label for="tcoCons">Consumo (L/100 km)</label>
-                  <input id="tcoCons" type="number" min="0" step=".1" placeholder="Ej: 6.2">
-                </div>
-
-                <div class="field">
-                  <label for="tcoPrice">Combustible (€/L)</label>
-                  <input id="tcoPrice" type="number" min="0" step=".01" placeholder="Ej: 1.65">
-                </div>
-
-                <div class="field">
-                  <label for="tcoInsurance">Seguro/año (€)</label>
-                  <input id="tcoInsurance" type="number" min="0" step="10" placeholder="Ej: 650">
-                </div>
-
-                <div class="field">
-                  <label for="tcoMaint">Mantenimiento/año (€)</label>
-                  <input id="tcoMaint" type="number" min="0" step="10" placeholder="Ej: 500">
-                </div>
-
-                <div class="field full">
-                  <label for="tcoTax">Impuestos + ITV/año (€)</label>
-                  <input id="tcoTax" type="number" min="0" step="10" placeholder="Ej: 150">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn-primary" onclick="calcTco()">Calcular coste total</button>
-                <button class="btn btn-secondary" onclick="clearTco()">Limpiar</button>
-              </div>
-            </div>
-
-            <div class="result-card">
-              <h3>Resultado</h3>
-              <p>Coste del periodo completo.</p>
-
-              <div class="results">
-                <div class="result-item main">
-                  <div class="result-label">Coste total</div>
-                  <div class="result-value" id="tcoTotal">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Media mensual</div>
-                  <div class="result-value" id="tcoMonthly">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Coste/km</div>
-                  <div class="result-value" id="tcoPerKm">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Depreciación</div>
-                  <div class="result-value" id="tcoDep">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Combustible</div>
-                  <div class="result-value" id="tcoFuel">—</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-
-      <!-- RENTING VS COMPRA -->
-      <details class="tool">
-        <summary class="tool-summary">
-          <div class="tool-left">
-            <div class="tool-icon">🔑</div>
-            <div>
-              <div class="tool-title">Renting vs comprar</div>
-              <div class="tool-desc">Compara ambos escenarios en el mismo plazo.</div>
-            </div>
-          </div>
-          <div class="chevron">⌄</div>
-        </summary>
-
-        <div class="tool-body">
-          <p class="tool-intro">Compara cuotas de renting frente a depreciación y gastos de compra.</p>
-
-          <div class="calculator">
-            <div class="form-card">
-              <div class="fields">
-                <div class="field">
-                  <label for="rbYears">Años</label>
-                  <input id="rbYears" type="number" min="1" step="1" placeholder="Ej: 4">
-                </div>
-
-                <div class="field">
-                  <label for="rbRent">Renting/mes (€)</label>
-                  <input id="rbRent" type="number" min="0" step="1" placeholder="Ej: 380">
-                </div>
-
-                <div class="field">
-                  <label for="rbBuy">Precio compra (€)</label>
-                  <input id="rbBuy" type="number" min="0" step="100" placeholder="Ej: 22000">
-                </div>
-
-                <div class="field">
-                  <label for="rbResale">Reventa (€)</label>
-                  <input id="rbResale" type="number" min="0" step="100" placeholder="Ej: 12000">
-                </div>
-
-                <div class="field">
-                  <label for="rbInsurance">Seguro/año (€)</label>
-                  <input id="rbInsurance" type="number" min="0" step="10" placeholder="Ej: 600">
-                </div>
-
-                <div class="field">
-                  <label for="rbMaint">Mantenimiento/año (€)</label>
-                  <input id="rbMaint" type="number" min="0" step="10" placeholder="Ej: 500">
-                </div>
-
-                <div class="field full">
-                  <label for="rbTax">Impuestos + ITV/año (€)</label>
-                  <input id="rbTax" type="number" min="0" step="10" placeholder="Ej: 150">
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="btn btn-primary" onclick="calcRentBuy()">Comparar</button>
-                <button class="btn btn-secondary" onclick="clearRentBuy()">Limpiar</button>
-              </div>
-            </div>
-
-            <div class="result-card">
-              <h3>Resultado</h3>
-              <p>Comparación económica del periodo.</p>
-
-              <div class="results">
-                <div class="result-item main">
-                  <div class="result-label">Opción más barata</div>
-                  <div class="result-value" id="rbWinner">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Renting total</div>
-                  <div class="result-value" id="rbRentTotal">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Compra total</div>
-                  <div class="result-value" id="rbBuyTotal">—</div>
-                </div>
-
-                <div class="result-item">
-                  <div class="result-label">Diferencia</div>
-                  <div class="result-value" id="rbDiff">—</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-
-
-<section class="section" id="movilidad-directo">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Datos y mapas</div>
-      <h2>Antes de repostar o recargar</h2>
-      <p class="sub">Consulta precios oficiales, encuentra gasolineras cercanas o localiza puntos de carga compatibles con tu coche eléctrico.</p>
-    </div>
-    <div class="seo-grid">
-      <a class="seo-card" href="precios-combustible-espana.html"><div class="seo-icon">📍</div><h3>Precios por provincia</h3><p>Compara gasolina 95 y diésel con datos oficiales.</p><span class="seo-link">Ver precios →</span></a>
-      <a class="seo-card" href="gasolineras-cerca-de-mi.html"><div class="seo-icon">⛽</div><h3>Gasolineras cerca de mí</h3><p>Busca las estaciones más baratas dentro del radio que elijas.</p><span class="seo-link">Buscar gasolineras →</span></a>
-      <a class="seo-card" href="puntos-recarga-cerca-de-mi.html"><div class="seo-icon">⚡</div><h3>Puntos de carga cerca de mí</h3><p>Filtra cargadores por distancia, potencia y conector.</p><span class="seo-link">Buscar cargadores →</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- NUEVA SECCIÓN: ENLACES A LAS 5 PÁGINAS -->
-<section class="section" id="guias">
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">Guías y calculadoras específicas</div>
-      <h2>¿Quieres profundizar en un cálculo?</h2>
-      <p class="sub">
-        Estas páginas están dedicadas a búsquedas y situaciones concretas. Incluyen su propia calculadora, explicación y ejemplos.
-      </p>
-    </div>
-
-    <div class="seo-grid">
-
-      <a class="seo-card" href="gasolineras-cerca-de-mi.html">
-        <div class="seo-icon">📍</div>
-        <h3>Gasolineras baratas cerca de mí</h3>
-        <p>Usa tu ubicación bajo demanda para comparar precios oficiales y distancia.</p>
-        <span class="seo-link">Buscar gasolineras →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-gasto-gasolina-al-mes.html">
-        <div class="seo-icon">⛽</div>
-        <h3>¿Cuánto gasto en gasolina al mes?</h3>
-        <p>Introduce tus kilómetros mensuales, consumo y precio por litro.</p>
-        <span class="seo-link">Abrir calculadora →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-cuesta-un-viaje-en-coche.html">
-        <div class="seo-icon">🛣️</div>
-        <h3>¿Cuánto cuesta un viaje en coche?</h3>
-        <p>Calcula combustible, peajes, otros gastos y coste por persona.</p>
-        <span class="seo-link">Calcular viaje →</span>
-      </a>
-
-      <a class="seo-card" href="coste-por-kilometro-coche.html">
-        <div class="seo-icon">📏</div>
-        <h3>Coste real por kilómetro</h3>
-        <p>Añade seguro, mantenimiento, impuestos y depreciación.</p>
-        <span class="seo-link">Calcular coste/km →</span>
-      </a>
-
-      <a class="seo-card" href="renting-o-comprar-coche.html">
-        <div class="seo-icon">🔑</div>
-        <h3>Renting o comprar coche</h3>
-        <p>Compara ambos escenarios incluyendo reventa y gastos asociados.</p>
-        <span class="seo-link">Comparar opciones →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-cuesta-mantener-un-coche-al-ano.html">
-        <div class="seo-icon">🧾</div>
-        <h3>Coste de mantener un coche al año</h3>
-        <p>Suma seguro, revisiones, neumáticos, impuestos y combustible.</p>
-        <span class="seo-link">Calcular coste al año →</span>
-      </a>
-
-      <a class="seo-card" href="gasolina-o-diesel.html">
-        <div class="seo-icon">⛽</div>
-        <h3>Gasolina o diésel</h3>
-        <p>Compara cuánto gastarías al año con cada combustible.</p>
-        <span class="seo-link">Comparar combustibles →</span>
-      </a>
-
-      <a class="seo-card" href="hibrido-o-gasolina.html">
-        <div class="seo-icon">♻️</div>
-        <h3>Híbrido o gasolina</h3>
-        <p>Calcula el ahorro anual y cuánto tardas en amortizar el híbrido.</p>
-        <span class="seo-link">Comparar opciones →</span>
-      </a>
-
-      <a class="seo-card" href="electrico-o-gasolina.html">
-        <div class="seo-icon">⚡</div>
-        <h3>Eléctrico o gasolina</h3>
-        <p>Compara el coste energético por 100 km y la amortización.</p>
-        <span class="seo-link">Comparar costes →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-financiacion-coche.html">
-        <div class="seo-icon">💳</div>
-        <h3>Financiación de coche</h3>
-        <p>Calcula cuota mensual, intereses y coste total del préstamo.</p>
-        <span class="seo-link">Calcular financiación →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-depreciacion-coche.html">
-        <div class="seo-icon">📉</div>
-        <h3>Depreciación del coche</h3>
-        <p>Estima cuánto valor puede perder el coche con los años.</p>
-        <span class="seo-link">Calcular depreciación →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-cuesta-tener-un-coche-al-mes.html">
-        <div class="seo-icon">💶</div>
-        <h3>Coste de tener un coche al mes</h3>
-        <p>Suma combustible, seguro, financiación, mantenimiento y aparcamiento.</p>
-        <span class="seo-link">Calcular coste mensual →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-cuesta-cargar-coche-electrico-en-casa.html">
-        <div class="seo-icon">🔌</div>
-        <h3>Cargar un coche eléctrico en casa</h3>
-        <p>Calcula el coste de una recarga y el precio por cada 100 km.</p>
-        <span class="seo-link">Calcular carga →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-autonomia-deposito-coche.html">
-        <div class="seo-icon">⛽</div>
-        <h3>Autonomía de un depósito</h3>
-        <p>Calcula cuántos kilómetros puedes recorrer según depósito y consumo.</p>
-        <span class="seo-link">Calcular autonomía →</span>
-      </a>
-
-      <a class="seo-card" href="cuantos-litros-necesito-para-un-viaje.html">
-        <div class="seo-icon">🧪</div>
-        <h3>Litros necesarios para un viaje</h3>
-        <p>Convierte distancia y consumo en litros de combustible.</p>
-        <span class="seo-link">Calcular litros →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-kilometros-anuales-coche.html">
-        <div class="seo-icon">🗓️</div>
-        <h3>Kilómetros al año</h3>
-        <p>Estima tu kilometraje anual a partir de tu rutina semanal.</p>
-        <span class="seo-link">Calcular km/año →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-coste-neumaticos-coche.html">
-        <div class="seo-icon">🛞</div>
-        <h3>Coste de neumáticos</h3>
-        <p>Prorratea el precio de las ruedas por año y por 1.000 km.</p>
-        <span class="seo-link">Calcular neumáticos →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-coste-aparcamiento-coche.html">
-        <div class="seo-icon">🅿️</div>
-        <h3>Coste de aparcamiento</h3>
-        <p>Suma garaje, zona regulada y parkings puntuales.</p>
-        <span class="seo-link">Calcular parking →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-ahorro-coche-eficiente.html">
-        <div class="seo-icon">📉</div>
-        <h3>Ahorro con un coche eficiente</h3>
-        <p>Calcula cuánto ahorras si reduces el consumo de combustible.</p>
-        <span class="seo-link">Calcular ahorro →</span>
-      </a>
-
-      <a class="seo-card" href="comparar-dos-rutas-en-coche.html">
-        <div class="seo-icon">🗺️</div>
-        <h3>Comparar dos rutas</h3>
-        <p>Compara distancia, combustible y peajes de dos trayectos.</p>
-        <span class="seo-link">Comparar rutas →</span>
-      </a>
-
-      <a class="seo-card" href="mantener-coche-o-cambiarlo.html">
-        <div class="seo-icon">🔄</div>
-        <h3>Mantener el coche o cambiarlo</h3>
-        <p>Compara el coste anual de tu coche actual frente a uno nuevo.</p>
-        <span class="seo-link">Comparar escenarios →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-consumo-real-coche.html">
-        <div class="seo-icon">📐</div>
-        <h3>Consumo real del coche</h3>
-        <p>Calcula tus L/100 km usando kilómetros recorridos y litros repostados.</p>
-        <span class="seo-link">Calcular consumo real →</span>
-      </a>
-
-      <a class="seo-card" href="cuanto-cuesta-llenar-deposito-coche.html">
-        <div class="seo-icon">⛽</div>
-        <h3>Cuánto cuesta llenar el depósito</h3>
-        <p>Calcula litros, coste del repostaje y autonomía estimada.</p>
-        <span class="seo-link">Calcular repostaje →</span>
-      </a>
-
-      <a class="seo-card" href="cuantos-km-puedo-hacer-con-x-euros-gasolina.html">
-        <div class="seo-icon">💶</div>
-        <h3>Km con 20, 50 o 100 €</h3>
-        <p>Convierte un presupuesto de combustible en kilómetros aproximados.</p>
-        <span class="seo-link">Calcular kilómetros →</span>
-      </a>
-
-      <a class="seo-card" href="calculadora-ahorro-gasolinera-barata.html">
-        <div class="seo-icon">🏷️</div>
-        <h3>Ahorro en una gasolinera barata</h3>
-        <p>Compara precios y descuenta incluso el coste de desviarte.</p>
-        <span class="seo-link">Calcular ahorro →</span>
-      </a>
-
-      <a class="seo-card" href="coste-viaje-coche-electrico.html">
-        <div class="seo-icon">⚡</div>
-        <h3>Coste de viaje en coche eléctrico</h3>
-        <p>Calcula kWh, recargas, peajes y coste por persona.</p>
-        <span class="seo-link">Calcular viaje eléctrico →</span>
-      </a>
-
-      <a class="seo-card" href="precios-combustible-espana.html">
-        <div class="seo-icon">📡</div>
-        <h3>Precios de combustible en España</h3>
-        <p>Consulta mínimo, media, máximo y rango habitual de gasolina 95 y diésel con datos oficiales.</p>
-        <span class="seo-link">Ver precios de referencia →</span>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="como-funciona">
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">Cómo funciona</div>
-      <h2>De datos simples a decisiones más claras</h2>
-    </div>
-
-    <div class="info-grid">
-      <article class="info">
-        <h3>Empieza por el gasto básico</h3>
-        <p>
-          Kilómetros, consumo y precio del combustible permiten obtener una primera estimación.
-          Después puedes añadir costes fijos y depreciación si necesitas una cifra más completa.
-        </p>
-      </article>
-
-      <article class="info">
-        <h3>Compara escenarios, no predicciones</h3>
-        <p>
-          Los resultados dependen de los datos que introduces. La utilidad está en probar diferentes
-          situaciones y entender qué factores hacen subir o bajar el coste.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="faq">
-  <div class="container">
-
-    <div class="section-head">
-      <div class="eyebrow">Preguntas frecuentes</div>
-      <h2>Dudas habituales</h2>
-    </div>
-
-    <div class="faq">
-      <details>
-        <summary>¿Los resultados son exactos?</summary>
-        <p>No. Son estimaciones matemáticas basadas en los datos que introduces. El consumo, mantenimiento, precio del combustible y valor de reventa reales pueden cambiar.</p>
-      </details>
-
-      <details>
-        <summary>¿Se guardan los números que introduzco?</summary>
-        <p>Los cálculos se realizan directamente en tu navegador. No necesitas registrarte.</p>
-      </details>
-
-      <details>
-        <summary>¿Para qué sirven las páginas específicas?</summary>
-        <p>Cada una se centra en una pregunta concreta y contiene una calculadora, explicaciones y ejemplos relacionados con esa situación.</p>
-      </details>
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-
-<footer>
-  <div class="container">
-    <div class="footer-card">
-
-      <div class="footer-grid">
-        <div>
-          <h3>CosteCoche</h3>
-          <p>Calculadoras para entender mejor cuánto cuesta realmente conducir.</p>
-        </div>
-
-        <div>
-          <h3>Herramientas</h3>
-          <div class="footer-links">
-            <a href="#calculadoras">Calculadoras</a>
-            <a href="#guias">Guías específicas</a>
-            <a href="coste-por-kilometro-coche.html">Coste por km</a>
-            <a href="renting-o-comprar-coche.html">Renting vs compra</a>
-          </div>
-        </div>
-
-        <div>
-          <h3>Información</h3>
-          <div class="footer-links">
-            <a href="sobre-costecoche.html">Sobre CosteCoche</a>
-            <a href="privacidad.html">Privacidad</a>
-            <a href="cookies.html">Cookies</a>
-            <a href="aviso-legal.html">Aviso legal</a>
-            <a href="#" data-privacy-settings>Preferencias de privacidad</a>
-          </div>
+      <div class="tool-group" id="movilidad">
+        <h3>Coche y movilidad</h3>
+        <div class="tool-grid tool-grid-one">
+          <article class="tool-card accent-car">
+            <div class="tool-top"><span class="tool-icon" aria-hidden="true">€</span><span class="tag">Movilidad</span></div>
+            <h4>CosteCoche</h4>
+            <p>Calcula combustible, coste por viaje, coste real por kilómetro, TCO y escenarios de compra o renting.</p>
+            <a href="https://elvaropablo-oss.github.io/calculadora-coche/">Abrir CosteCoche <span aria-hidden="true">→</span></a>
+          </article>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        © <span id="year"></span> CosteCoche · Los resultados son orientativos.
+      <div class="tool-group" id="hogar">
+        <h3>Obra y hogar</h3>
+        <div class="tool-grid">
+          <article class="tool-card accent-material"><div class="tool-top"><span class="tool-icon" aria-hidden="true">▦</span><span class="tag">Materiales</span></div><h4>CuántoMaterial</h4><p>Estima pintura, suelo, azulejos, hormigón, ladrillos, pladur, aislamiento y otros materiales de reforma.</p><a href="https://elvaropablo-oss.github.io/cuanto-material/">Abrir CuántoMaterial <span aria-hidden="true">→</span></a></article>
+          <article class="tool-card accent-wall"><div class="tool-top"><span class="tool-icon" aria-hidden="true">□</span><span class="tag">Decoración</span></div><h4>CuelgaMedido</h4><p>Calcula centros, anclajes, separaciones y cuadrículas para colocar uno o varios cuadros con medidas precisas.</p><a href="https://elvaropablo-oss.github.io/cuelga-medido/">Abrir CuelgaMedido <span aria-hidden="true">→</span></a></article>
+          <article class="tool-card accent-shelf"><div class="tool-top"><span class="tool-icon" aria-hidden="true">≡</span><span class="tag">Carpintería</span></div><h4>EstanteMedido</h4><p>Reparte baldas, comprueba cuántas caben y genera medidas de corte para una estantería sencilla.</p><a href="https://elvaropablo-oss.github.io/estante-medido/">Abrir EstanteMedido <span aria-hidden="true">→</span></a></article>
+        </div>
       </div>
 
+      <div class="tool-group" id="crear">
+        <h3>Cocina y manualidades</h3>
+        <div class="tool-grid">
+          <article class="tool-card accent-oven"><div class="tool-top"><span class="tool-icon" aria-hidden="true">%</span><span class="tag">Cocina</span></div><h4>HornoExacto</h4><p>Adapta recetas entre moldes, escala ingredientes, trabaja con porcentaje panadero y convierte temperaturas.</p><a href="https://elvaropablo-oss.github.io/horno-exacto/">Abrir HornoExacto <span aria-hidden="true">→</span></a></article>
+          <article class="tool-card accent-knit"><div class="tool-top"><span class="tool-icon" aria-hidden="true">⌁</span><span class="tag">Tejido</span></div><h4>TejeConMedida</h4><p>Convierte una muestra en puntos y vueltas, adapta patrones a tu tensión y distribuye cambios uniformemente.</p><a href="https://elvaropablo-oss.github.io/teje-con-medida/">Abrir TejeConMedida <span aria-hidden="true">→</span></a></article>
+        </div>
+      </div>
+
+      <div class="tool-group" id="medir">
+        <h3>Impresión y escalas</h3>
+        <div class="tool-grid">
+          <article class="tool-card accent-print"><div class="tool-top"><span class="tool-icon" aria-hidden="true">↔</span><span class="tag">Impresión</span></div><h4>ImprimeMedido</h4><p>Relaciona píxeles, centímetros y DPI, calibra desviaciones y crea plantillas o retículas de etiquetas a tamaño real.</p><a href="https://elvaropablo-oss.github.io/imprime-medido/">Abrir ImprimeMedido <span aria-hidden="true">→</span></a></article>
+          <article class="tool-card accent-scale"><div class="tool-top"><span class="tool-icon" aria-hidden="true">1:n</span><span class="tag">Escalas</span></div><h4>EscalaClara</h4><p>Convierte medidas entre dibujo y realidad, identifica una escala y calcula porcentajes para reescalar una impresión.</p><a href="https://elvaropablo-oss.github.io/escala-clara/">Abrir EscalaClara <span aria-hidden="true">→</span></a></article>
+        </div>
+      </div>
+
+      <div class="tool-group" id="logistica">
+        <h3>Embalaje y jardín</h3>
+        <div class="tool-grid">
+          <article class="tool-card accent-box"><div class="tool-top"><span class="tool-icon" aria-hidden="true">▱</span><span class="tag">Logística</span></div><h4>EmbalaExacto</h4><p>Comprueba cuántas piezas caben, calcula una caja mínima y estima el peso volumétrico de un envío.</p><a href="https://elvaropablo-oss.github.io/embala-exacto/">Abrir EmbalaExacto <span aria-hidden="true">→</span></a></article>
+          <article class="tool-card accent-earth"><div class="tool-top"><span class="tool-icon" aria-hidden="true">◒</span><span class="tag">Jardín</span></div><h4>TierraExacta</h4><p>Calcula litros para macetas y jardineras, número de sacos y proporciones de una mezcla de sustrato.</p><a href="https://elvaropablo-oss.github.io/tierra-exacta/">Abrir TierraExacta <span aria-hidden="true">→</span></a></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="principles">
+      <div class="shell">
+        <div class="section-heading light">
+          <p class="eyebrow">Una misma filosofía</p>
+          <h2>Menos caja negra, más cálculo revisable</h2>
+        </div>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Introduce tus datos</h3><p>Cada herramienta pide solo las medidas necesarias para el cálculo que has elegido.</p></article>
+          <article><span>02</span><h3>Revisa el resultado</h3><p>Las calculadoras muestran fórmulas, valores utilizados y avisos cuando el resultado necesita contexto.</p></article>
+          <article><span>03</span><h3>Guárdalo o compártelo</h3><p>Las webs incorporan enlaces de cálculo, guardado local, copia, compartir e impresión cuando tiene sentido.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell final-cta">
+      <p class="eyebrow">Sin catálogo infinito</p>
+      <h2>Diez herramientas mantenidas como productos, no como páginas de relleno</h2>
+      <p>La colección crece mejorando calculadoras existentes, corrigiendo errores y creando funciones útiles antes de añadir nuevas webs.</p>
+      <a class="button button-primary" href="#herramientas">Elegir una herramienta</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div><strong>Herramientas Exactas</strong><p>Colección independiente de calculadoras prácticas.</p></div>
+      <div class="footer-links"><a href="#herramientas">Herramientas</a><a href="/privacidad.html">Privacidad</a><a href="https://github.com/elvaropablo-oss">GitHub</a></div>
     </div>
-  </div>
-</footer>
-
-
-<div class="cookie" id="cookieBanner" hidden>
-  <p>La web funciona sin analítica. Google Analytics solo se carga si aceptas la medición de visitas.</p>
-
-  <div class="actions">
-    <button class="btn btn-primary" id="acceptAnalytics">Aceptar analítica</button>
-    <button class="btn btn-secondary" id="rejectAnalytics">Rechazar</button>
-  </div>
-</div>
-
-
-<script src="assets/home.js" defer></script>
-
-<script src="assets/precios-espana.js" defer></script>
-<script src="assets/precios-regiones.js" defer></script>
+  </footer>
 </body>
 </html>
