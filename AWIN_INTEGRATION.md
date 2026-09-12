@@ -19,7 +19,7 @@ Los identificadores son candidatos de programa: no prueban que CosteCoche haya s
 ## Datos que faltan para activar cada enlace
 
 1. Confirmación de que el programa ha aceptado el espacio promocional de CosteCoche.
-2. Enlace de seguimiento generado por AWIN para el destino concreto, con el Publisher ID **3087889** y el `awinmid` correcto del comerciante aceptado.
+2. Enlace de seguimiento generado por AWIN para el destino concreto y el comerciante aceptado. El Publisher ID y cualquier otro identificador de cuenta se mantienen fuera del frontend y de la documentación pública.
 3. URL oficial del producto, servicio o búsqueda cuya relevancia se haya verificado en la fecha de publicación.
 
 Cuando estén disponibles, se sustituirá únicamente la URL normal del contexto validado por el enlace AWIN, se añadirá `rel="sponsored noopener noreferrer"` y se actualizará el aviso visible. La comisión nunca decidirá qué opción recomienda una calculadora.
