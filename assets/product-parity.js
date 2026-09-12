@@ -34,3 +34,15 @@ function styles(){if($('#ccParityStyles'))return;const s=document.createElement(
 function init(){styles();buildLibrary();restore();document.addEventListener('click',e=>{const b=calculationButton(e.target);if(!b)return;const scope=scopeFor(b);setTimeout(()=>enhance(scope),0)},true);document.addEventListener('submit',e=>{const scope=scopeFor(e.target);if(!fieldsIn(scope).length)return;setTimeout(()=>enhance(scope),0)},true)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+(()=>{
+  if(!location.pathname.endsWith('calculadora-coste-neumaticos-coche.html'))return;
+  const result=document.querySelector('.result-card,.result');
+  if(!result)return;
+  const box=document.createElement('section');box.className='cc-commerce';
+  box.innerHTML='<h2>Buscar neumáticos por medida</h2><p>Introduce la medida completa de tu neumático antes de comparar opciones. No confirmamos compatibilidad: comprueba siempre la ficha del vehículo.</p><div class="cc-commerce-fields"><label>Ancho (mm)<input inputmode="numeric" min="125" max="355" type="number"></label><label>Perfil<input inputmode="numeric" min="20" max="95" type="number"></label><label>Llanta (pulgadas)<input inputmode="numeric" min="10" max="24" type="number"></label></div><a class="cc-commerce-link" hidden rel="noopener noreferrer" target="_blank">Comparar neumáticos de esta medida</a>';
+  result.append(box);
+  const inputs=[...box.querySelectorAll('input')],link=box.querySelector('a');
+  const update=()=>{const [width,profile,rim]=inputs.map(input=>Number(input.value));const ready=width>=125&&profile>=20&&rim>=10;link.hidden=!ready;if(ready){link.href='https://www.neumaticos.es/';link.textContent=`Comparar neumáticos ${width}/${profile} R${rim}`;}};
+  inputs.forEach(input=>input.addEventListener('input',update));
+  const style=document.createElement('style');style.textContent='.cc-commerce{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(127,127,127,.25)}.cc-commerce h2{font-size:1rem}.cc-commerce p{font-size:.9rem;line-height:1.45}.cc-commerce-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}.cc-commerce label{font-size:.82rem;font-weight:700}.cc-commerce input{display:block;width:100%;box-sizing:border-box;margin-top:.2rem;padding:.45rem}.cc-commerce-link{display:inline-block;margin-top:.8rem;font-weight:800}@media(max-width:520px){.cc-commerce-fields{grid-template-columns:1fr}}';document.head.append(style);
+})();
