@@ -44,5 +44,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   const inputs=[...box.querySelectorAll('input')],link=box.querySelector('a');
   const update=()=>{const [width,profile,rim]=inputs.map(input=>Number(input.value));const ready=width>=125&&profile>=20&&rim>=10;link.hidden=!ready;if(ready){link.href='https://www.neumaticos.es/';link.textContent=`Comparar neumáticos ${width}/${profile} R${rim}`;}};
   inputs.forEach(input=>input.addEventListener('input',update));
+  link.addEventListener('click',()=>window.CosteCocheAnalytics?.track?.('affiliate_product_click',{merchant:'Neumaticos.es',category:'tyres',affiliate_active:false}));
+  window.CosteCocheAnalytics?.track?.('affiliate_module_view',{merchant:'Neumaticos.es',category:'tyres',affiliate_active:false});
   const style=document.createElement('style');style.textContent='.cc-commerce{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(127,127,127,.25)}.cc-commerce h2{font-size:1rem}.cc-commerce p{font-size:.9rem;line-height:1.45}.cc-commerce-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}.cc-commerce label{font-size:.82rem;font-weight:700}.cc-commerce input{display:block;width:100%;box-sizing:border-box;margin-top:.2rem;padding:.45rem}.cc-commerce-link{display:inline-block;margin-top:.8rem;font-weight:800}@media(max-width:520px){.cc-commerce-fields{grid-template-columns:1fr}}';document.head.append(style);
 })();
