@@ -90,6 +90,7 @@
     window.__costecocheGaLoaded=true;
     window.__ga=1;
 
+    window.gtag('js',new Date());
     window.gtag('config',GA_ID,{
       anonymize_ip:true,
       allow_google_signals:false,
