@@ -73,7 +73,8 @@
 
   function loadAnalytics(){
     if(!state?.analytics) return;
-    window[GA_DISABLED]=false;
+    setConsentSignal(true);
+    if(window.__ccConsentGaLoaded) return;
 
     const alreadyLoaded=Boolean(window.__ccConsentGaLoaded||window.__ccAnalyticsLoaded||window.__costecocheGaLoaded||window.__ga);
     ensureGtag();
@@ -276,7 +277,7 @@
     buildUi();
     bindPrivacyLinks();
     bindAnalyticsEvents();
-    window.CosteCocheAnalytics={track,hasAnalyticsConsent:()=>Boolean(state?.analytics),openPrivacySettings:()=>openSettings(true)};
+    window.CosteCocheAnalytics={track,refreshConsent:()=>{state=readState();applyState()},hasAnalyticsConsent:()=>Boolean(state?.analytics),openPrivacySettings:()=>openSettings(true)};
     if(!state) openSummary();
   }
 

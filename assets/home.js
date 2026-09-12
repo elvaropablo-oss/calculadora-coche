@@ -172,24 +172,7 @@ const GA_ID="G-EZJ4866V6M";
   }
 
 
-  function loadAnalytics(){
-    if(window.__costecocheGaLoaded) return;
-
-    window.__costecocheGaLoaded=true;
-    window.dataLayer=window.dataLayer||[];
-
-    window.gtag=function(){
-      dataLayer.push(arguments);
-    };
-
-    gtag("js",new Date());
-    gtag("config",GA_ID,{anonymize_ip:true});
-
-    const script=document.createElement("script");
-    script.async=true;
-    script.src="https://www.googletagmanager.com/gtag/js?id="+GA_ID;
-    document.head.appendChild(script);
-  }
+  function loadAnalytics(){window.CosteCocheAnalytics?.refreshConsent()}
 
 
   const banner=document.getElementById("cookieBanner");

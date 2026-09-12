@@ -40,18 +40,7 @@ function initNav() {
   });
 }
 
-function loadAnalytics() {
-  if (window.__ccAnalyticsLoaded) return;
-  window.__ccAnalyticsLoaded = true;
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function(){dataLayer.push(arguments);};
-  gtag("js", new Date());
-  gtag("config", GA_ID, { anonymize_ip: true });
-  const s = document.createElement("script");
-  s.async = true;
-  s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GA_ID);
-  document.head.appendChild(s);
-}
+function loadAnalytics() {window.CosteCocheAnalytics?.refreshConsent()}
 
 function setPrivacy(choice) {
   localStorage.setItem(PRIVACY_KEY, choice);
