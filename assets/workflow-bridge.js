@@ -40,7 +40,7 @@ function styles(){if(document.getElementById('ccWorkflowStyles'))return;const s=
 function init(){styles();refresh();document.addEventListener('click',e=>{const b=e.target.closest?.('button');if(!b)return;const text=(b.textContent||'')+' '+(b.getAttribute('onclick')||'');if(/calcular|comparar|estimar|calc|compare/i.test(text))setTimeout(refresh,0)},true);document.addEventListener('submit',()=>setTimeout(refresh,0),true)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
-(()=>{if(document.querySelector('script[src*="visuals.js"]'))return;const s=document.createElement('script');s.src='assets/visuals.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
+(()=>{if(document.querySelector('script[src*="visuals.js"]'))return;const s=document.createElement('script');s.src='assets/visuals.js?v=20260912-audit1';s.defer=true;document.head.appendChild(s)})();
 (()=>{if(document.querySelector('script[src*="fuel-price-actions.js"]'))return;const s=document.createElement('script');s.src='assets/fuel-price-actions.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
 (()=>{if(document.querySelector('script[src*="quality-fixes.js"]'))return;const s=document.createElement('script');s.src='assets/quality-fixes.js?v=20260911-1';s.defer=true;document.head.appendChild(s)})();
 (()=>{if(document.querySelector('script[src*="/assets/monetization.js"]'))return;const s=document.createElement('script');s.src='/assets/monetization.js?v=20260912-1';s.defer=true;document.head.appendChild(s)})();
